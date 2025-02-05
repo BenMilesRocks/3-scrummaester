@@ -5,10 +5,11 @@ CREATE TABLE "teams" (
 );
 
 CREATE TABLE "users" (
-    "user_id" BIGSERIAL PRIMARY KEY,
+    "user_id" BIGSERIAL,
     "first_name" VARCHAR(50) NOT NULL,
     "last_name" VARCHAR(50) NOT NULL,
-    "username" VARCHAR(50) UNIQUE NOT NULL,
+    "username" VARCHAR(20) UNIQUE PRIMARY KEY NOT NULL,
+    "password" VARCHAR(80) NOT NULL,
     "email" VARCHAR(50) UNIQUE NOT NULL,
     "role" VARCHAR(50) NOT NULL,
     "team_id" INTEGER 
@@ -33,7 +34,7 @@ CREATE TABLE "tasks" (
     "project_id" INTEGER 
         REFERENCES "projects" ("project_id") 
         FOREIGN KEY ON DELETE CASCADE,
-    "project_id" INTEGER REFERENCES 
-        "users" ("user_id") 
+    "assigned_user" VARCHAR 
+        REFERENCES "users" ("username") 
         FOREIGN KEY ON DELETE SET NULL
 );
