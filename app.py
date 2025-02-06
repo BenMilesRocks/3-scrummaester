@@ -12,6 +12,10 @@ login = LoginManager()
 #Route to Login if not logged in, Dashboard if logged in
 @app.route("/")
 def index():
+    return render_template("login.html", page_title= "Login")
+
+@app.route("/index")
+def index():
     return render_template("index.html", page_title= "Home")
 
 if __name__ == "__main__":

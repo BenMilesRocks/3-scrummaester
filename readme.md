@@ -55,9 +55,17 @@
 
 Wireframes were created using Affinity Designer.
 
-**Homepage**
+**Login**
+
+![Login / Register page wireframe](/static/assets/documentation/wireframes/login.jpg)
 
 **Dashboard**
+
+![Dashboard page wireframe](/static/assets/documentation/wireframes/dashboard.jpg)
+
+**New Project**
+
+![New Project page wireframe](/static/assets/documentation/wireframes/new%20project.jpg)
 
 ### Features
 
