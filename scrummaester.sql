@@ -6,12 +6,12 @@ CREATE TABLE "teams" (
 
 CREATE TABLE "users" (
     "user_id" BIGSERIAL,
-    "first_name" VARCHAR(50) NOT NULL,
-    "last_name" VARCHAR(50) NOT NULL,
+    "first_name" VARCHAR(20) NOT NULL,
+    "last_name" VARCHAR(20) NOT NULL,
     "username" VARCHAR(20) UNIQUE PRIMARY KEY NOT NULL,
     "password" VARCHAR(80) NOT NULL,
     "email" VARCHAR(50) UNIQUE NOT NULL,
-    "role" VARCHAR(50) NOT NULL,
+    "role" VARCHAR(20) NOT NULL,
     "team_id" INTEGER 
         REFERENCES "teams" ("team_id") 
         FOREIGN KEY ON DELETE SET NULL
