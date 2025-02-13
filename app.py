@@ -1,16 +1,22 @@
 import os
 from flask import Flask, render_template, request, flash
 from flask_login import LoginManager, UserMixin
-import sqlalchemy
 from typing import List
 from typing import Optional
+import sqlalchemy
 from sqlalchemy import ForeignKey, String, Integer, create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from flask_wtf import wtforms, FlaskForm
+from wtforms import StringField, IntegerField, PasswordField, SubmitField
+from wtforms.validators import InputRequired, Length, ValidationError
+
 if os.path.exists("env.py"):
     from env import SECRET_KEY, url
 
+
 #Initialize Flask
 app = Flask(__name__)
+db = sqlalchemy(app)
 engine = create_engine(url, echo=True)
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = url
@@ -34,6 +40,32 @@ class User(Base):
 
     def __repr__(self) -> str:
         return f"User(id={self.id!r}, name={self.first_name!r} {self.last_name!r}, username={self.username!r}, email={self.email!r}, role= {self.role!r}, team id={self.team_id!r})"
+    
+class RegistrationForm(FlaskForm):
+    first_name = StringField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"First Name"})
+    last_name = StringField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"Last Name"})
+    username = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Username"})
+    password = PasswordField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Password"})
+    email = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Email Address"})
+    team_role = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Job Role"})
+    team_id = IntegerField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"Team Number"})
+
+    submit = SubmitField("Register")
+
+    def validate_username(self, username):
+        existing_user_name = User.query.filter_by(
+            username = username.data).first()
+        if existing_user_name:
+            raise ValidationError(
+                "That username already exists. Please choose a different one"
+            )
+        
+
+class LoginForm(FlaskForm):
+    username = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Username"})
+    password = PasswordField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Password"})
+
+    submit = SubmitField("Log In")
 
 
 #create all declared tables from classes
