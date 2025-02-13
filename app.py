@@ -3,10 +3,9 @@ from flask import Flask, render_template, request, flash
 from flask_login import LoginManager, UserMixin
 from typing import List
 from typing import Optional
-import sqlalchemy
 from sqlalchemy import ForeignKey, String, Integer, create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-from flask_wtf import wtforms, FlaskForm
+from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 
@@ -16,7 +15,6 @@ if os.path.exists("env.py"):
 
 #Initialize Flask
 app = Flask(__name__)
-db = sqlalchemy(app)
 engine = create_engine(url, echo=True)
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = url
@@ -76,6 +74,10 @@ class LoginForm(FlaskForm):
 @app.route("/")
 def index():
     return render_template("index.html", page_title= "Login")
+
+@app.route("/register")
+def register():
+    return render_template("register.html", page_title= "Register")
 
 @app.route("/dashboard")
 def dashboard():
