@@ -26,10 +26,10 @@ class User(Base):
     user_id: Mapped[int] = mapped_column(Integer())
     first_name: Mapped[str] = mapped_column(String(30))
     last_name: Mapped[str] = mapped_column(String(30))
-    username: Mapped[str] = mapped_column(String(30), primary_key=True)
+    username: Mapped[str] = mapped_column(String(30), primary_key=True, unique=True)
     password:  Mapped[str] = mapped_column(String(80))
-    email:  Mapped[str] = mapped_column(String(80))
-    role:  Mapped[str] = mapped_column(String(80))
+    email:  Mapped[str] = mapped_column(String(80), unique=True)
+    team_role:  Mapped[str] = mapped_column(String(80))
     team_id: Mapped[int] = mapped_column(Integer())
 
     def __repr__(self) -> str:
@@ -37,16 +37,17 @@ class User(Base):
 
 
 #create all declared tables from classes
-Base.metadata.create_all(engine)
+#Base.metadata.drop_all(engine)
+#Base.metadata.create_all(engine)
 
 #Route to Login if not logged in, Dashboard if logged in
 @app.route("/")
 def index():
-    return render_template("login.html", page_title= "Login")
+    return render_template("index.html", page_title= "Login")
 
-@app.route("/index")
-def index():
-    return render_template("index.html", page_title= "Home")
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html", page_title= "Dashboard")
 
 
 
