@@ -71,13 +71,15 @@ class LoginForm(FlaskForm):
 #Base.metadata.create_all(engine)
 
 #Route to Login if not logged in, Dashboard if logged in
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("index.html", page_title= "Login")
+    form = LoginForm()
+    return render_template("index.html", page_title= "Login", form = form)
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template("register.html", page_title= "Register")
+    form = RegistrationForm()
+    return render_template("register.html", page_title= "Register", form = form)
 
 @app.route("/dashboard")
 def dashboard():

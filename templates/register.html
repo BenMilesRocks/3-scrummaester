@@ -26,5 +26,17 @@
     
     <h1>Create new account</h1>
 
+    <form method="post" action="">
+      {{ form.hidden_tag() }}
+      {{ form.first_name }}
+      {{ form.last_name }}
+      {{ form.username }}
+      {{ form.password }}
+      {{ form.email }}
+      {{ form.team_role }}
+      {{ form.team_id }}
+      {{ form.submit }}
+    </form>
+
 </body>
 </html>
