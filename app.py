@@ -1,13 +1,14 @@
 import os
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, redirect, url_for
 from flask_login import LoginManager, UserMixin
 from typing import List
 from typing import Optional
 from sqlalchemy import ForeignKey, String, Integer, create_engine
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, sessionmaker
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
+import bcrypt
 
 if os.path.exists("env.py"):
     from env import SECRET_KEY, url
@@ -16,6 +17,10 @@ if os.path.exists("env.py"):
 #Initialize Flask
 app = Flask(__name__)
 engine = create_engine(url, echo=True)
+Session = sessionmaker(engine)
+session = Session()
+
+
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = url
 login = LoginManager()
@@ -39,6 +44,9 @@ class User(Base):
     def __repr__(self) -> str:
         return f"User(id={self.id!r}, name={self.first_name!r} {self.last_name!r}, username={self.username!r}, email={self.email!r}, role= {self.role!r}, team id={self.team_id!r})"
     
+
+user_db = session.query(User)
+
 class RegistrationForm(FlaskForm):
     first_name = StringField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"First Name"})
     last_name = StringField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"Last Name"})
@@ -46,12 +54,12 @@ class RegistrationForm(FlaskForm):
     password = PasswordField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Password"})
     email = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Email Address"})
     team_role = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Job Role"})
-    team_id = IntegerField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"Team Number"})
+    team_id = IntegerField(validators=[InputRequired()], render_kw={"placeholder":"Team Number"})
 
     submit = SubmitField("Register")
 
     def validate_username(self, username):
-        existing_user_name = User.query.filter_by(
+        existing_user_name = session.query(User).filter_by(
             username = username.data).first()
         if existing_user_name:
             raise ValidationError(
@@ -79,6 +87,21 @@ def index():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
+
+    if form.validate_on_submit():
+        hashed_password = bcrypt.hashpw(form.password.data, bcrypt.gensalt())
+        new_user = User(
+            first_name = form.first_name.data,
+            last_name = form.last_name.data,
+            username = form.username.data,
+            password = hashed_password,
+            email = form.email.data,
+            team_role = form.team_role.data,
+            team_id = form.team_id.data)
+        session.add(new_user)
+        session.commit()
+        return redirect(url_for("index"))
+
     return render_template("register.html", page_title= "Register", form = form)
 
 @app.route("/dashboard")
