@@ -38,5 +38,13 @@
       {{ form.submit }}
     </form>
 
+    {% if form.errors %}
+      <ul class="errors">
+        {% for error in form.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
 </body>
 </html>

@@ -31,12 +31,11 @@ class Base(DeclarativeBase):
 
 class User(Base):
     __tablename__ = "users"
-
-    user_id: Mapped[int] = mapped_column(Integer())
+    
     first_name: Mapped[str] = mapped_column(String(30))
     last_name: Mapped[str] = mapped_column(String(30))
     username: Mapped[str] = mapped_column(String(30), primary_key=True, unique=True)
-    password:  Mapped[str] = mapped_column(String(80))
+    password:  Mapped[str] = mapped_column(String(1000))
     email:  Mapped[str] = mapped_column(String(80), unique=True)
     team_role:  Mapped[str] = mapped_column(String(80))
     team_id: Mapped[int] = mapped_column(Integer())
@@ -75,8 +74,8 @@ class LoginForm(FlaskForm):
 
 
 #create all declared tables from classes
-#Base.metadata.drop_all(engine)
-#Base.metadata.create_all(engine)
+Base.metadata.drop_all(engine)
+Base.metadata.create_all(engine)
 
 #Route to Login if not logged in, Dashboard if logged in
 @app.route("/", methods=["GET", "POST"])
@@ -89,7 +88,7 @@ def register():
     form = RegistrationForm()
 
     if form.validate_on_submit():
-        hashed_password = bcrypt.hashpw(form.password.data, bcrypt.gensalt())
+        hashed_password = bcrypt.hashpw(form.password.data.encode(), bcrypt.gensalt())
         new_user = User(
             first_name = form.first_name.data,
             last_name = form.last_name.data,
