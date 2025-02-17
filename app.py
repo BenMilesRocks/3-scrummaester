@@ -1,9 +1,9 @@
 import os
 from flask import Flask, render_template, redirect, url_for
-from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
 from typing import List
 from typing import Optional
-from sqlalchemy import ForeignKey, Boolean, String, Integer, create_engine
+from sqlalchemy import ForeignKey, Boolean, String, Integer, BigInteger, create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, sessionmaker
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, PasswordField, SubmitField
@@ -36,17 +36,17 @@ def load_user(username):
 class Base(DeclarativeBase):
     pass
 
-class User(Base):
+class User(UserMixin, Base):
     __tablename__ = "users"
-    
+
+    id: Mapped[int] = mapped_column(BigInteger(), autoincrement=True, primary_key=True)
     first_name: Mapped[str] = mapped_column(String(30))
     last_name: Mapped[str] = mapped_column(String(30))
-    username: Mapped[str] = mapped_column(String(30), primary_key=True, unique=True)
-    password: Mapped[str] = mapped_column(String(1000))
+    username: Mapped[str] = mapped_column(String(30), unique=True)
+    password: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(80), unique=True)
     team_role: Mapped[str] = mapped_column(String(80))
     team_id: Mapped[int] = mapped_column(Integer())
-    is_active: Mapped[bool] = mapped_column(Boolean())
 
     def __repr__(self) -> str:
         return f"User(id={self.id!r}, name={self.first_name!r} {self.last_name!r}, username={self.username!r}, email={self.email!r}, role= {self.role!r}, team id={self.team_id!r})"
@@ -83,8 +83,8 @@ class LoginForm(FlaskForm):
 
 
 #create all declared tables from classes
-Base.metadata.drop_all(engine)
-Base.metadata.create_all(engine)
+#Base.metadata.drop_all(engine)
+#Base.metadata.create_all(engine)
 
 #Route to Login if not logged in, Dashboard if logged in
 @app.route("/", methods=["GET", "POST"])
@@ -96,8 +96,6 @@ def index():
             username = form.username.data).first()
         if user:
             password = user.password.encode('utf8')
-            print(user.password)
-            print(type(user.password))
             submit_pass = form.password.data.encode('utf8')
             if bcrypt.checkpw(submit_pass, password):
                 login_user(user)
@@ -120,8 +118,7 @@ def register():
             password = hashed_password.decode('utf8'),
             email = form.email.data,
             team_role = form.team_role.data,
-            team_id = form.team_id.data,
-            is_active = False)            
+            team_id = form.team_id.data)            
         session.add(new_user)
         session.commit()    
         return redirect(url_for("index"))
