@@ -70,7 +70,20 @@ class Project(Base):
     team_id: Mapped[int] = mapped_column(ForeignKey("teams.team_id"))
 
     def __repr__(self) -> str:
-        return f"Project(Project Id={self.project_id!r}, Project Name={self.project_name!r}, Status={self.project_status!r})"
+        return f"Project(Project Id={self.project_id!r}, Project Name={self.project_name!r}, Status={self.project_status!r}, Team Id={self.team_id!r})"
+
+class Task(Base):
+    __tablename__ = "tasks"
+
+    task_id: Mapped[int] = mapped_column(BigInteger(), autoincrement=True, primary_key=True)
+    task_name: Mapped[str] = mapped_column(String(50))
+    task_description: Mapped[str] = mapped_column(String(3000))
+    task_status: Mapped[str] = mapped_column(String(30))
+    project_id: Mapped[int] = mapped_column(ForeignKey("projects.project_id"))
+    assigned_user: Mapped[int] = mapped_column(ForeignKey("users.id"))
+
+    def __repr__(self) -> str:
+        return f"Task(Task Id={self.task_id!r}, Task Name={self.task_name!r}, Description={self.task_description!r} Status={self.task_status!r}, Project Id={self.project_id!r}, Assigned User={self.assigned_user!r})"
 
 
 user_db = session.query(User)
