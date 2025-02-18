@@ -37,7 +37,7 @@ class Base(DeclarativeBase):
     pass
 
 class Team(Base):
-    __tablename__ = "users"
+    __tablename__ = "teams"
 
     team_id: Mapped[int] = mapped_column(BigInteger(), autoincrement=True, primary_key=True)
     team_lead: Mapped[str] = mapped_column(String(30))
@@ -56,11 +56,22 @@ class User(UserMixin, Base):
     password: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(80), unique=True)
     team_role: Mapped[str] = mapped_column(String(80))
-    team_id: Mapped[int] = mapped_column(ForeignKey("Team.team_id"))
+    team_id: Mapped[int] = mapped_column(ForeignKey("teams.team_id"))
 
     def __repr__(self) -> str:
         return f"User(id={self.id!r}, name={self.first_name!r} {self.last_name!r}, username={self.username!r}, email={self.email!r}, role= {self.role!r}, team id={self.team_id!r})"
-    
+
+class Project(Base):
+    __tablename__ = "projects"
+
+    project_id: Mapped[int] = mapped_column(BigInteger(), autoincrement=True, primary_key=True)
+    project_name: Mapped[str] = mapped_column(String(30))
+    project_status: Mapped[str] = mapped_column(String(30))
+    team_id: Mapped[int] = mapped_column(ForeignKey("teams.team_id"))
+
+    def __repr__(self) -> str:
+        return f"Project(Project Id={self.project_id!r}, Project Name={self.project_name!r}, Status={self.project_status!r})"
+
 
 user_db = session.query(User)
 
