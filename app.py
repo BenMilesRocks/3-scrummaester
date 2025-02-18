@@ -36,6 +36,16 @@ def load_user(username):
 class Base(DeclarativeBase):
     pass
 
+class Team(Base):
+    __tablename__ = "users"
+
+    team_id: Mapped[int] = mapped_column(BigInteger(), autoincrement=True, primary_key=True)
+    team_lead: Mapped[str] = mapped_column(String(30))
+    team_lead_email: Mapped[str] = mapped_column(String(30))
+
+    def __repr__(self) -> str:
+        return f"Team(Team Id={self.team_id!r}, Team Lead={self.team_lead!r}, Contact Email={self.team_lead_email!r})"
+    
 class User(UserMixin, Base):
     __tablename__ = "users"
 
@@ -46,7 +56,7 @@ class User(UserMixin, Base):
     password: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(80), unique=True)
     team_role: Mapped[str] = mapped_column(String(80))
-    team_id: Mapped[int] = mapped_column(Integer())
+    team_id: Mapped[int] = mapped_column(ForeignKey("Team.team_id"))
 
     def __repr__(self) -> str:
         return f"User(id={self.id!r}, name={self.first_name!r} {self.last_name!r}, username={self.username!r}, email={self.email!r}, role= {self.role!r}, team id={self.team_id!r})"
