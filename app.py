@@ -164,6 +164,16 @@ def register():
 def dashboard():
     return render_template("dashboard.html", page_title= "Dashboard")
 
+@app.route("/projects", methods=["GET", "POST"])
+@login_required
+def projects():
+    return render_template("projects.html", page_title= "Projects")
+
+@app.route("/teams", methods=["GET", "POST"])
+@login_required
+def teams():
+    return render_template("teams.html", page_title= "Teams")
+
 
 
 if __name__ == "__main__":
