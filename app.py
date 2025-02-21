@@ -116,13 +116,61 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Log In")
 
 
+#create values for testing
+
+temp_pass = "password"
+hash_password = bcrypt.hashpw(temp_pass.encode('utf8'), bcrypt.gensalt())
+
+team1 = Team(
+    team_lead = "Ben Miles",
+    team_lead_email = "email@email.com"
+)
+
+user1 = User(
+    first_name = "Ben",
+    last_name = "Miles",
+    username = "user1",
+    password = hash_password.decode('utf8'),
+    email = "email@email.com",
+    team_role = "Test Role",
+    team_id = 1
+)
+
+project1 = Project(
+    project_name = "Test Project",
+    project_status = "Active",
+    team_id = 1
+)
+
+task1 = Task(
+    task_name = "Test Task",
+    task_description = "A task to test the site & database functions",
+    task_status = "Active",
+    project_id = 1,
+    assigned_user = 1
+)
+
 #create all declared tables from classes
 #Base.metadata.drop_all(engine)
 #Base.metadata.create_all(engine)
 
-#Route to Login if not logged in, Dashboard if logged in
-@app.route("/", methods=["GET", "POST"])
+
+#add data into tables
+#session.add(team1)
+#session.add(user1)
+#session.add(project1)
+#session.add(task1)
+#session.commit()
+
+
+
+@app.route("/")
 def index():
+    return render_template("index.html", page_title= "Home")
+
+#Route to Login if not logged in, Dashboard if logged in
+@app.route("/login", methods=["GET", "POST"])
+def login():
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -137,7 +185,11 @@ def index():
             else:
                 return print("password isn't matching")
 
-    return render_template("index.html", page_title= "Login", form = form)
+    return render_template("login.html", page_title= "Login", form = form)
+
+login_manager.login_view = "User.login"
+
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
