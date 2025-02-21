@@ -207,7 +207,7 @@ def register():
             team_id = form.team_id.data)            
         session.add(new_user)
         session.commit()    
-        return redirect(url_for("index"))
+        return redirect(url_for("login"))
 
     return render_template("register.html", page_title= "Register", form = form)
 
@@ -226,6 +226,11 @@ def projects():
 def teams():
     return render_template("teams.html", page_title= "Teams")
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("login"))
 
 
 if __name__ == "__main__":
