@@ -1,16 +1,12 @@
 import os
 from flask import Flask, render_template, redirect, url_for
-from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
-from typing import List
-from typing import Optional
-from sqlalchemy import ForeignKey, Boolean, String, Integer, BigInteger, create_engine
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, sessionmaker
-from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
+from flask_login import LoginManager, login_user, login_required, logout_user
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 import bcrypt
 
 from models import Team, User, Project, Task
+from forms import RegistrationForm, LoginForm
 
 if os.path.exists("env.py"):
     from env import SECRET_KEY, URI
@@ -37,81 +33,6 @@ def load_user(username):
 
 
 user_db = session.query(User)
-
-class RegistrationForm(FlaskForm):
-    first_name = StringField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"First Name"})
-    last_name = StringField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"Last Name"})
-    username = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Username"})
-    password = PasswordField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Password"})
-    email = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Email Address"})
-    team_role = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Job Role"})
-    team_id = IntegerField(validators=[InputRequired()], render_kw={"placeholder":"Team Number"})
-
-
-    submit = SubmitField("Register")
-
-    def validate_username(self, username):
-        existing_user_name = session.query(User).filter_by(
-            username = username.data).first()
-        if existing_user_name:
-            raise ValidationError(
-                "That username already exists. Please choose a different one"
-            )
-        
-
-class LoginForm(FlaskForm):
-    username = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Username"})
-    password = PasswordField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Password"})
-
-    submit = SubmitField("Log In")
-
-
-#create values for testing
-
-temp_pass = "password"
-hash_password = bcrypt.hashpw(temp_pass.encode('utf8'), bcrypt.gensalt())
-
-team1 = Team(
-    team_lead = "Ben Miles",
-    team_lead_email = "email@email.com"
-)
-
-user1 = User(
-    first_name = "Ben",
-    last_name = "Miles",
-    username = "user1",
-    password = hash_password.decode('utf8'),
-    email = "email@email.com",
-    team_role = "Test Role",
-    team_id = 1
-)
-
-project1 = Project(
-    project_name = "Test Project",
-    project_status = "Active",
-    team_id = 1
-)
-
-task1 = Task(
-    task_name = "Test Task",
-    task_description = "A task to test the site & database functions",
-    task_status = "Active",
-    project_id = 1,
-    assigned_user = 1
-)
-
-#create all declared tables from classes
-#Base.metadata.drop_all(engine)
-#Base.metadata.create_all(engine)
-
-
-#add data into tables
-#session.add(team1)
-#session.add(user1)
-#session.add(project1)
-#session.add(task1)
-#session.commit()
-
 
 
 @app.route("/")
