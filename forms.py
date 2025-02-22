@@ -2,6 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 
+from __init__ import session
+from models import User
 class RegistrationForm(FlaskForm):
     first_name = StringField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"First Name"})
     last_name = StringField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"Last Name"})

@@ -1,31 +1,12 @@
 import os
-from flask import Flask, render_template, redirect, url_for
-from flask_login import LoginManager, login_user, login_required, logout_user
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from flask import render_template, redirect, url_for
+from flask_login import login_user, login_required, logout_user
 import bcrypt
-
+from __init__ import session, login_manager, app
 from models import Team, User, Project, Task
 from forms import RegistrationForm, LoginForm
 
-if os.path.exists("env.py"):
-    from env import SECRET_KEY, URI
 
-
-#Initialize Flask
-app = Flask(__name__)
-
-#Database session variables
-engine = create_engine(URI, echo=True)
-Session = sessionmaker(engine)
-session = Session()
-app.config['SECRET_KEY'] = SECRET_KEY
-app.config['SQLALCHEMY_DATABASE_URI'] = URI
-
-#flask_login variables
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "login"
 
 @login_manager.user_loader
 def load_user(username):
