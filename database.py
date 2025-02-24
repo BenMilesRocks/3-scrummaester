@@ -1,4 +1,4 @@
-from __init__ import session, login_manager, app, engine
+from __init__ import session
 from models import Team, User, Project, Task
 
 team_db = session.query(Team)
