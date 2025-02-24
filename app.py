@@ -5,7 +5,7 @@ import bcrypt
 from __init__ import session, login_manager, app
 from models import Team, User, Project, Task
 from forms import RegistrationForm, LoginForm
-from database import team_db, user_db, project_db, task_db
+from database import team_db, user_db, project_db, task_db, task_by_project, task_by_user, project_by_team, project_by_user, user_by_project, user_by_team
 
 
 

@@ -1,4 +1,3 @@
-import sqlalchemy
 from __init__ import session, login_manager, app, engine
 from models import Team, User, Project, Task
 
@@ -48,4 +47,4 @@ def project_by_user(user):
     user_projects = session.query(Project).filter_by(user_id = user)
     for project in user_projects:
         return project
-    
+
