@@ -19,6 +19,16 @@ def task_by_project(project):
     project_tasks = session.query(Task).filter_by(project_id = project)
     for task in project_tasks:
         return task
+    
+def outstanding_task_by_project(project):
+    project_tasks = session.query(Task).filter_by(project_id = project).filter_by(task_status = "outstanding")
+    for task in project_tasks:
+        return task
+
+def completed_task_by_project(project):
+    project_tasks = session.query(Task).filter_by(project_id = project).filter_by(task_status = "completed")
+    for task in project_tasks:
+        return task
 
 #User by Team
 
@@ -31,6 +41,16 @@ def user_by_team(team):
 
 def task_by_user(user):
     user_tasks = session.query(Task).filter_by(user_id = user)
+    for task in user_tasks:
+        return task
+    
+def outstanding_task_by_user(user):
+    user_tasks = session.query(Task).filter_by(user_id = user).filter_by(task_status = "outstanding")
+    for task in user_tasks:
+        return task
+    
+def completed_task_by_user(user):
+    user_tasks = session.query(Task).filter_by(user_id = user).filter_by(task_status = "completed")
     for task in user_tasks:
         return task
 
