@@ -5,6 +5,7 @@ import bcrypt
 from __init__ import session, login_manager, app
 from models import Team, User, Project, Task
 from forms import RegistrationForm, LoginForm
+from database import team_db, user_db, project_db, task_db
 
 
 
@@ -13,7 +14,7 @@ def load_user(username):
     return session.query(User).get(username)
 
 
-user_db = session.query(User)
+
 
 
 @app.route("/")
@@ -71,7 +72,7 @@ def dashboard():
 @app.route("/projects", methods=["GET", "POST"])
 @login_required
 def projects():
-    return render_template("projects.html", page_title= "Projects")
+    return render_template("projects.html", page_title= "Projects", project_list = project_db)
 
 @app.route("/teams", methods=["GET", "POST"])
 @login_required
