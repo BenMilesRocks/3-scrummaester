@@ -1,9 +1,11 @@
+from sqlalchemy import select
+
 from __init__ import session
 from models import Team, User, Project, Task
 
 team_db = session.query(Team)
 user_db = session.query(User)
-project_db = session.query(Project)
+project_db = list(session.query(Project))
 task_db = session.query(Task)
 
 #Project by Team
@@ -16,7 +18,7 @@ def project_by_team(team):
 #Task by Project
 
 def task_by_project(project):
-    project_tasks = session.query(Task).filter_by(project_id = project)
+    project_tasks = session.query(Task).filter_by(project_id = project).order_by(Task.task_status.desc)
     for task in project_tasks:
         return task
     
@@ -68,3 +70,9 @@ def project_by_user(user):
     for project in user_projects:
         return project
 
+
+#Functions for pulling all data
+
+def all_task_by_project(projects):
+    for project in projects:
+        return task_by_project(project)
