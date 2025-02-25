@@ -5,7 +5,7 @@
         <h3>Projects</h3>
     </div>
 
-    {% for item in project_list %}
+    {% for item in project_list | sort (attribute="project_id") %}
         <div class='project'>
             <h3>{{ item.project_name }}</h3>
             <p>Status: {{ item.project_status }}</p>
