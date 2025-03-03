@@ -2,6 +2,7 @@ import os
 from flask import render_template, redirect, url_for, request
 from flask_login import login_user, login_required, logout_user
 import bcrypt
+from sqlalchemy import select, delete
 from __init__ import session, login_manager, app
 from models import Team, User, Project, Task
 from forms import RegistrationForm, LoginForm
@@ -137,10 +138,8 @@ def add_task():
 
 @app.route("/delete_task/<int:task_id>")
 def delete_task(task_id):
-    with session:
-        task = session.query(Task).filter_by(task_id = task_id).first
-        session.delete(task)
-        session.commit()
+    task = delete(Task).where(Task.task_id == task_id)
+    session.execute(task)
     return redirect(url_for("tasks"))
 
 @app.route("/logout")

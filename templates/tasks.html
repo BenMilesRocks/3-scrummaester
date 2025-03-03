@@ -14,6 +14,8 @@
             <p>Task Status: {{ item.task_status }}</p>
             <p>Assigned User: {{ item.assigned_user }}</p>
         </div>
+
+        <a href="{{ url_for('delete_task', task_id = item.task_id) }}">Delete</a>
     {% endfor %}
 
     <a href={{ url_for('add_task') }}>Add New Task</a>
