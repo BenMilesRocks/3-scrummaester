@@ -2,7 +2,7 @@ import os
 from flask import render_template, redirect, url_for, request
 from flask_login import login_user, login_required, logout_user
 import bcrypt
-from sqlalchemy import select, delete
+from sqlalchemy import update, delete
 from __init__ import session, login_manager, app
 from models import Team, User, Project, Task
 from forms import RegistrationForm, LoginForm
@@ -153,6 +153,18 @@ def add_task():
             session.commit()
         return redirect(url_for("tasks"))
     return render_template("add_task.html", projects = project_db, users = user_db)
+
+@app.route("/update_task/<int:task_id>", methods=["GET", "POST"])
+def update_task(task_id):
+    if request.method == "POST":
+        task = update(Task).where(Task.task_id == task_id).values(
+            task_name = request.form.get("task_name"),
+            task_description = request.form.get("task_description"),
+            task_status = request.form.get("task_status"),
+            project_id = request.form.get("project_id"),
+            assigned_user  = request.form.get("assigned_user"))
+        session.execute(task)
+    return render_template("update_task.html", projects = project_db, users = user_db)
 
 @app.route("/delete_task/<int:task_id>")
 def delete_task(task_id):
