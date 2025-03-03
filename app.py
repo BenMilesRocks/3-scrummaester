@@ -80,7 +80,7 @@ def projects():
 @app.route("/teams", methods=["GET", "POST"])
 @login_required
 def teams():
-    return render_template("teams.html", page_title= "Teams")
+    return render_template("teams.html", page_title= "Teams", team_list = team_db)
 
 @app.route("/logout")
 @login_required

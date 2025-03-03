@@ -4,5 +4,13 @@
     <div>
         <h3>Teams</h3>
     </div>
+
+    {% for item in team_list | sort (attribute="team_id") %}
+        <div class='project'>
+            <h3>{{ item.team_id }}</h3>
+            <p>Team Lead: {{ item.team_lead }}</p>
+            <p>Contact: {{ item.team_lead_email }}</p>
+        </div>
+    {% endfor %}
     
 {% endblock %}
