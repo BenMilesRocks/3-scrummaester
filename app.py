@@ -1,5 +1,5 @@
 import os
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, request
 from flask_login import login_user, login_required, logout_user
 import bcrypt
 from __init__ import session, login_manager, app
@@ -91,6 +91,22 @@ def users():
 @login_required
 def tasks():
     return render_template("tasks.html", page_title= "Tasks", task_list = task_db)
+
+@app.route("/add_task", methods=["GET", "POST"])
+def add_task():
+    if request.method == "POST":
+        task = Task(
+            task_name = request.form.get("task_name"),
+            task_description = request.form.get("task_description"),
+            task_status = request.form.get("task_status"),
+            project_id = request.form.get("project_id"),
+            assigned_user = request.form.get("assigned_user")
+        )
+        with session:
+            session.add(task)
+            session.commit()
+        return redirect(url_for("tasks"))
+    return render_template("add_task.html", projects = project_db, users = user_db)
 
 @app.route("/logout")
 @login_required
