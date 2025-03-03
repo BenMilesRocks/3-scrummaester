@@ -92,6 +92,12 @@ def add_project():
         return redirect(url_for("projects"))
     return render_template("add_project.html", teams = team_db)
 
+@app.route("/delete_task/<int:project_id>")
+def delete_project(project_id):
+    project = delete(Project).where(Project.project_id == project_id)
+    session.execute(project)
+    return redirect(url_for("projects"))
+
 @app.route("/teams", methods=["GET", "POST"])
 @login_required
 def teams():
