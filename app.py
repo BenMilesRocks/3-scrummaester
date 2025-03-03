@@ -82,6 +82,11 @@ def projects():
 def teams():
     return render_template("teams.html", page_title= "Teams", team_list = team_db)
 
+@app.route("/users", methods=["GET", "POST"])
+@login_required
+def users():
+    return render_template("users.html", page_title= "Users", user_list = user_db)
+
 @app.route("/logout")
 @login_required
 def logout():

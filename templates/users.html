@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    <div>
+        <h3>Users</h3>
+    </div>
+
+    {% for item in user_list | sort (attribute="user_id") %}
+        <div class='user'>
+            <h3>{{ item.first_name }} {{ item.last_name }}</h3>
+            <p>User Name: {{ item.user_name }}</p>
+            <p>Contact: {{ item.email }}</p>
+            <p>Assigned to team: {{ item.team_id }}</p>
+            <p>Team Role: {{ item.team_role }}</p>
+        </div>
+    {% endfor %}
+
+    
+{% endblock %}
