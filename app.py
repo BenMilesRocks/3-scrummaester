@@ -135,6 +135,14 @@ def add_task():
         return redirect(url_for("tasks"))
     return render_template("add_task.html", projects = project_db, users = user_db)
 
+@app.route("/delete_task/<int:task_id>")
+def delete_task(task_id):
+    with session:
+        task = session.query(Task).filter_by(task_id = task_id).first
+        session.delete(task)
+        session.commit()
+    return redirect(url_for("tasks"))
+
 @app.route("/logout")
 @login_required
 def logout():

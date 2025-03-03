@@ -5,7 +5,7 @@ from models import Team, User, Project, Task
 
 team_db = session.query(Team)
 user_db = session.query(User)
-project_db = list(session.query(Project).order_by(Project.project_status, Project.project_id))
+project_db = session.query(Project)
 task_db = session.query(Task)
 
 #Project by Team
