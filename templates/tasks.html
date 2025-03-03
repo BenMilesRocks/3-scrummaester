@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    <div>
+        <h3>Tasks</h3>
+    </div>
+
+    {% for item in task_list | sort (attribute="project_id") %}
+        <div class='task'>
+            <h3>{{ item.task_name }}</h3>
+            <p>Project Id: {{ item.project_id }}</p>
+            <p>Task Description:</p>
+            <p>{{ item.task_description }}</p>
+            <p>Task Status: {{ item.task_status }}</p>
+            <p>Assigned User: {{ item.assigned_user }}</p>
+        </div>
+    {% endfor %}
+
+    
+{% endblock %}
