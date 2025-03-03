@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    <div>
+        <h3>Add New Task</h3>
+    </div>
+
+    <form method="POST" action="{{ url_for('add_project') }}">
+        <label for="project_name">Project Name</label>
+        <input id="project_name" name="project_name" minlength="5" maxlength="50" type="text" required>
+        <label for="project_status">Project Status</label>
+        <input id="project_status" name="project_status" minlength="5" maxlength="50" type="text" required>
+        <select id="team_id" name="team_id" required>
+            <option value="" disabled selected>Choose Team</option>
+            {% for team in teams %}
+                <option value="{{ team.team_id }}">{{ team.team_id }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Add new project</button>
+    </form>
+
+    
+{% endblock %}
