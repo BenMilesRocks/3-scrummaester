@@ -116,6 +116,12 @@ def add_team():
         return redirect(url_for("teams"))
     return render_template("add_team.html")
 
+@app.route("/delete_task/<int:team_id>")
+def delete_team(team_id):
+    team = delete(Team).where(Team.team_id == team_id)
+    session.execute(team)
+    return redirect(url_for("teams"))
+
 @app.route("/users", methods=["GET", "POST"])
 @login_required
 def users():
