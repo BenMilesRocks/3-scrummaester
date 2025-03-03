@@ -82,6 +82,19 @@ def projects():
 def teams():
     return render_template("teams.html", page_title= "Teams", team_list = team_db)
 
+@app.route("/add_team", methods=["GET", "POST"])
+def add_team():
+    if request.method == "POST":
+        team = Team(
+            team_lead = request.form.get("team_lead"),
+            team_lead_email = request.form.get("team_lead_email")
+        )
+        with session:
+            session.add(team)
+            session.commit()
+        return redirect(url_for("teams"))
+    return render_template("add_team.html")
+
 @app.route("/users", methods=["GET", "POST"])
 @login_required
 def users():
