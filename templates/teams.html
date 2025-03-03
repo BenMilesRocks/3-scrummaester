@@ -12,5 +12,7 @@
             <p>Contact: {{ item.team_lead_email }}</p>
         </div>
     {% endfor %}
+
+    <a href={{ url_for('add_team') }}>Add new Team</a>
     
 {% endblock %}
