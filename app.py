@@ -92,7 +92,7 @@ def add_project():
         return redirect(url_for("projects"))
     return render_template("add_project.html", teams = team_db)
 
-@app.route("/delete_task/<int:project_id>")
+@app.route("/delete_project/<int:project_id>")
 def delete_project(project_id):
     project = delete(Project).where(Project.project_id == project_id)
     session.execute(project)
@@ -116,7 +116,7 @@ def add_team():
         return redirect(url_for("teams"))
     return render_template("add_team.html")
 
-@app.route("/delete_task/<int:team_id>")
+@app.route("/delete_team/<int:team_id>")
 def delete_team(team_id):
     team = delete(Team).where(Team.team_id == team_id)
     session.execute(team)
@@ -127,7 +127,7 @@ def delete_team(team_id):
 def users():
     return render_template("users.html", page_title= "Users", user_list = user_db)
 
-@app.route("/delete_task/<int:team_id>")
+@app.route("/delete_user/<int:user_id>")
 def delete_user(user_id):
     user = delete(User).where(User.id == user_id)
     session.execute(user)
