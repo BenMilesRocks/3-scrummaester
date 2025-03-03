@@ -77,6 +77,20 @@ def dashboard():
 def projects():
     return render_template("projects.html", page_title= "Projects", project_list = project_db)
 
+@app.route("/add_project", methods=["GET", "POST"])
+def add_project():
+    if request.method == "POST":
+        project = Project(
+            project_name = request.form.get("project_name"),
+            project_status = request.form.get("project_status"),
+            team_id = request.form.get("team_id")
+        )
+        with session:
+            session.add(project)
+            session.commit()
+        return redirect(url_for("projects"))
+    return render_template("add_project.html", teams = team_db)
+
 @app.route("/teams", methods=["GET", "POST"])
 @login_required
 def teams():
