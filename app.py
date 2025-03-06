@@ -79,6 +79,7 @@ def projects():
     return render_template("projects.html", page_title= "Projects", project_list = project_db)
 
 @app.route("/add_project", methods=["GET", "POST"])
+@login_required
 def add_project():
     if request.method == "POST":
         project = Project(
@@ -93,6 +94,7 @@ def add_project():
     return render_template("add_project.html", teams = team_db)
 
 @app.route("/delete_project/<int:project_id>")
+@login_required
 def delete_project(project_id):
     project = delete(Project).where(Project.project_id == project_id)
     session.execute(project)
@@ -105,6 +107,7 @@ def teams():
     return render_template("teams.html", page_title= "Teams", team_list = team_db)
 
 @app.route("/add_team", methods=["GET", "POST"])
+@login_required
 def add_team():
     if request.method == "POST":
         team = Team(
@@ -118,6 +121,7 @@ def add_team():
     return render_template("add_team.html")
 
 @app.route("/delete_team/<int:team_id>")
+@login_required
 def delete_team(team_id):
     team = delete(Team).where(Team.team_id == team_id)
     session.execute(team)
@@ -130,6 +134,7 @@ def users():
     return render_template("users.html", page_title= "Users", user_list = user_db)
 
 @app.route("/update_user/<int:user_id>", methods=["GET", "POST"])
+@login_required
 def update_user(user_id):
     user = session.get(User, user_id)
 
@@ -147,6 +152,7 @@ def update_user(user_id):
     return render_template("update_user.html", teams = team_db, users = user_db, user_id = user_id)
 
 @app.route("/delete_user/<int:user_id>")
+@login_required
 def delete_user(user_id):
     user = delete(User).where(User.id == user_id)
     session.execute(user)
@@ -159,6 +165,7 @@ def tasks():
     return render_template("tasks.html", page_title= "Tasks", task_list = task_db)
 
 @app.route("/add_task", methods=["GET", "POST"])
+@login_required
 def add_task():
     if request.method == "POST":
         task = Task(
@@ -175,6 +182,7 @@ def add_task():
     return render_template("add_task.html", projects = project_db, users = user_db)
 
 @app.route("/update_task/<int:task_id>", methods=["GET", "POST"])
+@login_required
 def update_task(task_id):
     task = session.get(Task, task_id)
 
@@ -193,6 +201,7 @@ def update_task(task_id):
 
 
 @app.route("/delete_task/<int:task_id>")
+@login_required
 def delete_task(task_id):
     task = delete(Task).where(Task.task_id == task_id)
     session.execute(task)
