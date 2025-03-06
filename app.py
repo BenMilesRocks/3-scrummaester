@@ -93,6 +93,22 @@ def add_project():
         return redirect(url_for("projects"))
     return render_template("add_project.html", teams = team_db)
 
+@app.route("/update_project/<int:project_id>", methods=["GET", "POST"])
+@login_required
+def update_project(project_id):
+    project = session.get(Project, project_id)
+
+    if request.method == "POST":
+        project = update(Project).where(project.project_id == project_id).execution_options(populate_existing=True).values(
+            project_name = request.form.get("project_name"),
+            project_status = request.form.get("project_statusd"),
+            team_id = request.form.get("team_id")
+            )
+        session.execute(project)
+        session.commit()
+        return redirect(url_for("projects"))
+    return render_template("update_project.html", teams = team_db, users = user_db, project_id = project_id)
+
 @app.route("/delete_project/<int:project_id>")
 @login_required
 def delete_project(project_id):
