@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    <div>
+        <h3>Update User Info</h3>
+    </div>
+
+    <form method="POST" action="{{ url_for('update_user', user_id = user_id ) }}">
+        <label for="first_name">First Name</label>
+        <input id="first_name" name="first_name" minlength="5" maxlength="50" type="text" required>
+        <label for="last_name">Last Name</label>
+        <input id="last_name" name="last_name" minlength="5" maxlength="50" type="text" required>
+        <label for="email">Email Address</label>
+        <input id="email" name="email" minlength="5" maxlength="80" type="email" required>
+        <label for="team_role">Team Role</label>
+        <input id="team_role" name="team_role" minlength="5" maxlength="50" type="text" required>
+        <select id="team_id" name="team_id" required>
+            <option value="" disabled selected>Choose Team</option>
+            {% for team in teams %}
+                <option value="{{ team.team_id }}">{{ team.team_id }}</option>
+            {% endfor %}
+        </select>
+        
+        <button type="submit">Update User</button>
+    </form>
+
+    
+{% endblock %}
+
+
+username = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Username"})
+password = PasswordField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Password"})
+email = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Email Address"})
+team_role = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Job Role"})
+team_id = IntegerField(validators=[InputRequired()], render_kw={"placeholder":"Team Number"})

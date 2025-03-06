@@ -129,22 +129,22 @@ def delete_team(team_id):
 def users():
     return render_template("users.html", page_title= "Users", user_list = user_db)
 
-@app.route("/update_task/<int:task_id>", methods=["GET", "POST"])
-def update_user(id):
-    user = session.get(User, id)
+@app.route("/update_user/<int:user_id>", methods=["GET", "POST"])
+def update_user(user_id):
+    user = session.get(User, user_id)
 
     if request.method == "POST":
-        user = update(User).where(User.id == id).execution_options(populate_existing=True).values(
+        user = update(User).where(User.id == user_id).execution_options(populate_existing=True).values(
             first_name = request.form.get("first_name"),
             last_name = request.form.get("last_name"),
             email = request.form.get("email"),
-            team_role = request.form.get("project_id"),
-            team_id  = request.form.get("assigned_user")
+            team_role = request.form.get("team_role"),
+            team_id  = request.form.get("team_id")
             )
         session.execute(user)
         session.commit()
         return redirect(url_for("users"))
-    return render_template("update_user.html", projects = project_db, users = user_db, id = id)
+    return render_template("update_user.html", teams = team_db, users = user_db, user_id = user_id)
 
 @app.route("/delete_user/<int:user_id>")
 def delete_user(user_id):
