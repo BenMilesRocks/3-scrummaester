@@ -96,6 +96,7 @@ def add_project():
 def delete_project(project_id):
     project = delete(Project).where(Project.project_id == project_id)
     session.execute(project)
+    session.commit()
     return redirect(url_for("projects"))
 
 @app.route("/teams", methods=["GET", "POST"])
@@ -120,6 +121,7 @@ def add_team():
 def delete_team(team_id):
     team = delete(Team).where(Team.team_id == team_id)
     session.execute(team)
+    session.commit()
     return redirect(url_for("teams"))
 
 @app.route("/users", methods=["GET", "POST"])
@@ -131,6 +133,7 @@ def users():
 def delete_user(user_id):
     user = delete(User).where(User.id == user_id)
     session.execute(user)
+    session.commit()
     return redirect(url_for("users"))
 
 @app.route("/tasks", methods=["GET", "POST"])
@@ -156,20 +159,28 @@ def add_task():
 
 @app.route("/update_task/<int:task_id>", methods=["GET", "POST"])
 def update_task(task_id):
+    task = session.get(Task, task_id)
+
     if request.method == "POST":
-        task = update(Task).where(Task.task_id == task_id).values(
+        task = update(Task).where(Task.task_id == task_id).execution_options(populate_existing=True).values(
+            task_id = task_id,
             task_name = request.form.get("task_name"),
             task_description = request.form.get("task_description"),
             task_status = request.form.get("task_status"),
             project_id = request.form.get("project_id"),
-            assigned_user  = request.form.get("assigned_user"))
+            assigned_user  = request.form.get("assigned_user")
+            )
         session.execute(task)
-    return render_template("update_task.html", projects = project_db, users = user_db)
+        session.commit()
+        return redirect(url_for("tasks"))
+    return render_template("update_task.html", projects = project_db, users = user_db, task_id = task_id)
+
 
 @app.route("/delete_task/<int:task_id>")
 def delete_task(task_id):
     task = delete(Task).where(Task.task_id == task_id)
     session.execute(task)
+    session.commit()
     return redirect(url_for("tasks"))
 
 @app.route("/logout")
