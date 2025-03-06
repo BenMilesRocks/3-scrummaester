@@ -129,6 +129,23 @@ def delete_team(team_id):
 def users():
     return render_template("users.html", page_title= "Users", user_list = user_db)
 
+@app.route("/update_task/<int:task_id>", methods=["GET", "POST"])
+def update_user(id):
+    user = session.get(User, id)
+
+    if request.method == "POST":
+        user = update(User).where(User.id == id).execution_options(populate_existing=True).values(
+            first_name = request.form.get("first_name"),
+            last_name = request.form.get("last_name"),
+            email = request.form.get("email"),
+            team_role = request.form.get("project_id"),
+            team_id  = request.form.get("assigned_user")
+            )
+        session.execute(user)
+        session.commit()
+        return redirect(url_for("users"))
+    return render_template("update_user.html", projects = project_db, users = user_db, id = id)
+
 @app.route("/delete_user/<int:user_id>")
 def delete_user(user_id):
     user = delete(User).where(User.id == user_id)
@@ -163,7 +180,6 @@ def update_task(task_id):
 
     if request.method == "POST":
         task = update(Task).where(Task.task_id == task_id).execution_options(populate_existing=True).values(
-            task_id = task_id,
             task_name = request.form.get("task_name"),
             task_description = request.form.get("task_description"),
             task_status = request.form.get("task_status"),
