@@ -1,6 +1,6 @@
 import os
 from flask import render_template, redirect, url_for, request
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 import bcrypt
 from sqlalchemy import update, delete
 from __init__ import session, login_manager, app
@@ -11,15 +11,11 @@ from database import (team_db, user_db, project_db, task_db, task_by_project,
                     user_by_team, outstanding_task_by_project, completed_task_by_project,
                     outstanding_task_by_user, completed_task_by_user)
 
-
+login_manager.login_view = "User.login"
 
 @login_manager.user_loader
 def load_user(username):
     return session.query(User).get(username)
-
-
-
-
 
 @app.route("/")
 def index():
@@ -44,10 +40,6 @@ def login():
 
     return render_template("login.html", page_title= "Login", form = form)
 
-login_manager.login_view = "User.login"
-
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
@@ -71,7 +63,8 @@ def register():
 @app.route("/dashboard", methods=["GET", "POST"])
 @login_required
 def dashboard():
-    return render_template("dashboard.html", page_title= "Dashboard")
+    user_id = int(current_user.id)
+    return render_template("dashboard.html", page_title= "Dashboard", user_id = user_id, task_list = task_db)
 
 @app.route("/projects", methods=["GET", "POST"])
 @login_required
