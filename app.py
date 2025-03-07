@@ -71,6 +71,11 @@ def dashboard():
 def projects():
     return render_template("projects.html", page_title= "Projects", project_list = project_db)
 
+@app.route("/task_by_project", methods=["GET", "POST"])
+@login_required
+def task_by_project():
+    return render_template("task_by_project.html", project_list = project_db)
+
 @app.route("/add_project", methods=["GET", "POST"])
 @login_required
 def add_project():
