@@ -6,10 +6,7 @@ from sqlalchemy import update, delete
 from __init__ import session, login_manager, app
 from models import Team, User, Project, Task
 from forms import RegistrationForm, LoginForm
-from database import (team_db, user_db, project_db, task_db, task_by_project,
-                    task_by_user, project_by_team, project_by_user, user_by_project,
-                    user_by_team, outstanding_task_by_project, completed_task_by_project,
-                    outstanding_task_by_user, completed_task_by_user)
+from database import (team_db, user_db, project_db, task_db)
 
 login_manager.login_view = "User.login"
 
@@ -23,7 +20,8 @@ def load_user(username):
 def index():
     return render_template("index.html", page_title= "Home")
 
-#Route to Login if not logged in, Dashboard if logged in
+#-LOGIN
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
@@ -41,6 +39,12 @@ def login():
                 return print("password isn't matching")
 
     return render_template("login.html", page_title= "Login", form = form)
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("login"))
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -62,11 +66,16 @@ def register():
 
     return render_template("register.html", page_title= "Register", form = form)
 
+#-DASHBOARD
+
 @app.route("/dashboard", methods=["GET", "POST"])
 @login_required
 def dashboard():
     user_id = int(current_user.id)
     return render_template("dashboard.html", page_title= "Dashboard", user_id = user_id, task_list = task_db)
+
+
+#-PROJECTS
 
 @app.route("/projects", methods=["GET", "POST"])
 @login_required
@@ -79,6 +88,8 @@ def projects():
         team_list = team_db,
         user_list = user_db)
 
+#----------Project Inserts
+
 @app.route("/task_by_project", methods=["GET", "POST"])
 @login_required
 def task_by_project():
@@ -88,6 +99,8 @@ def task_by_project():
 @login_required
 def team_by_project():
     return render_template("team_by_project.html")
+
+#----------Project CRUD Functions
 
 @app.route("/add_project", methods=["GET", "POST"])
 @login_required
@@ -128,10 +141,14 @@ def delete_project(project_id):
     session.commit()
     return redirect(url_for("projects"))
 
+#-TEAMS
+
 @app.route("/teams", methods=["GET", "POST"])
 @login_required
 def teams():
     return render_template("teams.html", page_title= "Teams", team_list = team_db)
+
+#----------Team CRUD Functions
 
 @app.route("/add_team", methods=["GET", "POST"])
 @login_required
@@ -155,10 +172,14 @@ def delete_team(team_id):
     session.commit()
     return redirect(url_for("teams"))
 
+#-USERS
+
 @app.route("/users", methods=["GET", "POST"])
 @login_required
 def users():
     return render_template("users.html", page_title= "Users", user_list = user_db)
+
+#----------User CRUD Functions
 
 @app.route("/update_user/<int:user_id>", methods=["GET", "POST"])
 @login_required
@@ -186,10 +207,14 @@ def delete_user(user_id):
     session.commit()
     return redirect(url_for("users"))
 
+#-TASKS
+
 @app.route("/tasks", methods=["GET", "POST"])
 @login_required
 def tasks():
     return render_template("tasks.html", page_title= "Tasks", task_list = task_db)
+
+#----------Task CRUD Functions
 
 @app.route("/add_task", methods=["GET", "POST"])
 @login_required
@@ -235,12 +260,7 @@ def delete_task(task_id):
     session.commit()
     return redirect(url_for("tasks"))
 
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for("login"))
-
+#-RUN APP
 
 if __name__ == "__main__":
     app.run(
