@@ -71,12 +71,17 @@ def dashboard():
 @app.route("/projects", methods=["GET", "POST"])
 @login_required
 def projects():
-    return render_template("projects.html", page_title= "Projects", project_list = project_db, task_list = task_db)
+    return render_template("projects.html", page_title= "Projects", project_list = project_db, task_list = task_db, team_list = team_db)
 
 @app.route("/task_by_project", methods=["GET", "POST"])
 @login_required
 def task_by_project():
     return render_template("task_by_project.html")
+
+@app.route("/team_by_project", methods=["GET", "POST"])
+@login_required
+def team_by_project():
+    return render_template("team_by_project.html")
 
 @app.route("/add_project", methods=["GET", "POST"])
 @login_required
