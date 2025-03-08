@@ -5,6 +5,8 @@
         <h3>Projects</h3>
     </div>
 
+    <hr>
+
     {% for item in project_list | sort (attribute="project_id") %}
         <div class='project'>
             <h3>{{ item.project_name }}</h3>
@@ -15,15 +17,19 @@
         <a href="{{ url_for('update_project', project_id = item.project_id) }}">Update</a>
         <a href="{{ url_for('delete_project', project_id = item.project_id) }}">Delete</a>
 
+        <hr>
+
         {% with team_id = item.team_id %}
         {% include "team_by_project.html" %}
         {% endwith %} 
         
+        <hr>
+
         {% with project_id = item.project_id %}
         {% include "task_by_project.html" %}
         {% endwith %}
         
-        
+        <hr>
     {% endfor %}
 
 
