@@ -1,2 +1,15 @@
-<p>Tasks go here</p>
-<h4>{{project_id}}</h4>
+{% for item in task_list %}
+    {% if item.project_id == project_id %}
+        <div class='task'>
+            <h3>{{ item.task_name }}</h3>
+            <p>Project Id: {{ item.project_id }}</p>
+            <p>Task Description:</p>
+            <p>{{ item.task_description }}</p>
+            <p>Task Status: {{ item.task_status }}</p>
+            <p>Assigned User: {{ item.assigned_user }}</p>
+        </div>
+
+        <a href="{{ url_for('update_task', task_id = item.task_id) }}">Update</a>
+        <a href="{{ url_for('delete_task', task_id = item.task_id) }}">Delete</a>
+    {% endif %}
+{% endfor %}

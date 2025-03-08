@@ -13,6 +13,8 @@ from database import (team_db, user_db, project_db, task_db, task_by_project,
 
 login_manager.login_view = "User.login"
 
+#app routing
+
 @login_manager.user_loader
 def load_user(username):
     return session.query(User).get(username)
@@ -69,12 +71,12 @@ def dashboard():
 @app.route("/projects", methods=["GET", "POST"])
 @login_required
 def projects():
-    return render_template("projects.html", page_title= "Projects", project_list = project_db)
+    return render_template("projects.html", page_title= "Projects", project_list = project_db, task_list = task_db)
 
 @app.route("/task_by_project", methods=["GET", "POST"])
 @login_required
 def task_by_project():
-    return render_template("task_by_project.html", project_list = project_db)
+    return render_template("task_by_project.html")
 
 @app.route("/add_project", methods=["GET", "POST"])
 @login_required
