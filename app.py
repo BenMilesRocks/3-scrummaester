@@ -164,6 +164,21 @@ def add_team():
         return redirect(url_for("teams"))
     return render_template("add_team.html")
 
+@app.route("/update_team/<int:team_id>", methods=["GET", "POST"])
+@login_required
+def update_team(team_id):
+    team = session.get(Team, team_id)
+
+    if request.method == "POST":
+        team = update(Team).where(team.team_id == team_id).execution_options(populate_existing=True).values(
+            team_lead = request.form.get("team_lead"),
+            team_lead_email = request.form.get("team_lead_email")
+            )
+        session.execute(team)
+        session.commit()
+        return redirect(url_for("teams"))
+    return render_template("update_team.html", teams = team_db, team_id = team_id)
+
 @app.route("/delete_team/<int:team_id>")
 @login_required
 def delete_team(team_id):
