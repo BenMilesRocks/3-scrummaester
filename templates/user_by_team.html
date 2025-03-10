@@ -13,7 +13,10 @@
         <br>
         <br>
         <hr>
-
+        
+        {% with user_id = user.id %}
+        {% include "task_by_user.html" %}
+        {% endwith %}
 
         
         <hr>
