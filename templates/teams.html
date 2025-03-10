@@ -14,7 +14,17 @@
 
         <a href="{{ url_for('update_team', team_id = item.team_id) }}">Update</a>
         <a href="{{ url_for('delete_team', team_id = item.team_id) }}">Delete</a>
+
+        
+        <hr>
+
+        {% with team_id = item.team_id %}
+        {% include "project_by_team.html" %}
+        {% endwith %} 
+        
+        <hr>
     {% endfor %}
+
 
     <a href={{ url_for('add_team') }}>Add new Team</a>
     

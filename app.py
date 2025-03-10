@@ -5,7 +5,7 @@ import bcrypt
 from sqlalchemy import update, delete
 from __init__ import session, login_manager, app
 from models import Team, User, Project, Task
-from forms import RegistrationForm, LoginForm
+from forms import LoginForm
 from database import (team_db, user_db, project_db, task_db)
 
 login_manager.login_view = "User.login"
@@ -89,18 +89,6 @@ def projects():
         team_list = team_db,
         user_list = user_db)
 
-#----------Project Inserts
-
-@app.route("/task_by_project", methods=["GET", "POST"])
-@login_required
-def task_by_project():
-    return render_template("task_by_project.html")
-
-@app.route("/team_by_project", methods=["GET", "POST"])
-@login_required
-def team_by_project():
-    return render_template("team_by_project.html")
-
 #----------Project CRUD Functions
 
 @app.route("/add_project", methods=["GET", "POST"])
@@ -147,7 +135,7 @@ def delete_project(project_id):
 @app.route("/teams", methods=["GET", "POST"])
 @login_required
 def teams():
-    return render_template("teams.html", page_title= "Teams", team_list = team_db)
+    return render_template("teams.html", page_title= "Teams", team_list = team_db, project_list = project_db)
 
 #----------Team CRUD Functions
 
