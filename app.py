@@ -48,23 +48,24 @@ def logout():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    form = RegistrationForm()
 
-    if form.validate_on_submit():
-        hashed_password = bcrypt.hashpw(form.password.data.encode('utf8'), bcrypt.gensalt())
+    if request.method == "POST":
+        password_input = request.form.get("password")
+        hashed_password = bcrypt.hashpw(password_input.encode('utf8'), bcrypt.gensalt())
         new_user = User(
-            first_name = form.first_name.data,
-            last_name = form.last_name.data,
-            username = form.username.data,
+            first_name = request.form.get("first_name"),
+            last_name = request.form.get("last_name"),
+            username = request.form.get("username"),
             password = hashed_password.decode('utf8'),
-            email = form.email.data,
-            team_role = form.team_role.data,
-            team_id = form.team_id.data)            
+            email = request.form.get("email"),
+            team_role = request.form.get("team_role"),
+            team_id = request.form.get("team_id")
+        )            
         session.add(new_user)
         session.commit()    
         return redirect(url_for("login"))
 
-    return render_template("register.html", page_title= "Register", form = form)
+    return render_template("register.html", page_title= "Register", teams = team_db)
 
 #-DASHBOARD
 
