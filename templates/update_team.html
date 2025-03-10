@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
     
+
     <div>
-        <h3>Add New Team</h3>
+        <h3>Update Team</h3>
     </div>
 
-    <form method="POST" action="{{ url_for('add_team') }}">
+    <form method="POST" action="{{ url_for('update_team', team_id = team_id) }}">
         <label for="team_lead">Team Lead Name</label>
         <input id="team_lead" name="team_lead" minlength="5" maxlength="50" type="text" required>
         <label for="team_lead_email">Contact Email</label>
         <input id="team_lead_email" name="team_lead_email" minlength="5" maxlength="80" type="text" required>
-        <button type="submit">Add new team</button>
+        <button type="submit">Update Team</button>
     </form>
-
     
 {% endblock %}

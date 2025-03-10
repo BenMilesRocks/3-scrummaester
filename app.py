@@ -123,7 +123,7 @@ def update_project(project_id):
     project = session.get(Project, project_id)
 
     if request.method == "POST":
-        project = update(Project).where(project.project_id == project_id).execution_options(populate_existing=True).values(
+        project = update(Project).where(Project.project_id == project_id).execution_options(populate_existing=True).values(
             project_name = request.form.get("project_name"),
             project_status = request.form.get("project_status"),
             team_id = request.form.get("team_id")
@@ -170,7 +170,7 @@ def update_team(team_id):
     team = session.get(Team, team_id)
 
     if request.method == "POST":
-        team = update(Team).where(team.team_id == team_id).execution_options(populate_existing=True).values(
+        team = update(Team).where(Team.team_id == team_id).execution_options(populate_existing=True).values(
             team_lead = request.form.get("team_lead"),
             team_lead_email = request.form.get("team_lead_email")
             )
