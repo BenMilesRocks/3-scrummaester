@@ -38,7 +38,7 @@
       <select id="team_id" name="team_id" required>
           <option value="" disabled selected>Choose Team</option>
           {% for team in teams %}
-              <option value="{{ team.team_id }}">{{ team.team_id }}</option>
+              <option value="{{ team.team_id }}">Team: {{ team.team_id }}, Team Lead: {{ team.team_lead }}</option>
           {% endfor %}
       </select>
       <label for="username">Username</label>
