@@ -1,0 +1,21 @@
+{% for user in user_list %}
+    {% if user.team_id == team_id %}
+        <div class='user'>
+            <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+            <p>User Name: {{ user.user_name }}</p>
+            <p>Contact: {{ user.email }}</p>
+            <p>Assigned to team: {{ user.team_id }}</p>
+            <p>Team Role: {{ user.team_role }}</p>
+        </div>
+
+        <a href="{{ url_for('update_user', user_id = user.id) }}">Update</a>
+        <a href="{{ url_for('delete_user', user_id = user.id) }}">Delete</a>
+        <br>
+        <br>
+        <hr>
+
+
+        
+        <hr>
+    {% endif %}
+{% endfor %}

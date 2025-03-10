@@ -135,7 +135,14 @@ def delete_project(project_id):
 @app.route("/teams", methods=["GET", "POST"])
 @login_required
 def teams():
-    return render_template("teams.html", page_title= "Teams", team_list = team_db, project_list = project_db)
+    return render_template(
+        "teams.html", 
+        page_title= "Teams", 
+        team_list = team_db, 
+        project_list = project_db, 
+        task_list = task_db, 
+        user_list = user_db
+        )
 
 #----------Team CRUD Functions
 

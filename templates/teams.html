@@ -23,6 +23,12 @@
         {% endwith %} 
         
         <hr>
+
+        {% with team_id = item.team_id %}
+        {% include "user_by_team.html" %}
+        {% endwith %} 
+        
+        <hr>
     {% endfor %}
 
 
