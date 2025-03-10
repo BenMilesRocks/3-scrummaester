@@ -16,6 +16,11 @@
 
         <a href="{{ url_for('update_user', user_id = item.id) }}">Update User Info</a>
         <a href="{{ url_for('delete_user', user_id = item.id) }}">Delete</a>
+
+        {% with team_id = item.team_id %}
+        {% include "project_by_user.html" %}
+        {% endwith %} 
+        
     {% endfor %}
 
     

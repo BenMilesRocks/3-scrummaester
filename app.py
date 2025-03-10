@@ -188,7 +188,14 @@ def delete_team(team_id):
 @app.route("/users", methods=["GET", "POST"])
 @login_required
 def users():
-    return render_template("users.html", page_title= "Users", user_list = user_db)
+    return render_template(
+        "users.html", 
+        page_title= "Users",
+        team_list = team_db, 
+        project_list = project_db, 
+        task_list = task_db, 
+        user_list = user_db
+        )
 
 #----------User CRUD Functions
 
