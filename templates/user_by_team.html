@@ -1,24 +1,31 @@
-{% for user in user_list %}
-    {% if user.team_id == team_id %}
-        <div class='user'>
-            <h4>{{ user.first_name }} {{ user.last_name }}</h4>
-            <p>User Name: {{ user.user_name }}</p>
-            <p>Contact: {{ user.email }}</p>
-            <p>Assigned to team: {{ user.team_id }}</p>
-            <p>Team Role: {{ user.team_role }}</p>
-        </div>
+<div class="accordion" id="ProjectByTeamAccordion">
+    {% for user in user_list %}
+    
+        {% if user.team_id == team_id %}
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ user.id }}userbyteamaccordion" aria-expanded="true" aria-controls="{{ user.id }}userbyteamaccordion">
+                        {{ user.first_name }} {{ user.last_name }}
+                    </button>
+                </h2>
+                <div id="{{ user.id }}userbyteamaccordion" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        <p>User Name: {{ user.user_name }}</p>
+                        <p>Contact: {{ user.email }}</p>
+                        <p>Assigned to team: {{ user.team_id }}</p>
+                        <p>Team Role: {{ user.team_role }}</p>
 
-        <a href="{{ url_for('update_user', user_id = user.id) }}">Update</a>
-        <a href="{{ url_for('delete_user', user_id = user.id) }}">Delete</a>
-        <br>
-        <br>
-        <hr>
-        
-        {% with user_id = user.id %}
-        {% include "task_by_user.html" %}
-        {% endwith %}
+                        <a href="{{ url_for('update_user', user_id = user.id) }}">Update</a>
+                        <a href="{{ url_for('delete_user', user_id = user.id) }}">Delete</a>
 
+                        {% with user_id = user.id %}
+                        {% include "task_by_user.html" %}
+                        {% endwith %}                        
+                    </div>
+                </div>
+                
+            </div>
+        {% endif %}
         
-        <hr>
-    {% endif %}
-{% endfor %}
+    {% endfor %}
+</div>

@@ -4,11 +4,11 @@
     {% if project.team_id == team_id %}
         <div class="accordion-item">
             <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ project.project_id }}projectaccordion" aria-expanded="true" aria-controls="{{ project.project_id }}projectaccordion">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ project.project_id }}projectbyteamaccordion" aria-expanded="true" aria-controls="{{ project.project_id }}projectbyteamaccordion">
                     {{ project.project_name }}
                 </button>
             </h2>
-            <div id="{{ project.project_id }}projectaccordion" class="accordion-collapse collapse">
+            <div id="{{ project.project_id }}projectbyteamaccordion" class="accordion-collapse collapse">
                 <div class="accordion-body">
                     Project Status: {{ project.project_status }}
                     <a href="{{ url_for('update_project', project_id = project.project_id) }}">Update</a>
