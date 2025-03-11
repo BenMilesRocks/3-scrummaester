@@ -5,18 +5,52 @@
         <h3>Tasks</h3>
     </div>
 
-    {% for item in task_list | sort (attribute="project_id") %}
-        <div class='task'>
-            <h3>{{ item.task_name }}</h3>
-            <p>Project Id: {{ item.project_id }}</p>
-            <p>Task Description:</p>
-            <p>{{ item.task_description }}</p>
-            <p>Task Status: {{ item.task_status }}</p>
-            <p>Assigned User: {{ item.assigned_user }}</p>
-        </div>
+    <hr>
 
-        <a href="{{ url_for('update_task', task_id = item.task_id) }}">Update</a>
-        <a href="{{ url_for('delete_task', task_id = item.task_id) }}">Delete</a>
+    <div>
+        <h4>Sorted by Project</h4>
+    </div>
+
+    {% for project in project_list | sort (attribute="project_id") %}
+    <div class='project'>
+        <h3>{{ project.project_name }}</h3>
+        <p>Status: {{ project.project_status }}</p>
+        <p>Team: {{ project.team_id }}</p>
+    </div>
+
+    <a href="{{ url_for('update_project', project_id = project.project_id) }}">Update</a>
+    <a href="{{ url_for('delete_project', project_id = project.project_id) }}">Delete</a>
+
+    <hr>
+
+    {% with project_id = project.project_id %}
+    {% include "task_by_project.html" %}
+    {% endwith %}
+    
+    <hr>
+        
+    {% endfor %}
+
+    <div>
+        <h4>Sorted by User</h4>
+    </div>
+
+    {% for user in user_list | sort (attribute="id") %}
+    <div class='user'>
+        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+        <p>User Name: {{ user.user_name }}</p>
+        <p>Contact: {{ user.email }}</p>
+        <p>Assigned to team: {{ user.team_id }}</p>
+        <p>Team Role: {{ user.team_role }}</p>
+    </div> 
+
+    <a href="{{ url_for('update_user', user_id = user.id) }}">Update User Info</a>
+    <a href="{{ url_for('delete_user', user_id = user.id) }}">Delete</a>
+
+    {% with user_id = user.id %}
+    {% include "task_by_user.html" %}
+    {% endwith %} 
+
     {% endfor %}
 
     <a href={{ url_for('add_task') }}>Add New Task</a>

@@ -230,7 +230,14 @@ def delete_user(user_id):
 @app.route("/tasks", methods=["GET", "POST"])
 @login_required
 def tasks():
-    return render_template("tasks.html", page_title= "Tasks", task_list = task_db)
+    return render_template(
+        "tasks.html", 
+        page_title= "Tasks", 
+        team_list = team_db, 
+        project_list = project_db, 
+        task_list = task_db, 
+        user_list = user_db
+        )
 
 #----------Task CRUD Functions
 

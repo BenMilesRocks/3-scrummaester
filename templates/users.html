@@ -5,7 +5,7 @@
         <h3>Users</h3>
     </div>
 
-    {% for item in user_list | sort (attribute="user_id") %}
+    {% for item in user_list | sort (attribute="id") %}
         <div class='user'>
             <h3>{{ item.first_name }} {{ item.last_name }}</h3>
             <p>User Name: {{ item.user_name }}</p>
