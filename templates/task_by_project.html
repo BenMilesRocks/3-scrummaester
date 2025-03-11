@@ -1,22 +1,28 @@
 {% for task in task_list %}
     {% if task.project_id == project_id %}
-        <div class='task'>
-            <h4>{{ task.task_name }}</h4>
-            <p>Task Description:</p>
-            <p>{{ task.task_description }}</p>
-            <p>Task Status: {{ task.task_status }}</p>
-            <p>Assigned User: {% for user in user_list %}
-                {% if user.id == task.assigned_user %}
-                    {{ user.first_name}} {{ user.last_name }}
-                {% endif %}
-                {% endfor %}
-            </p>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#{{ task.task_id }}taskbyprojectaccordion" aria-expanded="true" aria-controls="{{ task.task_id }}taskbyprojectaccordion">
+                    {{ task.task_name }}
+                </button>
+            </h2>
+            <div id="{{ task.task_id }}taskbyprojectaccordion" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <p>Task Description:</p>
+                    <p>{{ task.task_description }}</p>
+                    <p>Task Status: {{ task.task_status }}</p>
+                    <p>Assigned User: {% for user in user_list %}
+                        {% if user.id == task.assigned_user %}
+                            {{ user.first_name}} {{ user.last_name }}
+                        {% endif %}
+                        {% endfor %}
+                    </p>
+                    <a href="{{ url_for('update_task', task_id = task.task_id) }}">Update</a>
+                    <a href="{{ url_for('delete_task', task_id = task.task_id) }}">Delete</a>                     
+                </div>
+            </div>
+            
         </div>
-
-        <a href="{{ url_for('update_task', task_id = task.task_id) }}">Update</a>
-        <a href="{{ url_for('delete_task', task_id = task.task_id) }}">Delete</a>
-        <br>
-        <br>
     {% endif %}
 {% endfor %}
 
