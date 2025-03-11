@@ -1,27 +1,59 @@
 {% extends "base.html" %}
 {% block content %}
-    
-    <div>
-        <h3>Users</h3>
+ 
+
+<div class="row mx-2 my-2">
+    <div class="col">
+        <div>
+            <h3 class="text-center mx-2 my-2">Users</h3>
+        </div>
+
+        {% for user in user_list | sort (attribute="id") %}
+        <div class="row mx-2 my-2">
+            <div class="col card">
+                <div class='user'>
+                    <h3 class="text-center mx-2 my-2">{{ user.first_name }} {{ user.last_name }}</h3>
+                    <br>
+                    <p>User Name: {{ user.user_name }}</p>
+                    <p>Contact: {{ user.email }}</p>
+                    <p>Assigned to team: {{ user.team_id }}</p>
+                    <p>Team Role: {{ user.team_role }}</p>
+                    <div class="text-center">
+                        <a href="{{ url_for('update_user', user_id = user.id) }}">Update User Info</a>
+                        <a href="{{ url_for('delete_user', user_id = user.id) }}">Delete</a>
+                    </div>
+                    
+                </div>
+
+                
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ user.id }}projectsbyuser" aria-expanded="true" aria-controls="{{ user.id }}projectsbyuser">
+                            Projects
+                            </button>
+                        </h2>
+                        <div id="{{ user.id }}projectsbyuser" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                {% with team_id = user.team_id, user_id = user.id %}
+                                {% include "project_by_user.html" %}
+                                {% endwith %}                        
+                            </div>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+                <br>
+
+            </div>
+            
+        </div>
+        <br>
+        
+        {% endfor %}
+
     </div>
+</div>
 
-    {% for item in user_list | sort (attribute="id") %}
-        <div class='user'>
-            <h3>{{ item.first_name }} {{ item.last_name }}</h3>
-            <p>User Name: {{ item.user_name }}</p>
-            <p>Contact: {{ item.email }}</p>
-            <p>Assigned to team: {{ item.team_id }}</p>
-            <p>Team Role: {{ item.team_role }}</p>
-        </div> 
-
-        <a href="{{ url_for('update_user', user_id = item.id) }}">Update User Info</a>
-        <a href="{{ url_for('delete_user', user_id = item.id) }}">Delete</a>
-
-        {% with team_id = item.team_id, user_id = item.id %}
-        {% include "project_by_user.html" %}
-        {% endwith %} 
-
-    {% endfor %}
-
-    
 {% endblock %}
