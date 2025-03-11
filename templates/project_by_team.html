@@ -1,22 +1,28 @@
+<div class="accordion" id="ProjectByTeamAccordion">
 {% for project in project_list %}
+
     {% if project.team_id == team_id %}
-        <div class='project'>
-            <h4>{{ project.project_name }}</h4>
-            <p>Project Status: {{ project.project_status }}</p>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#{{ project.project_id }}projectaccordion" aria-expanded="true" aria-controls="{{ project.project_id }}projectaccordion">
+                    {{ project.project_name }}
+                </button>
+            </h2>
+            <div id="{{ project.project_id }}projectaccordion" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    Project Status: {{ project.project_status }}
+                    <a href="{{ url_for('update_project', project_id = project.project_id) }}">Update</a>
+                    <a href="{{ url_for('delete_project', project_id = project.project_id) }}">Delete</a>
+                    {% with project_id = project.project_id %}
+                    {% include "task_by_project.html" %}
+                    {% endwith %}                            
+                </div>
+            </div>
+            
         </div>
-
-        <a href="{{ url_for('update_project', project_id = project.project_id) }}">Update</a>
-        <a href="{{ url_for('delete_project', project_id = project.project_id) }}">Delete</a>
-        <br>
-        <br>
-        <hr>
-
-        {% with project_id = project.project_id %}
-        {% include "task_by_project.html" %}
-        {% endwith %}
-        
-        <hr>
     {% endif %}
+    
 {% endfor %}
-
+</div>
 <a href={{ url_for('add_project') }}>Add new Project</a>
+
