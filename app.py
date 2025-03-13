@@ -5,7 +5,7 @@ import bcrypt
 from sqlalchemy import update, delete
 from __init__ import session, login_manager, app
 from models import Team, User, Project, Task
-from forms import LoginForm
+from forms import LoginForm, RegistrationForm
 from database import (team_db, user_db, project_db, task_db)
 
 login_manager.login_view = "User.login"
@@ -47,25 +47,24 @@ def logout():
     return redirect(url_for("login"))
 
 @app.route("/register", methods=["GET", "POST"])
-def register():
+def register():    
+    form = RegistrationForm()
 
-    if request.method == "POST":
-        password_input = request.form.get("password")
-        hashed_password = bcrypt.hashpw(password_input.encode('utf8'), bcrypt.gensalt())
+    if form.validate_on_submit():
+        hashed_password = bcrypt.hashpw(form.password.data.encode('utf8'), bcrypt.gensalt())
         new_user = User(
-            first_name = request.form.get("first_name"),
-            last_name = request.form.get("last_name"),
-            username = request.form.get("username"),
+            first_name = form.first_name.data,
+            last_name = form.last_name.data,
+            username = form.username.data,
             password = hashed_password.decode('utf8'),
-            email = request.form.get("email"),
-            team_role = request.form.get("team_role"),
-            team_id = request.form.get("team_id")
-        )            
+            email = form.email.data,
+            team_role = form.team_role.data,
+            team_id = form.team_id.data.team_id)            
         session.add(new_user)
         session.commit()    
         return redirect(url_for("login"))
 
-    return render_template("register.html", page_title= "Register", teams = team_db)
+    return render_template("register.html", page_title= "Register", form = form)
 
 #-DASHBOARD
 

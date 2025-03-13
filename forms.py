@@ -1,8 +1,12 @@
+from __init__ import session
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
+from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 
-from __init__ import session
+from models import User, Team
+from database import team_db
+
 from models import User
 class RegistrationForm(FlaskForm):
     first_name = StringField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"First Name"})
@@ -11,7 +15,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Password"})
     email = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Email Address"})
     team_role = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Job Role"})
-    team_id = IntegerField(validators=[InputRequired()], render_kw={"placeholder":"Team Number"})
+    team_id = QuerySelectField(query_factory=lambda: session.query(Team).all())
 
 
     submit = SubmitField("Register")
