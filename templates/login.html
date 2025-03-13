@@ -26,11 +26,27 @@
     
     <h1>Login to ScrumMaester</h1>
 
-    <form method="post" action="">
-      {{ form.hidden_tag() }}
-      {{ form.username }}
-      {{ form.password }}
-      {{ form.submit }}
+    <form method="POST" action="{{ url_for('register') }}">
+      <label for="first_name">First Name</label>
+      <input id="first_name" name="first_name" minlength="5" maxlength="50" type="text" required>
+      <label for="last_name">Last Name</label>
+      <input id="last_name" name="last_name" minlength="5" maxlength="50" type="text" required>
+      <label for="email">Email Address</label>
+      <input id="email" name="email" minlength="5" maxlength="80" type="email" required>
+      <label for="team_role">Team Role</label>
+      <input id="team_role" name="team_role" minlength="5" maxlength="50" type="text" required>
+      <select id="team_id" name="team_id" required>
+          <option value="" disabled selected>Choose Team</option>
+          {% for team in teams %}
+              <option value="{{ team.team_id }}">Team: {{ team.team_id }}, Team Lead: {{ team.team_lead }}</option>
+          {% endfor %}
+      </select>
+      <label for="username">Username</label>
+      <input id="username" name="username" minlength="5" maxlength="50" type="text" required>
+      <label for="password">Password</label>
+      <input id="password" name="password" minlength="5" maxlength="50" type="password" required>
+      
+      <button type="submit">Create User</button>
     </form>
 
     <a href={{ url_for('register') }}>Don't have an account? Sign up here!</a>

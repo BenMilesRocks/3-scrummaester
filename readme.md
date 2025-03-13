@@ -1,5 +1,6 @@
-# Ben Miles Rocks
+# ScrumMaester
 
+This project is to create a Scrum management system, allowing Scrum masters to better manage coding teams giving better visibility on who is working on what.
 
 ## Project Goals
 
@@ -38,9 +39,26 @@
 
 **First Time Visitor Goals**
 
+* I want to be able to quickly ascertain the purpose of the site
+* I want to be able to register quickly and easily, with no unneccesary complications
+* I want the site to be easy to use and responsive to my device
+* I want the layout of the site to be intuitive and easy to understand
+
 **Returning Visitor Goals**
 
+* I want to be able to log in quickly and easily
+* I want to see content relevant to me on my dashboard
+* I want to be able to Create, Update and Delete data easily
+* I want to be able to quickly navigate to the information I want to access
+* I want the site to be easy to use and responsive to my device
+
 **Frequent Visitor Goals**
+
+* I want to see content relevant to me on my dashboard
+* I want to be able to Create, Update and Delete data easily
+* I want to be able to quickly navigate to the information I want to access
+* I want to be able to filter data in a number of ways to make it easier to follow
+* I want the site to be easy to use and responsive to my device
 
 
 ## Design
@@ -92,7 +110,8 @@ I also tested the site with the Chrome extension [Web Disability Simulator](http
 
 ### Languages Used
 
-This website is built with HTML 5 and styled using CSS.
+This website is built with Python's Flask framework. The site data is stored on a PostgreSQL database, using SQLalchemy to access the database through Python. I have used Bootstrap to provide 
+responsive elements and default classes in HTML, with additional styling in CSS.
 
 ### Frameworks, Libraries & Programs Used
 
@@ -106,7 +125,7 @@ The site is deployed using GitHub Pages - [Ben Miles Rocks](https://benmilesrock
 To Deploy the site using GitHub Pages:
 
 1. Login (or signup) to Github.
-2. Go to the repository for this project, [BenMilesRocks/1---Ben-Miles-Rocks](https://github.com/BenMilesRocks/1---Ben-Miles-Rocks).
+2. Go to the repository for this project, [BenMilesRocks/3-scrummaester](https://github.com/BenMilesRocks/3-scrummaester).
 3. Click the settings button.
 4. Select pages in the left hand navigation menu.
 5. From the source dropdown select main branch and press save.
@@ -119,7 +138,7 @@ To Deploy the site using GitHub Pages:
 To fork the repository:
 
 1. Log in (or sign up) to Github.
-2. Go to the repository for this project, [BenMilesRocks/1---Ben-Miles-Rocks](https://github.com/BenMilesRocks/1---Ben-Miles-Rocks).
+2. Go to the repository for this project, [BenMilesRocks/3-scrummaester](https://github.com/BenMilesRocks/3-scrummaester).
 3. Click the Fork button in the top right corner.
 
 **How to clone**
@@ -127,7 +146,7 @@ To fork the repository:
 To clone the repository:
 
 1. Log in (or sign up) to GitHub.
-2. Go to the repository for this project, [BenMilesRocks/1---Ben-Miles-Rocks](https://github.com/BenMilesRocks/1---Ben-Miles-Rocks).
+2. Go to the repository for this project, [BenMilesRocks/3-scrummaester](https://github.com/BenMilesRocks/3-scrummaester).
 3. Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
 4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
 5. Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.
