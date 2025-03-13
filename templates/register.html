@@ -24,18 +24,57 @@
         </div>
       </nav>
     
-    <h1>Create new account</h1>
 
-    <form method="post" action="">
-      {{ form.hidden_tag() }}
-      {{ form.first_name }}
-      {{ form.last_name }}
-      {{ form.username }}
-      {{ form.password }}
-      {{ form.email }}
-      {{ form.team_role }}
-      {{ form.team_id }}
-      {{ form.submit }}
+      <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm mx-auto my-3 py-3 px-3 text-center">
+          <h1>Create new account</h1>
+        </div>
+      </div>
+      
+  
+      <div class="row">
+        <div class="card col-lg-6 col-md-8 col-sm mx-auto my-3 py-3 px-3">
+          <form method="post" action="">
+            {{ form.hidden_tag() }}
+            <span class="form-group text-center">
+              {{ form.first_name.label }}
+              {{ form.first_name(class_="form-control", size=32) }}
+            </span>
+            <span class="form-group text-center">
+              {{ form.last_name.label }}
+              {{ form.last_name(class_="form-control", size=32) }}
+            </span>
+            <span class="form-group text-center">
+              {{ form.username.label }}
+              {{ form.username(class_="form-control", size=32) }}
+            </span>
+            <span class="form-group text-center">
+              {{ form.email.label }}
+              {{ form.email(class_="form-control", size=32) }}
+            </span>
+            <span class="form-group text-center">
+              {{ form.password.label }}
+              {{ form.password(class_="form-control", size=32) }}
+            </span>
+            <span class="form-group text-center">
+              {{ form.team_role.label }}
+              {{ form.team_role(class_="form-control", size=32) }}
+            </span>
+            <span class="form-group text-center">
+              {{ form.team_id.label }}           
+              {{ form.team_id }}
+            </span>
+            <div class="my-3 mx-auto">            
+              {{ form.submit(class_="btn btn-primary") }}
+            </div>          
+        </div>
+      </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-8 col-sm mx-auto my-3 py-3 px-3">
+      <a href={{ url_for('login') }}>Already have an account? Log in here!</a>
+    </div>
+  </div>
 
 </body>
 </html>
