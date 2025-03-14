@@ -26,8 +26,10 @@
                             <p>Status: {{ project.project_status }}</p>
                             <p>Team: {{ project.team_id }}</p>
 
-                            <a href="{{ url_for('update_project', project_id = project.project_id) }}">Update</a>
-                            <a href="{{ url_for('delete_project', project_id = project.project_id) }}">Delete</a>
+                            <div class="text-center my-2">
+                                <a class="btn btn-primary" href={{ url_for('update_project', project_id = project.project_id) }}>Update</a>
+                                <a class="btn btn-danger" href={{ url_for('delete_project', project_id = project.project_id) }}>Delete</a>
+                            </div>
 
                             {% with project_id = project.project_id %}
                             {% include "task_by_project.html" %}
@@ -64,8 +66,10 @@
                             <p>Assigned to team: {{ user.team_id }}</p>
                             <p>Team Role: {{ user.team_role }}</p>
 
-                            <a href="{{ url_for('update_user', user_id = user.id) }}">Update User Info</a>
-                            <a href="{{ url_for('delete_user', user_id = user.id) }}">Delete</a>
+                            <div class="text-center my-2">
+                                <a class="btn btn-primary" href={{ url_for('update_user', user_id = user.id) }}>Update User</a>
+                                <a class="btn btn-danger" href={{ url_for('delete_user', user_id = user.id) }}>Delete User</a>
+                            </div>   
                         
                             {% with user_id = user.id %}
                             {% include "task_by_user.html" %}
@@ -81,8 +85,11 @@
 
         </div>
 
-        <br>
-        <a href={{ url_for('add_task') }}>Add New Task</a>
+        <div class="row">
+            <div class="col mx-2 my-2 text-center">
+                <a class="btn btn-success" href={{ url_for('add_task') }}>Add New Task</a>
+            </div>
+        </div>
     </div>
 </div>
 
