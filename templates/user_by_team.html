@@ -15,8 +15,10 @@
                         <p>Assigned to team: {{ user.team_id }}</p>
                         <p>Team Role: {{ user.team_role }}</p>
 
-                        <a href="{{ url_for('update_user', user_id = user.id) }}">Update</a>
-                        <a href="{{ url_for('delete_user', user_id = user.id) }}">Delete</a>
+                        <div class="my-2 mx-2">
+                            <a class="btn btn-primary" href={{ url_for('update_user', user_id = user.id) }}>Update User</a>
+                            <a class="btn btn-danger" href={{ url_for('delete_user', user_id = user.id) }}>Delete User</a>
+                        </div>  
 
                         <br>
                         <br>

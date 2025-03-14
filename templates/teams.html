@@ -1,74 +1,74 @@
 {% extends "base.html" %}
 {% block content %}
     
-    <div class="row mx-2 my-2">
-        <div class="col">
-            <div>
-                <h3 class="text-center mx-2 my-2">Teams</h3>
+<div class="row mx-2 my-2">
+    <div class="col">
+        <div>
+            <h3 class="text-center mx-2 my-2">Teams</h3>
+        </div>
+    </div>
+</div>
+
+{% for team in team_list | sort (attribute="team_id") %}
+<div class="row mx-2 my-2">
+    <div class="col card">
+        <div class='team'>
+            <h3 class="text-center mx-2 my-2">Team ID: {{ team.team_id }}</h3>
+            <br>
+            <p class="text-center"><strong>Team Lead: </strong>{{ team.team_lead }}</p>
+            <p class="text-center"><strong>Contact: </strong>{{ team.team_lead_email }}</p>
+
+            <div class="text-center my-2">
+                <a class="btn btn-primary" href={{ url_for('update_team', team_id = team.team_id) }}>Update Team</a>
+                <a class="btn btn-danger" href={{ url_for('delete_team', team_id = team.team_id) }}>Delete Team</a>
             </div>
-
-            {% for team in team_list | sort (attribute="team_id") %}
-            <div class="row mx-2 my-2">
-                <div class="col card">
-                    <div class='team'>
-                        <h3 class="text-center mx-2 my-2">Team ID: {{ team.team_id }}</h3>
-                        <br>
-                        <p class="text-center"><strong>Team Lead: </strong>{{ team.team_lead }}</p>
-                        <p class="text-center"><strong>Contact: </strong>{{ team.team_lead_email }}</p>
-                        <div class="text-center">
-                            <a href="{{ url_for('update_team', team_id = team.team_id) }}">Update</a>
-                            <a href="{{ url_for('delete_team', team_id = team.team_id) }}">Delete</a>
-                        </div>
-                        
+            
+        <div class="accordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ team.team_id }}projects" aria-expanded="true" aria-controls="{{ team.team_id }}projects">
+                    Projects
+                    </button>
+                </h2>
+                <div id="{{ team.team_id }}projects" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        {% with team_id = team.team_id %}
+                        {% include "project_by_team.html" %}
+                        {% endwith %}                              
                     </div>
-
-                    
-
-                    
-                    <div class="accordion">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ team.team_id }}projects" aria-expanded="true" aria-controls="{{ team.team_id }}projects">
-                                Projects
-                                </button>
-                            </h2>
-                            <div id="{{ team.team_id }}projects" class="accordion-collapse collapse">
-                                <div class="accordion-body">
-                                    {% with team_id = team.team_id %}
-                                    {% include "project_by_team.html" %}
-                                    {% endwith %}                              
-                                </div>
-                            </div>
-                            
-                        </div>
-                    
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ team.team_id }}users" aria-expanded="true" aria-controls="{{ team.team_id }}users">
-                                Team Members
-                                </button>
-                            </h2>
-                            <div id="{{ team.team_id }}users" class="accordion-collapse collapse">
-                                <div class="accordion-body">
-                                    {% with team_id = team.team_id %}
-                                    {% include "user_by_team.html" %}
-                                    {% endwith %}                             
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <br>
-
                 </div>
                 
             </div>
-            <br>
-            
-            {% endfor %}
-
-
-            <a href={{ url_for('add_team') }}>Add new Team</a>
+        
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ team.team_id }}users" aria-expanded="true" aria-controls="{{ team.team_id }}users">
+                    Team Members
+                    </button>
+                </h2>
+                <div id="{{ team.team_id }}users" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        {% with team_id = team.team_id %}
+                        {% include "user_by_team.html" %}
+                        {% endwith %}                             
+                    </div>
+                </div>
+                
+            </div>
         </div>
+        <br>
+
     </div>
+    
+</div>
+<br>
+
+{% endfor %}
+
+<div class="row">
+    <div class="col mx-2 my-2 text-center">
+        <a class="btn btn-success" href={{ url_for('add_team') }}>Add new Team</a>
+    </div>
+</div>
+
 {% endblock %}
