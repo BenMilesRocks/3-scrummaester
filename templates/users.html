@@ -18,11 +18,10 @@
                     <p>Contact: {{ user.email }}</p>
                     <p>Assigned to team: {{ user.team_id }}</p>
                     <p>Team Role: {{ user.team_role }}</p>
-                    <div class="text-center">
-                        <a href="{{ url_for('update_user', user_id = user.id) }}">Update User Info</a>
-                        <a href="{{ url_for('delete_user', user_id = user.id) }}">Delete</a>
-                    </div>
-                    
+                    <div class="text-center my-2">
+                        <a class="btn btn-primary" href={{ url_for('update_user', user_id = user.id) }}>Update User</a>
+                        <a class="btn btn-danger" href={{ url_for('delete_user', user_id = user.id) }}>Delete User</a>
+                    </div>                    
                 </div>
 
                 
