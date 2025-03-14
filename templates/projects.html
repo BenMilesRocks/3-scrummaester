@@ -16,9 +16,10 @@
                     <br>
                     <p class="text-center"><strong>Status: </strong>{{ project.project_status }}</p>
                     <p class="text-center"><strong>Team: </strong>{{ project.team_id }}</p>
-                    <div class="text-center">
-                        <a href="{{ url_for('update_project', project_id = project.project_id) }}">Update</a>
-                        <a href="{{ url_for('delete_project', project_id = project.project_id) }}">Delete</a>
+
+                    <div class="text-center my-2">
+                        <a class="btn btn-primary" href={{ url_for('update_project', project_id = project.project_id) }}>Update Project</a>
+                        <a class="btn btn-danger" href={{ url_for('delete_project', project_id = project.project_id) }}>Delete Project</a>
                     </div>
                     
                 </div>
@@ -66,8 +67,11 @@
         
         {% endfor %}
 
-
-        <a href={{ url_for('add_project') }}>Add new Project</a>
+        <div class="row">
+            <div class="col mx-2 my-2 text-center">
+                <a class="btn btn-success" href={{ url_for('add_project') }}>Add new Project</a>
+            </div>
+        </div>
     </div>
 </div>
 
