@@ -9,7 +9,7 @@ from forms import LoginForm, RegistrationForm
 from database import (team_db, user_db, project_db, task_db)
 
 if os.path.exists("env.py"):
-    from env import DEBUG
+    import env
 
 login_manager.login_view = "User.login"
 
@@ -293,4 +293,4 @@ if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),
         port=int(os.environ.get("PORT", "5000")),
-        debug=DEBUG)
+        debug= os.environ.get("DEBUG"))
