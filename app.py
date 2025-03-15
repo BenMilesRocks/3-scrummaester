@@ -8,6 +8,9 @@ from models import Team, User, Project, Task
 from forms import LoginForm, RegistrationForm
 from database import (team_db, user_db, project_db, task_db)
 
+if os.path.exists("env.py"):
+    from env import DEBUG
+
 login_manager.login_view = "User.login"
 
 #app routing
@@ -290,4 +293,4 @@ if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),
         port=int(os.environ.get("PORT", "5000")),
-        debug=True)
+        debug=DEBUG)
