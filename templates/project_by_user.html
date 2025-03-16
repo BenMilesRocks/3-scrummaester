@@ -5,17 +5,14 @@
             <p>Project Status: {{ project.project_status }}</p>
         </div>
 
-        <a href="{{ url_for('update_project', project_id = project.project_id) }}">Update</a>
-        <a href="{{ url_for('delete_project', project_id = project.project_id) }}">Delete</a>
+        <a href="{{ url_for('update_project', project_id = project.project_id) }}" class="btn btn-primary">Update</a>
+        <a href="{{ url_for('delete_project', project_id = project.project_id) }}" class="btn btn-danger">Delete</a>
         <br>
         <br>
-        <hr>
 
         {% with user_id = user_id %}
         {% include "task_by_user.html" %}
         {% endwith %}
-
-        <hr>
 
     {% endif %}
 {% endfor %}
