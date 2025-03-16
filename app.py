@@ -112,6 +112,9 @@ def add_project():
 @login_required
 def update_project(project_id):
     project = session.get(Project, project_id)
+    current_project_name = project.project_name
+    current_project_status = project.project_status
+    current_team_id = project.team_id
 
     if request.method == "POST":
         project = update(Project).where(Project.project_id == project_id).execution_options(populate_existing=True).values(
@@ -122,7 +125,11 @@ def update_project(project_id):
         session.execute(project)
         session.commit()
         return redirect(url_for("projects"))
-    return render_template("update_project.html", teams = team_db, project_id = project_id)
+    return render_template(
+        "update_project.html", teams = team_db, project_id = project_id, 
+        current_project_name = current_project_name, 
+        current_project_status = current_project_status, 
+        current_team_id = current_team_id)
 
 @app.route("/delete_project/<int:project_id>")
 @login_required

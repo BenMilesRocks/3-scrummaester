@@ -1,24 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
-    
-    <div>
-        <h3>Update Task</h3>
+
+<div class="row mx-0 g-0">
+    <div class="col text-center my-4 g-0">
+        <h3>Update Project</h3>
     </div>
+</div>
 
-    <form method="POST" action="{{ url_for('update_project', project_id = project_id ) }}">
-        <label for="project_name">Project Name</label>
-        <input id="project_name" name="project_name" minlength="5" maxlength="50" type="text" required>
-        <label for="project_status">Project Status</label>
-        <input id="project_status" name="project_status" minlength="5" maxlength="50" type="text" required>
-        <select id="team_id" name="team_id" required>
-            <option value="" disabled selected>Choose Team</option>
-            {% for team in teams %}
-                <option value="{{ team.team_id }}">{{ team.team_id }}</option>
-            {% endfor %}
-        </select>
-        <button type="submit">Update project</button>
-    </form>
-        
-
+<div class="row mx-0 g-0">
+    <div class="col col-sm-10 col-md-8 col-lg-6 mx-auto my-4 px-3 py-3 card">
+        <form method="POST" action="{{ url_for('update_project', project_id = project_id ) }}">
+            <div class="mb-3">
+                <label for="project_name" class="form-label">Project Name</label>
+                <input type="text" class="form-control" value="{{ current_project_name }}" id="project_name" name="project_name" minlength="5" maxlength="50" required>
+            </div>
+            <div class="mb-3">
+                <label for="project_status" class="form-label">Project Status</label>
+                <input type="text" class="form-control" value="{{ current_project_status }}" id="project_status" name="project_status" minlength="5" maxlength="50" required>
+            </div>
+            <div class="mb-3">
+                <select class="form-select" aria-label="Select Team" id="team_id" name="team_id" required>
+                    <option value="{{ current_team_id }}" disabled selected>Choose Team</option>
+                    {% for team in teams %}
+                        <option value="{{ team.team_id }}">Team ID: {{ team.team_id }}, Team Lead: {{ team.team_lead }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Project</button>
+            <a href={{ url_for('projects') }} class="btn btn-danger">Cancel</a>
+        </form>
+    </div>
+</div>
     
 {% endblock %}
