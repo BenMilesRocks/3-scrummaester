@@ -20,8 +20,43 @@
 
             <div class="text-center my-2">
                 <a class="btn btn-primary" href={{ url_for('update_team', team_id = team.team_id) }}>Update Team</a>
-                <a class="btn btn-danger" href={{ url_for('delete_team', team_id = team.team_id) }}>Delete Team</a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{ team.team_id }}">
+                    Delete Team
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="delete{{ team.team_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-team-{{ team.team_id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="delete-team-{{ team.team_id }}">Delete Team</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Warning!</h3>
+                                <p>If you proceed you will delete this team:</p>
+                                <br>
+                                <div class="card">
+                                    <p>Team ID: {{ team.team_id }}</p>
+                                    <p>Team Lead: {{ team.team_lead }}</p>
+                                    <p>Contact Email: {{ team.team_lead_email }}</p>
+                                </div>
+                                <br>
+                                <p>All projects, tasks and users assigned to this team will not be affected.</p>
+                                <p>Are you sure you wish to continue?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back to safety</button>
+                                <a class="btn btn-danger" href={{ url_for('delete_team', team_id = team.team_id) }}>Delete Team</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+            <!-- Button trigger modal -->
+            
             
         <div class="accordion">
             <div class="accordion-item">
