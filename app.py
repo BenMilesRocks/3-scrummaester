@@ -166,6 +166,8 @@ def add_team():
 @login_required
 def update_team(team_id):
     team = session.get(Team, team_id)
+    current_team_lead = team.team_lead
+    current_team_lead_email = team.team_lead_email
 
     if request.method == "POST":
         team = update(Team).where(Team.team_id == team_id).execution_options(populate_existing=True).values(
@@ -175,7 +177,7 @@ def update_team(team_id):
         session.execute(team)
         session.commit()
         return redirect(url_for("teams"))
-    return render_template("update_team.html", teams = team_db, team_id = team_id)
+    return render_template("update_team.html", teams = team_db, team_id = team_id, current_team_lead = current_team_lead, current_team_lead_email = current_team_lead_email) 
 
 @app.route("/delete_team/<int:team_id>")
 @login_required
