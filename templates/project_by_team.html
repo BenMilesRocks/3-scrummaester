@@ -13,14 +13,14 @@
                     Project Status: {{ project.project_status }}
                     <div class="my-2 mx-2">
                         <a class="btn btn-primary" href={{ url_for('update_project', project_id = project.project_id) }}>Update Project</a>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteproject{{ project.project_id }}">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteprojectbyteam{{ project.project_id }}">
                             Delete Project
                         </button>
-                        <div class="modal fade" id="deleteproject{{ project.project_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-project-{{ project.project_id }}" aria-hidden="true">
+                        <div class="modal fade" id="deleteprojectbyteam{{ project.project_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-project-by-team{{ project.project_id }}" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="delete-project-{{ project.project_id }}">Delete Project</h1>
+                                        <h1 class="modal-title fs-5" id="delete-project-by-team{{ project.project_id }}">Delete Project</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
