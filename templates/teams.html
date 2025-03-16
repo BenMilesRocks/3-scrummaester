@@ -20,10 +20,10 @@
 
             <div class="text-center my-2">
                 <a class="btn btn-primary" href={{ url_for('update_team', team_id = team.team_id) }}>Update Team</a>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{ team.team_id }}">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteteam{{ team.team_id }}">
                     Delete Team
                 </button>
-                <div class="modal fade" id="delete{{ team.team_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-team-{{ team.team_id }}" aria-hidden="true">
+                <div class="modal fade" id="deleteteam{{ team.team_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-team-{{ team.team_id }}" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
