@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
     
-<div class="row">
-    <div class="col text-center my-4">
+<div class="row mx-0 g-0">
+    <div class="col text-center my-4 g-0">
         <h3>Update Team</h3>
     </div>
 </div>
 
-<div class="row">
+<div class="row mx-0 g-0">
     <div class="col col-sm-10 col-md-8 col-lg-6 mx-auto my-4 px-3 py-3 card">
         <form method="POST" action="{{ url_for('update_team', team_id = team_id) }}">
             <div class="mb-3">
