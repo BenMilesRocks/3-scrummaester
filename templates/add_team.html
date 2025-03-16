@@ -1,17 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
     
-    <div>
-        <h3>Add New Team</h3>
+<div class="row mx-0 g-0">
+    <div class="col text-center my-4 g-0">
+        <h3>Add Team</h3>
     </div>
+</div>
 
-    <form method="POST" action="{{ url_for('add_team') }}">
-        <label for="team_lead">Team Lead Name</label>
-        <input id="team_lead" name="team_lead" minlength="5" maxlength="50" type="text" required>
-        <label for="team_lead_email">Contact Email</label>
-        <input id="team_lead_email" name="team_lead_email" minlength="5" maxlength="80" type="text" required>
-        <button type="submit">Add new team</button>
-    </form>
+<div class="row mx-0 g-0">
+    <div class="col col-sm-10 col-md-8 col-lg-6 mx-auto my-4 px-3 py-3 card">
+        <form method="POST" action="{{ url_for('add_team') }}">
+            <div class="mb-3">
+                <label for="team_lead" class="form-label">Team Lead Name</label>
+                <input type="text" class="form-control" placeholder="Enter Name Here" name="team_lead">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input type="email" class="form-control" placeholder="Enter Email Here" name="team_lead_email">
+            </div>
+            <button type="submit" class="btn btn-success">Add Team</button>
+            <a href={{ url_for('teams') }} class="btn btn-danger">Cancel</a>
+        </form>
+    </div>
+</div>
 
     
 {% endblock %}
