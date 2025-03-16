@@ -2,15 +2,15 @@
 {% block content %}
  
 
-<div class="row mx-2 my-2">
-    <div class="col">
+<div class="row mx-0 g-0">
+    <div class="col mx-2 my-2">
         <div>
             <h3 class="text-center mx-2 my-2">Projects</h3>
         </div>
 
         {% for project in project_list | sort (attribute="project_id") %}
-        <div class="row mx-2 my-2">
-            <div class="col card">
+        <div class="row mx-0 g-0">
+            <div class="col card mx-2 my-2">
                 <div class='project'>
                     <h3 class="text-center mx-2 my-2">Project Name: {{ project.project_name }}</h3>
                     <br>
@@ -19,7 +19,36 @@
 
                     <div class="text-center my-2">
                         <a class="btn btn-primary" href={{ url_for('update_project', project_id = project.project_id) }}>Update Project</a>
-                        <a class="btn btn-danger" href={{ url_for('delete_project', project_id = project.project_id) }}>Delete Project</a>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{ project.project_id }}">
+                            Delete Project
+                        </button>
+                        <div class="modal fade" id="delete{{ project.project_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-project-{{ project.project_id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="delete-project-{{ project.project_id }}">Delete Project</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h3>Warning!</h3>
+                                        <p>If you proceed you will delete this project:</p>
+                                        <br>
+                                        <div class="card">
+                                            <p>Project Name: {{ project.project_name }}</p>
+                                            <p>Status: {{ project.project_status }}</p>
+                                            <p>Team: {{ project.team_id }}</p>
+                                        </div>
+                                        <br>
+                                        <p>All tasks assigned to this team will be deleted too!</p>
+                                        <p>Are you sure you wish to continue?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back to safety</button>
+                                        <a class="btn btn-danger" href={{ url_for('delete_project', project_id = project.project_id) }}>Delete Project</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
                     
                 </div>
@@ -67,7 +96,7 @@
         
         {% endfor %}
 
-        <div class="row">
+        <div class="row mx-0 g-0">
             <div class="col mx-2 my-2 text-center">
                 <a class="btn btn-success" href={{ url_for('add_project') }}>Add new Project</a>
             </div>
