@@ -228,6 +228,10 @@ def users():
 @login_required
 def update_user(user_id):
     user = session.get(User, user_id)
+    current_fname = user.first_name
+    current_lname = user.last_name
+    current_email = user.email
+    current_role = user.team_role
 
     if request.method == "POST":
         user = update(User).where(User.id == user_id).execution_options(populate_existing=True).values(
@@ -240,7 +244,14 @@ def update_user(user_id):
         session.execute(user)
         session.commit()
         return redirect(url_for("users"))
-    return render_template("update_user.html", teams = team_db, users = user_db, user_id = user_id)
+    return render_template(
+        "update_user.html", teams = team_db, 
+        users = user_db, user_id = user_id,
+        current_fname = current_fname,
+        current_lname = current_lname,
+        current_email = current_email,
+        current_role = current_role,
+        )
 
 @app.route("/delete_user/<int:user_id>")
 @login_required
