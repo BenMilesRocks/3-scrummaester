@@ -23,10 +23,10 @@
                 <input id="task_status" name="task_status" minlength="5" maxlength="50" type="text" class="form-control" placeholder="Task Status" required>
             </div>
             <div class="mb-3">
-                <select class="form-select" aria-label="Select Team" id="team_id" name="team_id" required>
-                    <option value="" disabled selected>Choose Team</option>
-                    {% for team in teams %}
-                        <option value="{{ team.team_id }}">Team ID: {{ team.team_id }}, Team Lead: {{ team.team_lead }}</option>
+                <select class="form-select" aria-label="Choose Project" id="project_id" name="project_id" required>
+                    <option value="" disabled selected>Choose Project</option>
+                    {% for project in projects %}
+                        <option value="{{ project.project_id }}">{{ project.project_name }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -39,7 +39,7 @@
                 </select>
             </div>
                
-            <button type="submit" class="btn btn-success">Add Team</button>
+            <button type="submit" class="btn btn-success">Add Task</button>
             <a href={{ url_for('projects') }} class="btn btn-danger">Cancel</a>
         </form>
     </div>
