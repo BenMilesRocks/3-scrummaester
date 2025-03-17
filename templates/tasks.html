@@ -28,7 +28,36 @@
 
                             <div class="text-center my-2">
                                 <a class="btn btn-primary" href={{ url_for('update_project', project_id = project.project_id) }}>Update</a>
-                                <a class="btn btn-danger" href={{ url_for('delete_project', project_id = project.project_id) }}>Delete</a>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteprojecttasks{{ project.project_id }}">
+                                    Delete Project
+                                </button>
+                                <div class="modal fade" id="deleteprojecttasks{{ project.project_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-project-tasks{{ project.project_id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="delete-project-tasks{{ project.project_id }}">Delete Project</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3>Warning!</h3>
+                                                <p>If you proceed you will delete this project:</p>
+                                                <br>
+                                                <div class="card">
+                                                    <p>Project Name: {{ project.project_name }}</p>
+                                                    <p>Status: {{ project.project_status }}</p>
+                                                    <p>Team: {{ project.team_id }}</p>
+                                                </div>
+                                                <br>
+                                                <p>All tasks assigned to this team will be deleted too!</p>
+                                                <p>Are you sure you wish to continue?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back to safety</button>
+                                                <a class="btn btn-danger" href={{ url_for('delete_project', project_id = project.project_id) }}>Delete Project</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>           
                             </div>
 
                             {% with project_id = project.project_id %}
@@ -68,7 +97,37 @@
 
                             <div class="text-center my-2">
                                 <a class="btn btn-primary" href={{ url_for('update_user', user_id = user.id) }}>Update User</a>
-                                <a class="btn btn-danger" href={{ url_for('delete_user', user_id = user.id) }}>Delete User</a>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteusertasks{{ user.id }}">
+                                    Delete User
+                                </button>
+                                <div class="modal fade" id="deleteusertasks{{ user.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-user-tasks{{ user.id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="delete-user-tasks{{ user.id }}">Delete User</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3>Warning!</h3>
+                                                <p>If you proceed you will delete this User:</p>
+                                                <br>
+                                                <div class="card">
+                                                    <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
+                                                    <p>Username: {{ user.username }}</p>
+                                                    <p>Contact: {{ user.email }}</p>
+                                                    <p>Assigned to team: {{ user.team_id }}</p>
+                                                    <p>Team Role: {{ user.team_role }}</p>
+                                                </div>
+                                                <br>
+                                                <p>Are you sure you wish to continue?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back to safety</button>
+                                                <a class="btn btn-danger" href={{ url_for('delete_user', user_id = user.id) }}>Delete User</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>   
                         
                             {% with user_id = user.id %}
