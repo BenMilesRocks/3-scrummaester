@@ -7,20 +7,54 @@
     </div>
 </div>
 
-{% for item in task_list | sort (attribute="project_id") %}
-    {% if item.assigned_user == user_id %}
+{% for task in task_list | sort (attribute="project_id") %}
+    {% if task.assigned_user == user_id %}
     <div class="row row mx-0 g-0">
         <div class="col-11 col-md-10 col-lg-8 mx-auto my-3 px-3 py-3 card task">
-            <h3>{{ item.task_name }}</h3>
-            <p>Project Id: {{ item.project_id }}</p>
+            <h3>{{ task.task_name }}</h3>
+            <p>Project Id: {{ task.project_id }}</p>
             <p>Task Description:</p>
-            <p>{{ item.task_description }}</p>
-            <p>Task Status: {{ item.task_status }}</p>
-            <p>Assigned User: {{ item.assigned_user }}</p>
+            <p>{{ task.task_description }}</p>
+            <p>Task Status: {{ task.task_status }}</p>
+            <p>Assigned User: {{ task.assigned_user }}</p>
 
             <span>
-                <a class="btn btn-primary" href={{ url_for('update_task', task_id = item.task_id) }}>Update Task</a>
-                <a class="btn btn-danger" href={{ url_for('delete_task', task_id = item.task_id) }}>Delete Task</a>
+                <a class="btn btn-primary" href={{ url_for('update_task', task_id = task.task_id) }}>Update Task</a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletetaskdashboard{{ task.task_id }}">
+                    Delete Task
+                </button>
+                <div class="modal fade" id="deletetaskdashboard{{ task.task_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-task-dashboard{{ task.task_id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="delete-task-dashboard{{ task.task_id }}">Delete Task</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Warning!</h3>
+                                <p>If you proceed you will delete this task:</p>
+                                <br>
+                                <div class="card">
+                                    <p>Task Name: {{ task.task_name }}</p>
+                                    <p>Task Description: {{ task.task_description }}</p>
+                                    <p>Task Status: {{ task.task_status }}</p>
+                                    <p>Assigned User: {% for user in user_list %}
+                                        {% if user.id == task.assigned_user %}
+                                            {{ user.first_name}} {{ user.last_name }}
+                                        {% endif %}
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                                <br>
+                                <p>Are you sure you wish to continue?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back to safety</button>
+                                <a class="btn btn-danger" href={{ url_for('delete_task', task_id = task.task_id) }}>Delete Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </span>
 
             

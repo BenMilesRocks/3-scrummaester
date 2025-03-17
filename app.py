@@ -75,7 +75,7 @@ def register():
 @login_required
 def dashboard():
     user_id = int(current_user.id)
-    return render_template("dashboard.html", page_title= "Dashboard", user_id = user_id, task_list = task_db)
+    return render_template("dashboard.html", page_title= "Dashboard", user_id = user_id, task_list = task_db, user_list = user_db)
 
 
 #-PROJECTS
