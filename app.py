@@ -287,6 +287,11 @@ def add_task():
 @login_required
 def update_task(task_id):
     task = session.get(Task, task_id)
+    current_task_name = task.task_name
+    current_task_description = task.task_description
+    current_task_status = task.task_status
+    current_project_id = task.project_id
+    current_assigned_user = task.assigned_user
 
     if request.method == "POST":
         task = update(Task).where(Task.task_id == task_id).execution_options(populate_existing=True).values(
@@ -299,7 +304,14 @@ def update_task(task_id):
         session.execute(task)
         session.commit()
         return redirect(url_for("tasks"))
-    return render_template("update_task.html", projects = project_db, users = user_db, task_id = task_id)
+    return render_template(
+        "update_task.html", projects = project_db, 
+        users = user_db, task_id = task_id,
+        current_task_name = current_task_name,
+        current_task_description = current_task_description,
+        current_task_status = current_task_status,
+        current_project_id = current_project_id,
+        current_assigned_user = current_assigned_user)
 
 
 @app.route("/delete_task/<int:task_id>")
