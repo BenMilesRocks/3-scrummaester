@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    
+<div class="row mx-0 g-0">
+    <div class="col text-center my-4 g-0">
+        <h3>404 - page not found!k</h3>
+    </div>
+</div>
+
+<div class="row mx-0 g-0">
+    <div class="col col-sm-10 col-md-8 col-lg-6 mx-auto my-4 px-3 py-3 card">
+        <h3>Oops! That page doesn't exist</h3>
+        <br>
+        <p>It looks like there was an error navigating to the page you were looking for. Click the link below to return to the dashboard.</p>
+        <br>
+        {% if current_user.is_authenticated %}
+        <a href={{ url_for('dashboard') }} class="btn btn-primary">Back to Dashboard</a>
+        {% else %}
+        <a href={{ url_for('login') }} class="btn btn-primary">Back to Log In</a>
+        {% endif %}
+        
+        
+    </div>
+</div>
+
+{% endblock %}

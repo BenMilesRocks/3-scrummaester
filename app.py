@@ -1,5 +1,5 @@
 import os
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, abort
 from flask_login import login_user, login_required, logout_user, current_user
 import bcrypt
 from sqlalchemy import update, delete
@@ -22,6 +22,12 @@ def load_user(username):
 @app.route("/")
 def index():
     return render_template("index.html", page_title= "Home")
+
+#error handling
+
+@app.errorhandler(404) 
+def not_found(e): 
+    return render_template("404.html") 
 
 #-LOGIN
 
