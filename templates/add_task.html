@@ -1,31 +1,48 @@
 {% extends "base.html" %}
 {% block content %}
     
-    <div>
+<div class="row mx-0 g-0">
+    <div class="col text-center my-4 g-0">
         <h3>Add New Task</h3>
     </div>
+</div>
 
-    <form method="POST" action="{{ url_for('add_task') }}">
-        <label for="task_name">Task Name</label>
-        <input id="task_name" name="task_name" minlength="5" maxlength="50" type="text" required>
-        <label for="task_description">Task Description</label>
-        <input id="task_description" name="task_description" minlength="5" maxlength="3000" type="text" required>
-        <label for="task_status">Task Status</label>
-        <input id="task_status" name="task_status" minlength="5" maxlength="50" type="text" required>
-        <select id="project_id" name="project_id" required>
-            <option value="" disabled selected>Choose Project</option>
-            {% for project in projects %}
-                <option value="{{ project.project_id }}">{{ project.project_name }}</option>
-            {% endfor %}
-        </select>
-        <select id="assigned_user" name="assigned_user" required>
-            <option value="" disabled selected>Choose User</option>
-            {% for user in users %}
-                <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-            {% endfor %}
-        </select>
-        <button type="submit">Add new task</button>
-    </form>
+<div class="row mx-0 g-0">
+    <div class="col col-sm-10 col-md-8 col-lg-6 mx-auto my-4 px-3 py-3 card">
+        <form method="POST" action="{{ url_for('add_task') }}">
+            <div class="mb-3">
+                <label for="task_name" class="form-label">Task Name</label>
+                <input id="task_name" name="task_name" minlength="5" maxlength="50" type="text" class="form-control" placeholder="Enter Task Name Here" required>
+            </div>
+            <div class="mb-3">
+                <label for="task_description" class="form-label">Task Description</label>
+                <textarea id="task_description" name="task_description" minlength="5" maxlength="3000" type="text" class="form-control" placeholder="Task Description" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="task_status" class="form-label">Task Status</label>
+                <input id="task_status" name="task_status" minlength="5" maxlength="50" type="text" class="form-control" placeholder="Task Status" required>
+            </div>
+            <div class="mb-3">
+                <select class="form-select" aria-label="Select Team" id="team_id" name="team_id" required>
+                    <option value="" disabled selected>Choose Team</option>
+                    {% for team in teams %}
+                        <option value="{{ team.team_id }}">Team ID: {{ team.team_id }}, Team Lead: {{ team.team_lead }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <select class="form-select" aria-label="Choose User" id="assigned_user" name="assigned_user" required>
+                    <option value="" disabled selected>Choose User</option>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+               
+            <button type="submit" class="btn btn-success">Add Team</button>
+            <a href={{ url_for('projects') }} class="btn btn-danger">Cancel</a>
+        </form>
+    </div>
+</div>
 
-    
 {% endblock %}

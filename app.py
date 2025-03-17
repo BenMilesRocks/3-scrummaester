@@ -267,7 +267,7 @@ def add_task():
             session.add(task)
             session.commit()
         return redirect(url_for("tasks"))
-    return render_template("add_task.html", projects = project_db, users = user_db)
+    return render_template("add_task.html", projects = project_db, users = user_db, teams = team_db)
 
 @app.route("/update_task/<int:task_id>", methods=["GET", "POST"])
 @login_required
