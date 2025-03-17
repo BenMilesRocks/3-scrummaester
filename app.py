@@ -11,7 +11,7 @@ from database import (team_db, user_db, project_db, task_db)
 if os.path.exists("env.py"):
     import env
 
-login_manager.login_view = "User.login"
+login_manager.login_view = "login"
 
 #app routing
 
@@ -24,6 +24,10 @@ def index():
     return render_template("index.html", page_title= "Home")
 
 #error handling
+
+@app.errorhandler(403) 
+def not_found(e): 
+    return render_template("403.html") 
 
 @app.errorhandler(404) 
 def not_found(e): 
