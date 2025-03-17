@@ -1,10 +1,12 @@
 {% for item in team_list %}
     {% if item.team_id == team_id %}
         
-        <div class='team'>
+        <div class='team text-center'>
             <p>Team Lead: {{ item.team_lead }}</p>
             <p>Contact: {{ item.team_lead_email }}</p>
         </div>
+
+        <br>
 
     {% endif %}
 {% endfor %}
