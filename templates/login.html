@@ -23,6 +23,19 @@
         </div>
       </div>
     </nav>
+
+    <!-- Flash error messages -->
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-danger alert-dismissible text-center" role="alert">
+        <div>{{ message }}</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}   
     
     <div class="row mx-2 my-2">
       <div class="col-lg-6 col-md-8 col-sm mx-auto my-3 py-3 px-3 text-center">
@@ -30,10 +43,8 @@
       </div>
     </div>
 
-    
-
-    
-
+    <!-- Login Form -->
+ 
     <div class="row mx-2 my-2">
       <div class="card col-lg-6 col-md-8 col-sm mx-auto my-3 py-3 px-3">
         <form method="post" action="">
@@ -52,13 +63,13 @@
       </div>
     </div>
 
-    
-<div class="row mx-2 my-2">
-  <div class="col-lg-6 col-md-8 col-sm mx-auto my-3 py-3 px-3">
-    <a class="btn btn-primary" href={{ url_for('register') }}>Don't have an account? Sign up here!</a>
-  </div>
-</div>
+    <!-- Register button -->
 
+  <div class="row mx-2 my-2">
+    <div class="col-lg-6 col-md-8 col-sm mx-auto my-3 py-3 px-3">
+      <a class="btn btn-primary" href={{ url_for('register') }}>Don't have an account? Sign up here!</a>
+    </div>
+  </div>
 
 </body>
 </html>

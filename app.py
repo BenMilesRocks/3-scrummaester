@@ -1,5 +1,5 @@
 import os
-from flask import render_template, redirect, url_for, request, abort
+from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_user, login_required, logout_user, current_user
 import bcrypt
 from sqlalchemy import update, delete
@@ -45,7 +45,11 @@ def login():
                 login_user(user)
                 return redirect(url_for("dashboard"))
             else:
-                return print("password isn't matching")
+                flash("Incorrect password. Please try again!")
+                return render_template("login.html", form=form)
+        else:
+                flash("Incorrect username. Please try again!")
+                return render_template("login.html", form=form)
 
     return render_template("login.html", page_title= "Login", form = form)
 
