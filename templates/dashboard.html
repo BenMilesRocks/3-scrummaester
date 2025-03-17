@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     
-<div class="row">
+<div class="row row mx-0 g-0">
     <div class="col text-center mx-auto my-3">
         <h3>Dashboard</h3>
     </div>
@@ -9,7 +9,7 @@
 
 {% for item in task_list | sort (attribute="project_id") %}
     {% if item.assigned_user == user_id %}
-    <div class="row">
+    <div class="row row mx-0 g-0">
         <div class="col-11 col-md-10 col-lg-8 mx-auto my-3 px-3 py-3 card task">
             <h3>{{ item.task_name }}</h3>
             <p>Project Id: {{ item.project_id }}</p>
