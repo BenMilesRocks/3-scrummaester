@@ -4,7 +4,7 @@ This project is to create a Scrum management system, allowing Scrum masters to b
 
 ## Project Goals
 
-[The deployed version of the site is available here]()
+[The deployed version of the site is available here](https://scrummaester-81eb70fbef06.herokuapp.com/)
 
 ## Contents
 
@@ -65,9 +65,19 @@ This project is to create a Scrum management system, allowing Scrum masters to b
 
 ### Color Scheme
 
+The color palette for this site was mostly chosen by keeping Bootstrap's 'Light' class defaults, as this provided a clean aesthetic that kept out of the way of the rest of the site.
+
 ### Typography
 
+Because the user is working with large volumes of mostly text data I wanted a font family that would be easy to read as well as not providing extra distraction from the content.
+
+I decided to keep the Bootstrap default font family which uses Helvetica and Arial. Both are sans-serif fonts, making them clear and easy to read.
+
 ### Imagery
+
+Because of the nature of the site, adding extra imagery seemed like an unnecessary distraction.
+
+As a result I decided not to include any external images to keep the interface focused and easy to read.
 
 ### Wireframe
 
@@ -96,7 +106,6 @@ I have worked hard to ensure the website is as easy to navigate and as accessibl
 - Used semantic HTML elements
 - Added Aria tags to all links, buttons and content to ensure Screen Readers are able to comprehend it
 - Used a San-Serif font for site navigation, to make it as easy to read as possible
-- Used as little text as possible, to make sure the site is accessible to people who do not speak or read English
 - Ensured contrasting colors were used throughout the site to keep elements easily idenitfiable and readable.
 
 I also tested the site with the Chrome extension [Web Disability Simulator](https://chromewebstore.google.com/detail/web-disability-simulator/olioanlbgbpmdlgjnnampnnlohigkjla) to ensure the user experience was friendly to those with color blindness, parkinsons and dyslexia.

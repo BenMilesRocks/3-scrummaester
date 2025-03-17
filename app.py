@@ -315,6 +315,7 @@ def update_task(task_id):
         session.execute(task)
         session.commit()
         return redirect(url_for("tasks"))
+    
     return render_template(
         "update_task.html", projects = project_db, 
         users = user_db, task_id = task_id,
