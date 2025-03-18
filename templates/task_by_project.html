@@ -1,8 +1,8 @@
 {% for task in task_list %}
     {% if task.project_id == project_id %}
         <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ task.task_id }}taskbyprojectaccordion" aria-expanded="true" aria-controls="{{ task.task_id }}taskbyprojectaccordion">
+            <h2 class="accordion-header task-accordion-head-{{ task.task_status }}">
+                <button class="accordion-button collapsed task-accordion-{{ task.task_status }}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ task.task_id }}taskbyprojectaccordion" aria-expanded="true" aria-controls="{{ task.task_id }}taskbyprojectaccordion">
                     {{ task.task_name }}
                 </button>
             </h2>

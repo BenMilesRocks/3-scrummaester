@@ -2,7 +2,7 @@ body {
     background-color: #ebebeb
 }
 
-/* Card classes */
+/* Card Classes */
 
 .task-Active {
     border-color: #019e18;
@@ -12,4 +12,22 @@ body {
 .task-Completed {
     border-color: #5f5f5f;
     border-width: 5px;
+}
+
+/* Accordion Classes */
+
+.task-accordion-head-Active {
+    border: 1px solid #019e18;
+}
+
+.task-accordion-Active {
+    background-color: #cff6d5;
+}
+
+.task-accordion-head-Completed {
+    border: 1px solid #5f5f5f;
+}
+
+.task-accordion-Completed {
+    background-color: #e6e6e6;
 }
