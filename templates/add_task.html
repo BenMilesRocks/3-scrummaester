@@ -20,7 +20,11 @@
             </div>
             <div class="mb-3">
                 <label for="task_status" class="form-label">Task Status</label>
-                <input id="task_status" name="task_status" minlength="5" maxlength="50" type="text" class="form-control" placeholder="Task Status" required>
+                <select class="form-select" aria-label="Select Team" id="project_status" name="project_status" required>
+                    <option value="" disabled selected>Project Status</option>
+                    <option value="Active">Active</option>
+                    <option value="Completed">Completed</option>
+                </select>
             </div>
             <div class="mb-3">
                 <select class="form-select" aria-label="Choose Project" id="project_id" name="project_id" required>
