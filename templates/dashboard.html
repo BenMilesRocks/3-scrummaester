@@ -9,8 +9,8 @@
 
 {% for task in task_list | sort (attribute="project_id") %}
     {% if task.assigned_user == user_id %}
-    <div class="row row mx-0 g-0">
-        <div class="col-11 col-md-10 col-lg-8 mx-auto my-3 px-3 py-3 card task">
+    <div class="row mx-0 g-0">
+        <div class="col-11 col-md-10 col-lg-8 mx-auto my-3 px-3 py-3 card task task-{{ task.task_status }}">
             <h3>{{ task.task_name }}</h3>
             <p>Project Id: {{ task.project_id }}</p>
             <p>Task Description:</p>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back to safety</button>
-                                <a class="btn btn-danger" href={{ url_for('delete_task', task_id = task.task_id) }}>Delete Project</a>
+                                <a class="btn btn-danger" href={{ url_for('delete_task', task_id = task.task_id) }}>Delete Task</a>
                             </div>
                         </div>
                     </div>
