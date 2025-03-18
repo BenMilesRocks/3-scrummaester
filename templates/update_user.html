@@ -13,6 +13,8 @@
             <div class="mb-3">
                 <label for="first_name" class="form-label">First Name</label>
                 <input id="first_name" name="first_name" minlength="5" maxlength="50" type="text" class="form-control" value="{{ current_fname }}" required>
+            </div>
+            <div class="mb-3">
                 <label for="first_name" class="form-label">Last Name</label>
                 <input id="first_name" name="last_name" minlength="5" maxlength="50" type="text" class="form-control" value="{{ current_lname }}" required>
             </div>
@@ -22,6 +24,16 @@
             </div>
             <div class="mb-3">
                 <label for="team_role">Team Role</label>
+                <select class="form-select" aria-label="Select Team Role" id="team_role" name="team_role" required>
+                    <option value="" disabled selected>Choose Team Role</option>
+                    <option value="Team Lead">Team Lead</option>
+                    <option value="Junior Front End Developer">Junior Front End Developer</option>
+                    <option value="Senior Front End Developer">Senior Front End Developer</option>
+                    <option value="Junior Back End Developer">Junior Back End Developer</option>
+                    <option value="Senior Back End Developer">Senior Back End Developer</option>
+                    <option value="Junior Full Stack Developer">Junior Full Stack Developer</option>
+                    <option value="Senior Full Stack Developer">Senior Full Stack Developer</option>
+                </select>
                 <input id="team_role" name="team_role" minlength="5" maxlength="50" type="text" class="form-control" value="{{ current_role }}" required>
             </div>
             <div class="mb-3">
