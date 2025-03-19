@@ -7,7 +7,7 @@
                 </button>
             </h2>
             <div id="{{ task.task_id }}taskbyprojectaccordion" class="accordion-collapse collapse">
-                <div class="accordion-body">
+                <div class="accordion-body task-accordion-body-{{ task.task_status }}">
                     <p>Task Description:</p>
                     <p>{{ task.task_description }}</p>
                     <p>Task Status: {{ task.task_status }}</p>

@@ -1,33 +1,39 @@
 body {
-    background-color: #ebebeb
+    background-color: #fafafa
 }
 
 /* Card Classes */
 
 .task-Active {
     border-color: #019e18;
-    border-width: 5px;
+    border-width: 1px;
+    background-color: #e1ffe6;
 }
 
 .task-Completed {
     border-color: #5f5f5f;
-    border-width: 5px;
+    border-width: 1px;
+    background-color: #efefef;
 }
 
 /* Accordion Classes */
 
-.task-accordion-head-Active {
+.task-accordion-head-Active,
+.task-accordion-body-Active {
     border: 1px solid #019e18;
 }
 
-.task-accordion-Active {
-    background-color: #cff6d5;
+.task-accordion-Active,
+.task-accordion-body-Active {
+    background-color: #e1ffe6;
 }
 
-.task-accordion-head-Completed {
+.task-accordion-head-Completed,
+.task-accordion-body-Completed {
     border: 1px solid #5f5f5f;
 }
 
-.task-accordion-Completed {
-    background-color: #e6e6e6;
+.task-accordion-Completed,
+.task-accordion-body-Completed {
+    background-color: #efefef;
 }
