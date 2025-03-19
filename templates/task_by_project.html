@@ -3,7 +3,8 @@
         <div class="accordion-item">
             <h2 class="accordion-header task-accordion-head-{{ task.task_status }}">
                 <button class="accordion-button collapsed task-accordion-{{ task.task_status }}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ task.task_id }}taskbyprojectaccordion" aria-expanded="true" aria-controls="{{ task.task_id }}taskbyprojectaccordion">
-                    {{ task.task_name }}
+                    <span class="w-100 px-2 text-start"><strong>{{ task.task_name }}</strong></span>
+                    <span class="w-100 px-2 text-end"><strong>{{ task.task_status }}</strong></span>
                 </button>
             </h2>
             <div id="{{ task.task_id }}taskbyprojectaccordion" class="accordion-collapse collapse">
