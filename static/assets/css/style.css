@@ -19,7 +19,8 @@ body {
 /* Include body classes */
 
 .project-by-team,
-.user-by-team {
+.user-by-team,
+.team-by-project {
     background-color: #f6fcff;
 }
 
