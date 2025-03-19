@@ -62,6 +62,24 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ project.team_id }}teammembers" aria-expanded="true" aria-controls="{{ project.team_id }}teammembers">
+                            Outstanding Tasks
+                            </button>
+                        </h2>
+                        <div id="{{ project.team_id }}teammembers" class="accordion-collapse collapse">
+                            <div class="accordion-body team-by-project">
+                                {% with project_id = project.project_id %}
+                                {% include "outstanding_task_by_project.html" %}
+                                {% endwith %}                             
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="accordion">              
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ project.team_id }}teammembers" aria-expanded="true" aria-controls="{{ project.team_id }}teammembers">
                             Team Members
                             </button>
                         </h2>
