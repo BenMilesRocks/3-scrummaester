@@ -65,7 +65,7 @@
                             Outstanding Tasks
                             </button>
                         </h2>
-                        <div id="{{ project.project_id }}teammembers" class="accordion-collapse collapse">
+                        <div id="{{ project.project_id }}-oustanding-tasks" class="accordion-collapse collapse">
                             <div class="accordion-body team-by-project">
                                 {% with project_id = project.project_id %}
                                 {% include "outstanding_task_by_project.html" %}
