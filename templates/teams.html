@@ -61,7 +61,7 @@
                     </button>
                 </h2>
                 <div id="{{ team.team_id }}projects" class="accordion-collapse collapse">
-                    <div class="accordion-body">
+                    <div class="accordion-body project-by-team">
                         {% with team_id = team.team_id %}
                         {% include "project_by_team.html" %}
                         {% endwith %}                              

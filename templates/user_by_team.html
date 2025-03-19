@@ -5,7 +5,8 @@
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ user.id }}userbyteamaccordion" aria-expanded="true" aria-controls="{{ user.id }}userbyteamaccordion">
-                        {{ user.first_name }} {{ user.last_name }}
+                        <span class="w-100 px-2 text-start"><strong>{{ user.first_name }} {{ user.last_name }}</strong></span>
+                        <span class="w-100 px-2 text-end"><strong>{{ user.team_role }}</strong></span>     
                     </button>
                 </h2>
                 <div id="{{ user.id }}userbyteamaccordion" class="accordion-collapse collapse">
