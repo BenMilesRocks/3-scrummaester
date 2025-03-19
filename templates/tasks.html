@@ -2,8 +2,8 @@
 {% block content %}
  
 
-<div class="row row mx-0 g-0">
-    <div class="col mx-2 my-2">
+<div class="row mx-2 my-2">
+    <div class="col">
         <div>
             <h3 class="text-center mx-2 my-2">Tasks</h3>
         </div>
@@ -13,64 +13,67 @@
                 <h4 class="text-center mx-2 my-2">Tasks sorted by Project</h4>
             </div>
 
-            <div class="accordion">
-                {% for project in project_list | sort (attribute="project_id") %}
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ project.project_id }}taskbyproject" aria-expanded="true" aria-controls="{{ project.project_id }}taskbyproject">
-                        Project Name: {{ project.project_name }}
-                        </button>
-                    </h2>
-                    <div id="{{ project.project_id }}taskbyproject" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                            <p>Status: {{ project.project_status }}</p>
-                            <p>Team: {{ project.team_id }}</p>
 
-                            <div class="text-center my-2">
-                                <a class="btn btn-primary" href={{ url_for('update_project', project_id = project.project_id) }}>Update</a>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteprojecttasks{{ project.project_id }}">
-                                    Delete Project
-                                </button>
-                                <div class="modal fade" id="deleteprojecttasks{{ project.project_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-project-tasks{{ project.project_id }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="delete-project-tasks{{ project.project_id }}">Delete Project</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h3>Warning!</h3>
-                                                <p>If you proceed you will delete this project:</p>
-                                                <br>
-                                                <div class="card">
-                                                    <p>Project Name: {{ project.project_name }}</p>
-                                                    <p>Status: {{ project.project_status }}</p>
-                                                    <p>Team: {{ project.team_id }}</p>
+            <div class="col mx-2 my-2">
+                <div class="accordion">
+                    {% for project in project_list | sort (attribute="project_id") %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ project.project_id }}taskbyproject" aria-expanded="true" aria-controls="{{ project.project_id }}taskbyproject">
+                            Project Name: {{ project.project_name }}
+                            </button>
+                        </h2>
+                        <div id="{{ project.project_id }}taskbyproject" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <p>Status: {{ project.project_status }}</p>
+                                <p>Team: {{ project.team_id }}</p>
+
+                                <div class="text-center my-2">
+                                    <a class="btn btn-primary" href={{ url_for('update_project', project_id = project.project_id) }}>Update</a>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteprojecttasks{{ project.project_id }}">
+                                        Delete Project
+                                    </button>
+                                    <div class="modal fade" id="deleteprojecttasks{{ project.project_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-project-tasks{{ project.project_id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="delete-project-tasks{{ project.project_id }}">Delete Project</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <br>
-                                                <p>All tasks assigned to this team will be deleted too!</p>
-                                                <p>Are you sure you wish to continue?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back to safety</button>
-                                                <a class="btn btn-danger" href={{ url_for('delete_project', project_id = project.project_id) }}>Delete Project</a>
+                                                <div class="modal-body">
+                                                    <h3>Warning!</h3>
+                                                    <p>If you proceed you will delete this project:</p>
+                                                    <br>
+                                                    <div class="card">
+                                                        <p>Project Name: {{ project.project_name }}</p>
+                                                        <p>Status: {{ project.project_status }}</p>
+                                                        <p>Team: {{ project.team_id }}</p>
+                                                    </div>
+                                                    <br>
+                                                    <p>All tasks assigned to this team will be deleted too!</p>
+                                                    <p>Are you sure you wish to continue?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back to safety</button>
+                                                    <a class="btn btn-danger" href={{ url_for('delete_project', project_id = project.project_id) }}>Delete Project</a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>           
-                            </div>
+                                    </div>           
+                                </div>
 
-                            {% with project_id = project.project_id %}
-                            {% include "task_by_project.html" %}
-                            {% endwith %}                          
+                                {% with project_id = project.project_id %}
+                                {% include "task_by_project.html" %}
+                                {% endwith %}                          
+                            </div>
                         </div>
+                        
                     </div>
-                    
+                    {% endfor %}
+                
                 </div>
-                {% endfor %}
-            
-            </div>
-            <br>   
+                <br>  
+            </div> 
 
         </div>
 
@@ -80,67 +83,70 @@
                 <h4 class="text-center mx-2 my-2">Tasks sorted by User</h4>
             </div>
 
-            <div class="accordion">
-                {% for user in user_list | sort (attribute="id") %}
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ user.id }}taskbyuser" aria-expanded="true" aria-controls="{{ user.id }}taskbyuser">
-                            {{ user.first_name }} {{ user.last_name }}
-                        </button>
-                    </h2>
-                    <div id="{{ user.id }}taskbyuser" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                            <p>User Name: {{ user.user_name }}</p>
-                            <p>Contact: {{ user.email }}</p>
-                            <p>Assigned to team: {{ user.team_id }}</p>
-                            <p>Team Role: {{ user.team_role }}</p>
+            <div class="col mx-2 my-2">
 
-                            <div class="text-center my-2">
-                                <a class="btn btn-primary" href={{ url_for('update_user', user_id = user.id) }}>Update User</a>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteusertasks{{ user.id }}">
-                                    Delete User
-                                </button>
-                                <div class="modal fade" id="deleteusertasks{{ user.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-user-tasks{{ user.id }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="delete-user-tasks{{ user.id }}">Delete User</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h3>Warning!</h3>
-                                                <p>If you proceed you will delete this User:</p>
-                                                <br>
-                                                <div class="card">
-                                                    <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
-                                                    <p>Username: {{ user.username }}</p>
-                                                    <p>Contact: {{ user.email }}</p>
-                                                    <p>Assigned to team: {{ user.team_id }}</p>
-                                                    <p>Team Role: {{ user.team_role }}</p>
+                <div class="accordion">
+                    {% for user in user_list | sort (attribute="id") %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ user.id }}taskbyuser" aria-expanded="true" aria-controls="{{ user.id }}taskbyuser">
+                                {{ user.first_name }} {{ user.last_name }}
+                            </button>
+                        </h2>
+                        <div id="{{ user.id }}taskbyuser" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <p>User Name: {{ user.user_name }}</p>
+                                <p>Contact: {{ user.email }}</p>
+                                <p>Assigned to team: {{ user.team_id }}</p>
+                                <p>Team Role: {{ user.team_role }}</p>
+
+                                <div class="text-center my-2">
+                                    <a class="btn btn-primary" href={{ url_for('update_user', user_id = user.id) }}>Update User</a>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteusertasks{{ user.id }}">
+                                        Delete User
+                                    </button>
+                                    <div class="modal fade" id="deleteusertasks{{ user.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-user-tasks{{ user.id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="delete-user-tasks{{ user.id }}">Delete User</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <br>
-                                                <p>Are you sure you wish to continue?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back to safety</button>
-                                                <a class="btn btn-danger" href={{ url_for('delete_user', user_id = user.id) }}>Delete User</a>
+                                                <div class="modal-body">
+                                                    <h3>Warning!</h3>
+                                                    <p>If you proceed you will delete this User:</p>
+                                                    <br>
+                                                    <div class="card">
+                                                        <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
+                                                        <p>Username: {{ user.username }}</p>
+                                                        <p>Contact: {{ user.email }}</p>
+                                                        <p>Assigned to team: {{ user.team_id }}</p>
+                                                        <p>Team Role: {{ user.team_role }}</p>
+                                                    </div>
+                                                    <br>
+                                                    <p>Are you sure you wish to continue?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back to safety</button>
+                                                    <a class="btn btn-danger" href={{ url_for('delete_user', user_id = user.id) }}>Delete User</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>   
-                        
-                            {% with user_id = user.id %}
-                            {% include "task_by_user.html" %}
-                            {% endwith %}                      
+                                </div>   
+                            
+                                {% with user_id = user.id %}
+                                {% include "task_by_user.html" %}
+                                {% endwith %}                      
+                            </div>
                         </div>
+                        
                     </div>
-                    
+                    {% endfor %}
+                
                 </div>
-                {% endfor %}
-            
-            </div>
-            <br>                
+                <br>       
+            </div>         
 
         </div>
 

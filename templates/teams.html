@@ -1,104 +1,114 @@
 {% extends "base.html" %}
 {% block content %}
     
-<div class="row mx-0 g-0">
-    <div class="col mx-2 my-2">
+<div class="row mx-2 my-2">
+    <div class="col">
         <div>
             <h3 class="text-center mx-2 my-2">Teams</h3>
         </div>
-    </div>
-</div>
 
-{% for team in team_list | sort (attribute="team_id") %}
-<div class="row mx-0 g-0">
-    <div class="col card mx-2 my-2">
-        <div class='team'>
-            <h3 class="text-center mx-2 my-2">Team ID: {{ team.team_id }}</h3>
-            <br>
-            <p class="text-center"><strong>Team Lead: </strong>{{ team.team_lead }}</p>
-            <p class="text-center"><strong>Contact: </strong>{{ team.team_lead_email }}</p>
 
-            <div class="text-center my-2">
-                <a class="btn btn-primary" href={{ url_for('update_team', team_id = team.team_id) }}>Update Team</a>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteteam{{ team.team_id }}">
-                    Delete Team
-                </button>
-                <div class="modal fade" id="deleteteam{{ team.team_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-team-{{ team.team_id }}" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="delete-team-{{ team.team_id }}">Delete Team</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <h3>Warning!</h3>
-                                <p>If you proceed you will delete this team:</p>
-                                <br>
-                                <div class="card">
-                                    <p>Team ID: {{ team.team_id }}</p>
-                                    <p>Team Lead: {{ team.team_lead }}</p>
-                                    <p>Contact Email: {{ team.team_lead_email }}</p>
+        {% for team in team_list | sort (attribute="team_id") %}
+        
+            <div class="col card">
+                <div class='team'>
+                    <h3 class="text-center mx-2 my-2">Team ID: {{ team.team_id }}</h3>
+                    <br>
+                    <p class="text-center"><strong>Team Lead: </strong>{{ team.team_lead }}</p>
+                    <p class="text-center"><strong>Contact: </strong>{{ team.team_lead_email }}</p>
+
+                    <div class="text-center my-2">
+                        <a class="btn btn-primary" href={{ url_for('update_team', team_id = team.team_id) }}>Update Team</a>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteteam{{ team.team_id }}">
+                            Delete Team
+                        </button>
+                        <div class="modal fade" id="deleteteam{{ team.team_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-team-{{ team.team_id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="delete-team-{{ team.team_id }}">Delete Team</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h3>Warning!</h3>
+                                        <p>If you proceed you will delete this team:</p>
+                                        <br>
+                                        <div class="card">
+                                            <p>Team ID: {{ team.team_id }}</p>
+                                            <p>Team Lead: {{ team.team_lead }}</p>
+                                            <p>Contact Email: {{ team.team_lead_email }}</p>
+                                        </div>
+                                        <br>
+                                        <p>All projects, tasks and users assigned to this team will not be affected.</p>
+                                        <p>Are you sure you wish to continue?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back to safety</button>
+                                        <a class="btn btn-danger" href={{ url_for('delete_team', team_id = team.team_id) }}>Delete Team</a>
+                                    </div>
                                 </div>
-                                <br>
-                                <p>All projects, tasks and users assigned to this team will not be affected.</p>
-                                <p>Are you sure you wish to continue?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back to safety</button>
-                                <a class="btn btn-danger" href={{ url_for('delete_team', team_id = team.team_id) }}>Delete Team</a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            
-        <div class="accordion">
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ team.team_id }}projects" aria-expanded="true" aria-controls="{{ team.team_id }}projects">
-                    Projects
-                    </button>
-                </h2>
-                <div id="{{ team.team_id }}projects" class="accordion-collapse collapse">
-                    <div class="accordion-body project-by-team">
-                        {% with team_id = team.team_id %}
-                        {% include "project_by_team.html" %}
-                        {% endwith %}                              
+                    
+                    
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ team.team_id }}projects" aria-expanded="true" aria-controls="{{ team.team_id }}projects">
+                            Projects
+                            </button>
+                        </h2>
+                        <div id="{{ team.team_id }}projects" class="accordion-collapse collapse">
+                            <div class="accordion-body project-by-team">
+                                {% with team_id = team.team_id %}
+                                {% include "project_by_team.html" %}
+                                {% endwith %}                              
+                            </div>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ team.team_id }}users" aria-expanded="true" aria-controls="{{ team.team_id }}users">
+                            Team Members
+                            </button>
+                        </h2>
+                        <div id="{{ team.team_id }}users" class="accordion-collapse collapse">
+                            <div class="accordion-body user-by-team">
+                                {% with team_id = team.team_id %}
+                                {% include "user_by_team.html" %}
+                                {% endwith %}                             
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
-                
+                <br>
+
             </div>
+            
         
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ team.team_id }}users" aria-expanded="true" aria-controls="{{ team.team_id }}users">
-                    Team Members
-                    </button>
-                </h2>
-                <div id="{{ team.team_id }}users" class="accordion-collapse collapse">
-                    <div class="accordion-body user-by-team">
-                        {% with team_id = team.team_id %}
-                        {% include "user_by_team.html" %}
-                        {% endwith %}                             
-                    </div>
-                </div>
-                
-            </div>
-        </div>
         <br>
 
     </div>
+
+    <br>
+
+        {% endfor %}
+
+    
+
+    <div class="row mx-0 g-0">
+        <div class="col mx-2 my-2 text-center">
+            <a class="btn btn-success" href={{ url_for('add_team') }}>Add new Team</a>
+        </div>
+    </div>
+
     
 </div>
-<br>
 
-{% endfor %}
 
-<div class="row mx-0 g-0">
-    <div class="col mx-2 my-2 text-center">
-        <a class="btn btn-success" href={{ url_for('add_team') }}>Add new Team</a>
-    </div>
-</div>
 
 {% endblock %}
