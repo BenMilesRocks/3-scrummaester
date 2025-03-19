@@ -4,13 +4,14 @@
         {% if task.assigned_user == user_id %}
 
             <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ task.task_id }}taskbyuseraccordion" aria-expanded="true" aria-controls="{{ task.task_id }}taskbyuseraccordion">
-                        {{ task.task_name }}
+                <h2 class="accordion-header task-accordion-head-{{ task.task_status }}">
+                    <button class="accordion-button task-accordion-{{ task.task_status }} collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ task.task_id }}taskbyuseraccordion" aria-expanded="true" aria-controls="{{ task.task_id }}taskbyuseraccordion">
+                        <span class="w-100 px-2 text-start"><strong>{{ task.task_name }}</strong></span>
+                        <span class="w-100 px-2 text-end"><strong>{{ task.task_status }}</strong></span>
                     </button>
                 </h2>
                 <div id="{{ task.task_id }}taskbyuseraccordion" class="accordion-collapse collapse">
-                    <div class="accordion-body">
+                    <div class="accordion-body task-accordion-body-{{ task.task_status }}">
                         <p>Task Description:</p>
                         <p>{{ task.task_description }}</p>
                         <p>Task Status: {{ task.task_status }}</p>
