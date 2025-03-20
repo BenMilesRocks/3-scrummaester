@@ -119,6 +119,7 @@ def add_project():
         with session:
             session.add(project)
             session.commit()
+            flash("Project Created Successfully!")
         return redirect(url_for("projects"))
     return render_template("add_project.html", teams = team_db)
 
@@ -138,6 +139,7 @@ def update_project(project_id):
             )
         session.execute(project)
         session.commit()
+        flash("Project Updated Successfully!")
         return redirect(url_for("projects"))
     return render_template(
         "update_project.html", teams = team_db, project_id = project_id, 
@@ -151,6 +153,7 @@ def delete_project(project_id):
     project = delete(Project).where(Project.project_id == project_id)
     session.execute(project)
     session.commit()
+    flash("Project Deleted Successfully!")
     return redirect(url_for("projects"))
 
 #-TEAMS
@@ -180,6 +183,7 @@ def add_team():
         with session:
             session.add(team)
             session.commit()
+            flash("Team Added Successfully!")
         return redirect(url_for("teams"))
     return render_template("add_team.html")
 
@@ -197,6 +201,7 @@ def update_team(team_id):
             )
         session.execute(team)
         session.commit()
+        flash("Team Updated Successfully!")
         return redirect(url_for("teams"))
     return render_template("update_team.html", teams = team_db, team_id = team_id, current_team_lead = current_team_lead, current_team_lead_email = current_team_lead_email) 
 
@@ -206,6 +211,7 @@ def delete_team(team_id):
     team = delete(Team).where(Team.team_id == team_id)
     session.execute(team)
     session.commit()
+    flash("Team Deleted Successfully!")
     return redirect(url_for("teams"))
 
 #-USERS
@@ -241,6 +247,7 @@ def update_user(user_id):
             )
         session.execute(user)
         session.commit()
+        flash("User Info Updated Successfully!")
         return redirect(url_for("users"))
     return render_template(
         "update_user.html", teams = team_db, 
@@ -256,6 +263,7 @@ def delete_user(user_id):
     user = delete(User).where(User.id == user_id)
     session.execute(user)
     session.commit()
+    flash("User Deleted Successfully!")
     return redirect(url_for("users"))
 
 #-TASKS
@@ -288,6 +296,7 @@ def add_task():
         with session:
             session.add(task)
             session.commit()
+            flash("Task Created Successfully!")
         return redirect(url_for("tasks"))
     return render_template("add_task.html", projects = project_db, users = user_db, teams = team_db)
 
@@ -311,6 +320,7 @@ def update_task(task_id):
             )
         session.execute(task)
         session.commit()
+        flash("Task Updated Successfully!")
         return redirect(url_for("tasks"))
     
     return render_template(
@@ -329,6 +339,7 @@ def delete_task(task_id):
     task = delete(Task).where(Task.task_id == task_id)
     session.execute(task)
     session.commit()
+    flash("Task Deleted Successfully!")
     return redirect(url_for("tasks"))
 
 #-RUN APP
