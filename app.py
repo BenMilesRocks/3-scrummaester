@@ -177,6 +177,8 @@ def teams():
 @app.route("/add_team", methods=["GET", "POST"])
 @login_required
 def add_team():
+    previous_url = request.referrer
+
     if request.method == "POST":
         team = Team(
             team_lead = request.form.get("team_lead"),
@@ -186,8 +188,8 @@ def add_team():
             session.add(team)
             session.commit()
             flash("Team Added Successfully!")
-        return redirect(url_for("teams"))
-    return render_template("add_team.html")
+        return redirect(request.form.get("next"))
+    return render_template("add_team.html", previous_url = previous_url)
 
 @app.route("/update_team/<int:team_id>", methods=["GET", "POST"])
 @login_required
