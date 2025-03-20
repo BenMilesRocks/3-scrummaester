@@ -312,6 +312,8 @@ def update_task(task_id):
     current_project_id = task.project_id
     current_assigned_user = task.assigned_user
 
+    previous_url = request.referrer
+
     if request.method == "POST":
         task = update(Task).where(Task.task_id == task_id).execution_options(populate_existing=True).values(
             task_name = request.form.get("task_name"),
@@ -332,7 +334,8 @@ def update_task(task_id):
         current_task_description = current_task_description,
         current_task_status = current_task_status,
         current_project_id = current_project_id,
-        current_assigned_user = current_assigned_user)
+        current_assigned_user = current_assigned_user,
+        previous_url = previous_url)
 
 
 @app.route("/delete_task/<int:task_id>")
