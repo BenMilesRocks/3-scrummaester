@@ -11,6 +11,7 @@
 <div class="row mx-0 g-0">
     <div class="col col-sm-10 col-md-8 col-lg-6 mx-auto my-4 px-3 py-3 card">
         <form method="POST" action="{{ url_for('add_project') }}">
+            <input type="hidden" name="next" value="{{ request.referrer }}" />
             <div class="mb-3">
                 <label for="project_name" class="form-label">Project Name</label>
                 <input type="text" class="form-control" placeholder="Enter Project Name Here" id="project_name" name="project_name" minlength="5" maxlength="50" required>
@@ -29,10 +30,10 @@
                     {% for team in teams %}
                         <option value="{{ team.team_id }}">Team ID: {{ team.team_id }}, Team Lead: {{ team.team_lead }}</option>
                     {% endfor %}
-                </select>                
+                </select>
             </div>
             <button type="submit" class="btn btn-success">Add Project</button>
-            <a href={{ url_for('projects') }} class="btn btn-danger">Cancel</a>
+            <a href={{ previous_url }} class="btn btn-danger">Cancel</a>
         </form>
     </div>
 </div>

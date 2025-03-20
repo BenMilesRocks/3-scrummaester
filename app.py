@@ -80,7 +80,8 @@ def register():
             team_role = form.team_role.data,
             team_id = form.team_id.data.team_id)            
         session.add(new_user)
-        session.commit()    
+        session.commit()
+        flash("New Account Created!")
         return redirect(url_for("login"))
 
     return render_template("register.html", page_title= "Register", form = form)
@@ -112,6 +113,8 @@ def projects():
 @app.route("/add_project", methods=["GET", "POST"])
 @login_required
 def add_project():
+    previous_url = request.referrer
+
     if request.method == "POST":
         project = Project(
             project_name = request.form.get("project_name"),
@@ -122,8 +125,8 @@ def add_project():
             session.add(project)
             session.commit()
             flash("Project Created Successfully!")
-        return redirect(url_for("projects"))
-    return render_template("add_project.html", teams = team_db)
+        return redirect(url_for(request.form.get("next")))
+    return render_template("add_project.html", teams = team_db, previous_url = previous_url)
 
 @app.route("/update_project/<int:project_id>", methods=["GET", "POST"])
 @login_required
