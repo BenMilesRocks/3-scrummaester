@@ -240,6 +240,8 @@ def update_user(user_id):
     current_lname = user.last_name
     current_role = user.team_role
 
+    previous_url = request.referrer
+
     if request.method == "POST":
         user = update(User).where(User.id == user_id).execution_options(populate_existing=True).values(
             first_name = request.form.get("first_name"),
@@ -250,13 +252,14 @@ def update_user(user_id):
         session.execute(user)
         session.commit()
         flash("User Info Updated Successfully!")
-        return redirect(url_for("users"))
+        return redirect(request.form.get("next"))
     return render_template(
-        "update_user.html", teams = team_db, 
+        "update_user.html", teams = team_db,
         users = user_db, user_id = user_id,
         current_fname = current_fname,
         current_lname = current_lname,
-        current_role = current_role
+        current_role = current_role,
+        previous_url = previous_url
         )
 
 @app.route("/delete_user/<int:user_id>")

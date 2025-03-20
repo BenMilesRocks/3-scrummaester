@@ -10,6 +10,7 @@
 <div class="row mx-0 g-0">
     <div class="col col-sm-10 col-md-8 col-lg-6 mx-auto my-4 px-3 py-3 card">
         <form method="POST" action="{{ url_for('update_user', user_id = user_id ) }}">
+            <input type="hidden" name="next" value="{{ request.referrer }}" />
             <div class="mb-3">
                 <label for="first_name" class="form-label">First Name</label>
                 <input id="first_name" name="first_name" minlength="5" maxlength="50" type="text" class="form-control" value="{{ current_fname }}" required>
@@ -31,7 +32,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Update User Info</button>
-            <a href={{ url_for('users') }} class="btn btn-danger">Cancel</a>
+            <a href={{ previous_url }} class="btn btn-danger">Cancel</a>
         </form>
     </div>
 </div>
