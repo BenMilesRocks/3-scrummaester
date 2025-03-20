@@ -196,6 +196,8 @@ def update_team(team_id):
     current_team_lead = team.team_lead
     current_team_lead_email = team.team_lead_email
 
+    previous_url = request.referrer
+
     if request.method == "POST":
         team = update(Team).where(Team.team_id == team_id).execution_options(populate_existing=True).values(
             team_lead = request.form.get("team_lead"),
@@ -204,8 +206,14 @@ def update_team(team_id):
         session.execute(team)
         session.commit()
         flash("Team Updated Successfully!")
-        return redirect(url_for("teams"))
-    return render_template("update_team.html", teams = team_db, team_id = team_id, current_team_lead = current_team_lead, current_team_lead_email = current_team_lead_email) 
+        return redirect(request.form.get("next"))
+    return render_template(
+        "update_team.html", teams = team_db,
+        team_id = team_id, 
+        current_team_lead = current_team_lead, 
+        current_team_lead_email = current_team_lead_email,
+        previous_url = previous_url
+        )
 
 @app.route("/delete_team/<int:team_id>")
 @login_required
