@@ -323,7 +323,7 @@ def update_task(task_id):
         session.execute(task)
         session.commit()
         flash("Task Updated Successfully!")
-        return redirect(url_for("tasks"))
+        return redirect(request.form.get("next"))
     
     return render_template(
         "update_task.html", projects = project_db, 
