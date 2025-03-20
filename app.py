@@ -213,8 +213,9 @@ def delete_team(team_id):
     team = delete(Team).where(Team.team_id == team_id)
     session.execute(team)
     session.commit()
+    previous_url = request.referrer
     flash("Team Deleted Successfully!")
-    return redirect(url_for("teams"))
+    return redirect(previous_url)
 
 #-USERS
 
