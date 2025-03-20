@@ -287,6 +287,8 @@ def tasks():
 @app.route("/add_task", methods=["GET", "POST"])
 @login_required
 def add_task():
+    previous_url = request.referrer
+
     if request.method == "POST":
         task = Task(
             task_name = request.form.get("task_name"),
@@ -299,8 +301,8 @@ def add_task():
             session.add(task)
             session.commit()
             flash("Task Created Successfully!")
-        return redirect(url_for("tasks"))
-    return render_template("add_task.html", projects = project_db, users = user_db, teams = team_db)
+        return redirect(request.form.get("next"))
+    return render_template("add_task.html", projects = project_db, users = user_db, teams = team_db, previous_url = previous_url)
 
 @app.route("/update_task/<int:task_id>", methods=["GET", "POST"])
 @login_required
