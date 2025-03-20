@@ -47,6 +47,7 @@ def login():
             submit_pass = form.password.data.encode('utf8')
             if bcrypt.checkpw(submit_pass, password):
                 login_user(user)
+                flash("Successfully Logged In!")
                 return redirect(url_for("dashboard"))
             else:
                 flash("Incorrect password. Please try again!")
@@ -61,6 +62,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    flash("Successfully Logged Out!")
     return redirect(url_for("login"))
 
 @app.route("/register", methods=["GET", "POST"])
