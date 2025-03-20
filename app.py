@@ -344,8 +344,9 @@ def delete_task(task_id):
     task = delete(Task).where(Task.task_id == task_id)
     session.execute(task)
     session.commit()
+    previous_url = request.referrer
     flash("Task Deleted Successfully!")
-    return redirect(url_for("tasks"))
+    return redirect(previous_url)
 
 #-RUN APP
 
