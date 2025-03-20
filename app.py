@@ -265,8 +265,9 @@ def delete_user(user_id):
     user = delete(User).where(User.id == user_id)
     session.execute(user)
     session.commit()
+    previous_url = request.referrer
     flash("User Deleted Successfully!")
-    return redirect(url_for("users"))
+    return redirect(previous_url)
 
 #-TASKS
 
