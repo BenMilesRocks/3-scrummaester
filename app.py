@@ -230,14 +230,12 @@ def update_user(user_id):
     user = session.get(User, user_id)
     current_fname = user.first_name
     current_lname = user.last_name
-    current_email = user.email
     current_role = user.team_role
 
     if request.method == "POST":
         user = update(User).where(User.id == user_id).execution_options(populate_existing=True).values(
             first_name = request.form.get("first_name"),
             last_name = request.form.get("last_name"),
-            email = request.form.get("email"),
             team_role = request.form.get("team_role"),
             team_id  = request.form.get("team_id")
             )
@@ -249,8 +247,7 @@ def update_user(user_id):
         users = user_db, user_id = user_id,
         current_fname = current_fname,
         current_lname = current_lname,
-        current_email = current_email,
-        current_role = current_role,
+        current_role = current_role
         )
 
 @app.route("/delete_user/<int:user_id>")
