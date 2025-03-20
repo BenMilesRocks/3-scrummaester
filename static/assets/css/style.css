@@ -21,7 +21,8 @@ body {
 .project-by-team,
 .project-by-user,
 .user-by-team,
-.team-by-project {
+.team-by-project,
+.task-by-user {
     background-color: #f6fcff;
 }
 
