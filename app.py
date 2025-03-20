@@ -133,6 +133,8 @@ def update_project(project_id):
     current_project_status = project.project_status
     current_team_id = project.team_id
 
+    previous_url = request.referrer
+
     if request.method == "POST":
         project = update(Project).where(Project.project_id == project_id).execution_options(populate_existing=True).values(
             project_name = request.form.get("project_name"),
@@ -142,21 +144,23 @@ def update_project(project_id):
         session.execute(project)
         session.commit()
         flash("Project Updated Successfully!")
-        return redirect(url_for("projects"))
+        return redirect(request.form.get("next"))
     return render_template(
         "update_project.html", teams = team_db, project_id = project_id, 
         current_project_name = current_project_name, 
         current_project_status = current_project_status, 
-        current_team_id = current_team_id)
+        current_team_id = current_team_id,
+        previous_url = previous_url)
 
 @app.route("/delete_project/<int:project_id>")
 @login_required
 def delete_project(project_id):
+    previous_url = request.referrer
     project = delete(Project).where(Project.project_id == project_id)
     session.execute(project)
     session.commit()
     flash("Project Deleted Successfully!")
-    return redirect(url_for("projects"))
+    return redirect(previous_url)
 
 #-TEAMS
 
