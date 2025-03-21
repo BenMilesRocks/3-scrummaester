@@ -1,20 +1,21 @@
 from __init__ import session
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
-from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import InputRequired, Length, ValidationError, DataRequired
+from wtforms_sqlalchemy.fields import QuerySelectField
+import re
 
 from models import User, Team
 from database import team_db
 
 from models import User
 class RegistrationForm(FlaskForm):
-    first_name = StringField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"First Name"})
-    last_name = StringField(validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder":"Last Name"})
-    username = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Username"})
-    password = PasswordField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Password"})
-    email = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Email Address"})
-    team_role = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Job Role"})
+    first_name = StringField(validators=[InputRequired(), DataRequired(), Length(min=1, max=30)], render_kw={"placeholder":"First Name"})
+    last_name = StringField(validators=[InputRequired(), DataRequired(), Length(min=1, max=30)], render_kw={"placeholder":"Last Name"})
+    username = StringField(validators=[InputRequired(), DataRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Username"})
+    password = PasswordField(validators=[InputRequired(), DataRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Password"})
+    email = StringField(validators=[InputRequired(), DataRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Email Address"})
+    team_role = StringField(validators=[InputRequired(), DataRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Job Role"})
     team_id = QuerySelectField(query_factory=lambda: session.query(Team).all())
 
 
@@ -28,7 +29,6 @@ class RegistrationForm(FlaskForm):
                 "That username already exists. Please choose a different one"
             )
         
-
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Username"})
     password = PasswordField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder":"Password"})
