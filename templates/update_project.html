@@ -13,7 +13,7 @@
             <input type="hidden" name="next" value="{{ request.referrer }}" />
             <div class="mb-3">
                 <label for="project_name" class="form-label">Project Name</label>
-                <input type="text" class="form-control" value="{{ current_project_name }}" id="project_name" name="project_name" minlength="5" maxlength="50" required>
+                <input type="text" class="form-control" value="{{ current_project_name }}" id="project_name" name="project_name" minlength="5" maxlength="50" pattern="^[^\s]+(\s+[^\s]+)*$" required>
             </div>
             <div class="mb-3">
                 <label for="project_status" class="form-label">Project Status</label>
