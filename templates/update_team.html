@@ -13,7 +13,7 @@
             <input type="hidden" name="next" value="{{ request.referrer }}" />
             <div class="mb-3">
                 <label for="team_lead" class="form-label">Team Lead Name</label>
-                <input type="text" class="form-control" value="{{ current_team_lead }}" name="team_lead" name="team_lead" minlength="5" maxlength="50" required>
+                <input type="text" class="form-control" value="{{ current_team_lead }}" name="team_lead" name="team_lead" minlength="5" maxlength="50" pattern="^[^\s]+(\s+[^\s]+)*$" title="Please enter a name without spaces at the beginning or end" required>
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Email address</label>
