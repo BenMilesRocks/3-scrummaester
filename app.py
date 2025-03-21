@@ -125,7 +125,7 @@ def add_project():
             session.add(project)
             session.commit()
             flash("Project Created Successfully!")
-        return redirect(url_for(request.form.get("next")))
+        return redirect(request.form.get("next"))
     return render_template("add_project.html", teams = team_db, previous_url = previous_url)
 
 @app.route("/update_project/<int:project_id>", methods=["GET", "POST"])
@@ -146,6 +146,9 @@ def update_project(project_id):
             )
         session.execute(project)
         session.commit()
+        print("--------------------------")
+        print(request.form.get("next"))
+        print("--------------------------")
         flash("Project Updated Successfully!")
         return redirect(request.form.get("next"))
     return render_template(
