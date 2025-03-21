@@ -18,16 +18,33 @@
             <div class="mb-3">
                 <label for="project_status" class="form-label">Project Status</label>
                 <select class="form-select" aria-label="Select Team" id="project_status" name="project_status" required>
-                    <option value="" disabled selected>Project Status</option>
-                    <option value="Active">Active</option>
-                    <option value="Completed">Completed</option>
+                    <option value={{ current_project_status }} selected> {{ current_project_status }} </option>
+                    {% for value in status %}
+                        {% if value == current_project_status %}
+
+                        {% else %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endif %}
+                        
+                    {% endfor %}
                 </select>
             </div>
             <div class="mb-3">
                 <select class="form-select" aria-label="Select Team" id="team_id" name="team_id" required>
-                    <option value="{{ current_team_id }}" disabled selected>Choose Team</option>
+                    <option value={{ current_team_id }} selected>
+                        {% for team in teams %}
+                            {% if team.team_id == current_team_id %}
+                                Team ID: {{ team.team_id }}, Team Lead: {{ team.team_lead }}
+                            {% endif %}
+                        {% endfor %}
+                    </option>
                     {% for team in teams %}
-                        <option value="{{ team.team_id }}">Team ID: {{ team.team_id }}, Team Lead: {{ team.team_lead }}</option>
+                        {% if team.team_id == current_team_id %}
+
+                        {% else %}
+                            <option value="{{ team.team_id }}">Team ID: {{ team.team_id }}, Team Lead: {{ team.team_lead }}</option>
+                        {% endif %}
+                        
                     {% endfor %}
                 </select>
             </div>

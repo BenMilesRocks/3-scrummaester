@@ -6,7 +6,7 @@ from sqlalchemy import update, delete
 from __init__ import session, login_manager, app
 from models import Team, User, Project, Task
 from forms import LoginForm, RegistrationForm
-from database import (team_db, user_db, project_db, task_db)
+from database import team_db, user_db, project_db, task_db, status
 
 if os.path.exists("env.py"):
     import env
@@ -156,7 +156,8 @@ def update_project(project_id):
         current_project_name = current_project_name, 
         current_project_status = current_project_status, 
         current_team_id = current_team_id,
-        previous_url = previous_url)
+        previous_url = previous_url,
+        status = status)
 
 @app.route("/delete_project/<int:project_id>")
 @login_required
