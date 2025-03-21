@@ -13,11 +13,11 @@
             <input type="hidden" name="next" value="{{ request.referrer }}" />
             <div class="mb-3">
                 <label for="first_name" class="form-label">First Name</label>
-                <input id="first_name" name="first_name" minlength="5" maxlength="50" type="text" class="form-control" value="{{ current_fname }}" required>
+                <input id="first_name" name="first_name" minlength="5" maxlength="50" type="text" class="form-control" value="{{ current_fname }}" pattern="^[^\s]+(\s+[^\s]+)*$" title="Please enter a name without spaces at the beginning or end" required>
             </div>
             <div class="mb-3">
                 <label for="first_name" class="form-label">Last Name</label>
-                <input id="first_name" name="last_name" minlength="5" maxlength="50" type="text" class="form-control" value="{{ current_lname }}" required>
+                <input id="first_name" name="last_name" minlength="5" maxlength="50" type="text" class="form-control" value="{{ current_lname }}" pattern="^[^\s]+(\s+[^\s]+)*$" title="Please enter a name without spaces at the beginning or end" required>
             </div>
             <div class="mb-3">
                 <label for="team_role">Team Role</label>
