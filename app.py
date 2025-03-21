@@ -374,7 +374,7 @@ def update_task(task_id):
             with session:
                 session.add(task)
                 session.commit()
-                flash("Task Created Successfully!")
+                flash("Task Updated Successfully!")
                 if "update_task" in request.form.get("next"):
                     return redirect(url_for("dashboard"))
                 else:

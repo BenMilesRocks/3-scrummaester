@@ -9,44 +9,89 @@
 
 <div class="row mx-0 g-0">
     <div class="col col-sm-10 col-md-8 col-lg-6 mx-auto my-4 px-3 py-3 card">
+
         <form method="POST" action="{{ url_for('update_task', task_id = task_id) }}">
+
+            <!-- returns last page visited -->
             <input type="hidden" name="next" value="{{ request.referrer }}" />
+
+            <!-- Form -->
             <div class="mb-3">
                 <label for="task_name" class="form-label">Task Name</label>
-                <input id="task_name" name="task_name" minlength="5" maxlength="50" type="text" class="form-control" value="{{ current_task_name }}" required>
+                <input id="task_name" name="task_name" minlength="5" maxlength="50" type="text" class="form-control" value="{{ current_task_name }}" pattern="^[^\s]+(\s+[^\s]+)*$" title="Please enter a name without spaces at the beginning or end" required>
             </div>
+
             <div class="mb-3">
                 <label for="task_description" class="form-label">Task Description</label>
                 <textarea id="task_description" name="task_description" minlength="5" maxlength="3000" type="text" class="form-control" required>{{ current_task_description }}</textarea>
             </div>
+
             <div class="mb-3">
                 <label for="task_status" class="form-label">Task Status</label>
                 <select class="form-select" aria-label="Select Status" id="task_status" name="task_status" required>
-                    <option value="" disabled selected>Choose Status</option>
-                    <option value="Active">Active</option>
-                    <option value="Completed">Completed</option>
+
+                    <!-- pulls existing values from database -->
+                    <option value={{ current_task_status }} selected>{{ current_task_status }}</option>
+
+                    <!-- populates remaining options -->
+                    {% for value in status %}
+                        {% if value == current_project_status %}
+
+                        {% else %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endif %}
+                        
+                    {% endfor %}
                 </select>
             </div>
             <div class="mb-3">
                 <select class="form-select" aria-label="Choose Project" id="project_id" name="project_id" required>
-                    <option value="{{ current_project_id }}" disabled selected>Choose Project</option>
+                    <!-- pulls existing values from database -->
+                    <option value="{{ current_project_id }}" selected>
+                        {% for project in projects %}
+                            {% if project.project_id == current_project_id %}
+                                {{ project.project_name }}
+                            {% endif %}
+                        {% endfor %}
+                    </option>
+
+                    <!-- populates remaining options -->
                     {% for project in projects %}
+                        {% if project.project_id == current_project_id %}
+
+                        {% else %}
                         <option value="{{ project.project_id }}">{{ project.project_name }}</option>
+                        {% endif %}
                     {% endfor %}
                 </select>
             </div>
             <div class="mb-3">
                 <select class="form-select" aria-label="Choose User" id="assigned_user" name="assigned_user" required>
-                    <option value="{{ current_assigned_user }}" disabled selected>Choose User</option>
+                    <!-- pulls existing values from database -->
+                    <option value="{{ current_assigned_user }}" selected>
+                        {% for user in users %}
+                            {% if user.id == current_assigned_user %}
+                                {{ user.first_name }} {{ user.last_name }}
+                            {% endif %}
+                        {% endfor %}
+                    </option>
+
+                    <!-- populates remaining options -->
                     {% for user in users %}
+                        {% if user.id == current_assigned_user %}
+
+                        {% else %}
                         <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                        {% endif %}
                     {% endfor %}
                 </select>
             </div>
                
             <button type="submit" class="btn btn-success">Update Task</button>
             <a href={{ previous_url }} class="btn btn-danger">Cancel</a>
+
         </form>
+
     </div>
 </div>
 
