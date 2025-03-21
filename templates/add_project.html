@@ -10,12 +10,19 @@
 
 <div class="row mx-0 g-0">
     <div class="col col-sm-10 col-md-8 col-lg-6 mx-auto my-4 px-3 py-3 card">
+
         <form method="POST" action="{{ url_for('add_project') }}">
+
+            <!-- returns last page visited -->
             <input type="hidden" name="next" value="{{ request.referrer }}" />
+
+            <!-- Form -->
+
             <div class="mb-3">
                 <label for="project_name" class="form-label">Project Name</label>
                 <input type="text" class="form-control" placeholder="Enter Project Name Here" id="project_name" name="project_name" minlength="5" maxlength="50" pattern="^[^\s]+(\s+[^\s]+)*$" title="Please enter a name without spaces at the beginning or end" required>
             </div>
+
             <div class="mb-3">
                 <label for="project_status" class="form-label">Project Status</label>
                 <select class="form-select" aria-label="Select Team" id="project_status" name="project_status" required>
@@ -24,6 +31,7 @@
                     <option value="Completed">Completed</option>
                 </select>                
             </div>
+
             <div class="mb-3">
                 <select class="form-select" aria-label="Select Team" id="team_id" name="team_id" required>
                     <option value="" disabled selected>Choose Team</option>
@@ -32,9 +40,12 @@
                     {% endfor %}
                 </select>
             </div>
+
             <button type="submit" class="btn btn-success">Add Project</button>
             <a href={{ previous_url }} class="btn btn-danger">Cancel</a>
+
         </form>
+        
     </div>
 </div>
     
