@@ -314,12 +314,14 @@ def tasks():
 @login_required
 def add_task():
     previous_url = request.referrer
+
+    # Checks regex for textarea
     
     if request.method == "POST":
         if (re.search("^[^\s]+(\s+[^\s]+)*$", request.form.get("task_description"))) == None:
             flash("Task desription can't have whitespace at the beginning or end of the description. Please try again")
             
-
+        # If valid, submit
         else:
 
             task = Task(
@@ -343,6 +345,7 @@ def add_task():
 @app.route("/update_task/<int:task_id>", methods=["GET", "POST"])
 @login_required
 def update_task(task_id):
+    # Pulls existing values
     task = session.get(Task, task_id)
     current_task_name = task.task_name
     current_task_description = task.task_description
@@ -352,18 +355,30 @@ def update_task(task_id):
 
     previous_url = request.referrer
 
+    # Checks Regex for textarea
+
     if request.method == "POST":
-        task = update(Task).where(Task.task_id == task_id).execution_options(populate_existing=True).values(
-            task_name = request.form.get("task_name"),
-            task_description = request.form.get("task_description"),
-            task_status = request.form.get("task_status"),
-            project_id = request.form.get("project_id"),
-            assigned_user  = request.form.get("assigned_user")
+        if (re.search("^[^\s]+(\s+[^\s]+)*$", request.form.get("task_description"))) == None:
+            flash("Task desription can't have whitespace at the beginning or end of the description. Please try again")
+            
+        # If valid, submit
+        else:
+
+            task = Task(
+                task_name = request.form.get("task_name"),
+                task_description = request.form.get("task_description"),
+                task_status = request.form.get("task_status"),
+                project_id = request.form.get("project_id"),
+                assigned_user = request.form.get("assigned_user")
             )
-        session.execute(task)
-        session.commit()
-        flash("Task Updated Successfully!")
-        return redirect(request.form.get("next"))
+            with session:
+                session.add(task)
+                session.commit()
+                flash("Task Created Successfully!")
+                if "update_task" in request.form.get("next"):
+                    return redirect(url_for("dashboard"))
+                else:
+                    return redirect(request.form.get("next"))
     
     return render_template(
         "update_task.html", projects = project_db, 
@@ -373,7 +388,8 @@ def update_task(task_id):
         current_task_status = current_task_status,
         current_project_id = current_project_id,
         current_assigned_user = current_assigned_user,
-        previous_url = previous_url)
+        previous_url = previous_url,
+        status = status)
 
 
 @app.route("/delete_task/<int:task_id>")
