@@ -7,6 +7,7 @@ from __init__ import session, login_manager, app
 from models import Team, User, Project, Task
 from forms import LoginForm, RegistrationForm
 from database import team_db, user_db, project_db, task_db, status
+import re
 
 if os.path.exists("env.py"):
     import env
@@ -313,20 +314,30 @@ def tasks():
 @login_required
 def add_task():
     previous_url = request.referrer
-
+    
     if request.method == "POST":
-        task = Task(
-            task_name = request.form.get("task_name"),
-            task_description = request.form.get("task_description"),
-            task_status = request.form.get("task_status"),
-            project_id = request.form.get("project_id"),
-            assigned_user = request.form.get("assigned_user")
-        )
-        with session:
-            session.add(task)
-            session.commit()
-            flash("Task Created Successfully!")
-        return redirect(request.form.get("next"))
+        if (re.search("^[^\s]+(\s+[^\s]+)*$", request.form.get("task_description"))) == None:
+            flash("Task desription can't have whitespace at the beginning or end of the description. Please try again")
+            
+
+        else:
+
+            task = Task(
+                task_name = request.form.get("task_name"),
+                task_description = request.form.get("task_description"),
+                task_status = request.form.get("task_status"),
+                project_id = request.form.get("project_id"),
+                assigned_user = request.form.get("assigned_user")
+            )
+            with session:
+                session.add(task)
+                session.commit()
+                flash("Task Created Successfully!")
+                if "add_task" in request.form.get("next"):
+                    return redirect(url_for("dashboard"))
+                else:
+                    return redirect(request.form.get("next"))
+        
     return render_template("add_task.html", projects = project_db, users = user_db, teams = team_db, previous_url = previous_url)
 
 @app.route("/update_task/<int:task_id>", methods=["GET", "POST"])
