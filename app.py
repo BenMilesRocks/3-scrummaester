@@ -265,6 +265,7 @@ def update_user(user_id):
     current_fname = user.first_name
     current_lname = user.last_name
     current_role = user.team_role
+    current_team_id = user.team_id
 
     previous_url = request.referrer
 
@@ -285,7 +286,8 @@ def update_user(user_id):
         current_fname = current_fname,
         current_lname = current_lname,
         current_role = current_role,
-        previous_url = previous_url
+        previous_url = previous_url,
+        current_team_id = current_team_id
         )
 
 @app.route("/delete_user/<int:user_id>")

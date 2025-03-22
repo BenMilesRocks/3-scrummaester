@@ -24,10 +24,25 @@
                 <input id="team_role" name="team_role" minlength="5" maxlength="50" type="text" class="form-control" value="{{ current_role }}" required>
             </div>
             <div class="mb-3">
-                <select id="team_id" name="team_id" class="form-select" required>
-                    <option value="" disabled selected>Choose Team</option>
+                <label for="team_id">Team</label>
+                <select class="form-select" aria-label="Select Team" id="team_id" name="team_id" required>
+                    <!-- pulls existing values from database -->
+                    <option value={{ current_team_id }} selected>
+                        {% for team in teams %}
+                            {% if team.team_id == current_team_id %}
+                                Team ID: {{ team.team_id }}, Team Lead: {{ team.team_lead }}
+                            {% endif %}
+                        {% endfor %}
+                    </option>
+
+                    <!-- populates remaining options -->
                     {% for team in teams %}
-                        <option value="{{ team.team_id }}">Team Id: {{ team.team_id }} - Team Lead: {{ team.team_lead }}</option>
+                        {% if team.team_id == current_team_id %}
+
+                        {% else %}
+                            <option value="{{ team.team_id }}">Team ID: {{ team.team_id }}, Team Lead: {{ team.team_lead }}</option>
+                        {% endif %}
+                        
                     {% endfor %}
                 </select>
             </div>
