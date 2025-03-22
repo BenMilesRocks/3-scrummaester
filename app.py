@@ -366,21 +366,20 @@ def update_task(task_id):
         # If valid, submit
         else:
 
-            task = Task(
+            task = update(Task).where(Task.task_id == task_id).execution_options(populate_existing=True).values(
                 task_name = request.form.get("task_name"),
                 task_description = request.form.get("task_description"),
                 task_status = request.form.get("task_status"),
                 project_id = request.form.get("project_id"),
                 assigned_user = request.form.get("assigned_user")
             )
-            with session:
-                session.add(task)
-                session.commit()
-                flash("Task Updated Successfully!")
-                if "update_task" in request.form.get("next"):
-                    return redirect(url_for("dashboard"))
-                else:
-                    return redirect(request.form.get("next"))
+            session.execute(task)
+            session.commit()
+
+            if "update_task" in request.form.get("next"):
+                return redirect(url_for("dashboard"))
+            else:
+                return redirect(request.form.get("next"))
     
     return render_template(
         "update_task.html", projects = project_db, 
