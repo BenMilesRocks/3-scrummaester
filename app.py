@@ -290,6 +290,44 @@ def update_user(user_id):
         current_team_id = current_team_id
         )
 
+@app.route("/update_current_user", methods=["GET", "POST"])
+@login_required
+def update_current_user():
+    user = session.get(User, int(current_user.id))
+    current_fname = user.first_name
+    current_lname = user.last_name
+    current_email = user.email
+    current_role = user.team_role
+    current_team_id = user.team_id
+
+    previous_url = request.referrer
+
+    if request.method == "POST":
+        hashed_password = bcrypt.hashpw(request.form.get("password").encode('utf8'), bcrypt.gensalt())
+        user = update(User).where(User.id == int(current_user.id)).execution_options(populate_existing=True).values(
+            first_name = request.form.get("first_name"),
+            last_name = request.form.get("last_name"),
+            email = request.form.get("email"),
+            password = hashed_password.decode('utf8'),
+            team_role = request.form.get("team_role"),
+            team_id  = request.form.get("team_id")
+            )
+        session.execute(user)
+        session.commit()
+        flash("User Info Updated Successfully!")
+        return redirect(request.form.get("next"))
+    return render_template(
+        "update_current_user.html",
+        teams = team_db, users = user_db,
+        current_fname = current_fname,
+        current_lname = current_lname,
+        current_role = current_role,
+        previous_url = previous_url,
+        current_email = current_email,
+        current_team_id = current_team_id,
+        user_id = int(current_user.id)
+        )
+
 @app.route("/delete_user/<int:user_id>")
 @login_required
 def delete_user(user_id):
