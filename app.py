@@ -233,12 +233,14 @@ def update_team(team_id):
 @app.route("/delete_team/<int:team_id>")
 @login_required
 def delete_team(team_id):
-    team = delete(Team).where(Team.team_id == team_id)
-    session.execute(team)
-    session.commit()
-    previous_url = request.referrer
-    flash("Team Deleted Successfully!")
-    return redirect(previous_url)
+    if team_id == 1:
+        flash("Cannot delete Team #1. Please edit team details instead.")
+    else:
+        team = delete(Team).where(Team.team_id == team_id)
+        session.execute(team)
+        session.commit()
+        flash("Team Deleted Successfully!")
+    return redirect(url_for("teams"))
 
 #-USERS
 
@@ -289,12 +291,14 @@ def update_user(user_id):
 @app.route("/delete_user/<int:user_id>")
 @login_required
 def delete_user(user_id):
-    user = delete(User).where(User.id == user_id)
-    session.execute(user)
-    session.commit()
-    previous_url = request.referrer
-    flash("User Deleted Successfully!")
-    return redirect(previous_url)
+    if user_id == 1:
+        flash("Cannot delete Super User! Please contact your administrator for more information.")
+    else:
+        user = delete(User).where(User.id == user_id)
+        session.execute(user)
+        session.commit()
+        flash("User Deleted Successfully!")
+    return redirect(url_for("users"))
 
 #-TASKS
 
