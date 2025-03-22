@@ -12,6 +12,8 @@ import re
 if os.path.exists("env.py"):
     import env
 
+#flask_login - adds route to login page
+
 login_manager.login_view = "login"
 
 #app routing
