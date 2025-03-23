@@ -90,5 +90,7 @@ Additional testing was taken by friends and family on a variety of devices and s
 
 | **Feature** | **Expected Outcome** | **Testing Performed** | **Result** | **Pass/Fail** |
 | --- | --- | ---- | --- | --- |
+| **Home Page** | --- | ---- | --- | --- |
+| --- | --- | ---- | --- | --- |
 
 - - -

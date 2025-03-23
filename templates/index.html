@@ -21,23 +21,42 @@
         </div>
     </div>
 
-    <div class="row mx-2 my-2">
-        <div class="col mx-auto my-4 text-center">
-            <p>An all new, Scrum management tool to help you keep track of your project workload.</p>
+    <div class="d-none d-md-block">
+        <div class="row mx-2 my-2">
+            <div class="col mx-auto my-4 text-center">
+                <p>An all new, Scrum management tool to help you keep track of your project workload.</p>
+            </div>
+        </div>
+        <div class="row mx-2 my-2">
+            <div class="col-1"></div>
+            <div class="col-4 mx-auto my-4 py-4 text-center card">
+                <p>Already have an account?</p>
+                <a class="btn btn-primary" href={{ url_for('login') }}>Login Here!</a>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-4 mx-auto my-4 py-4 text-center card">
+                <p>New to ScrumMaester?</p>
+                <a class="btn btn-primary" href={{ url_for('register') }}>Register Here!</a>
+            </div>
+            <div class="col-1"></div>
         </div>
     </div>
-    <div class="row mx-2 my-2">
-        <div class="col-1"></div>
-        <div class="col-4 mx-auto my-4 py-4 text-center card landing-card">
-            <p>Already have an account?</p>
-            <a class="btn btn-primary" href={{ url_for('login') }}>Login Here!</a>
+    
+    <div class="d-md-none">
+        <div class="row">
+            <div class="col mx-4 my-4 py-4 text-center card">
+                <p>Already have an account?</p>
+                <a class="btn btn-primary" href={{ url_for('login') }}>Login Here!</a>
+            </div>
         </div>
-        <div class="col-1"></div>
-        <div class="col-4 mx-auto my-4 py-4 text-center card landing-card">
-            <p>New to ScrumMaester?</p>
-            <a class="btn btn-primary" href={{ url_for('register') }}>Register Here!</a>
+        <br>
+        <div class="row">
+            <div class="col mx-4 my-4 py-4 text-center card">
+                <p>New to ScrumMaester?</p>
+                <a class="btn btn-primary" href={{ url_for('register') }}>Register Here!</a>
+            </div>
         </div>
-        <div class="col-1"></div>
+
     </div>
 
     
