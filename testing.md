@@ -135,5 +135,12 @@ Additional testing was taken by friends and family on a variety of devices and s
 | Update User (inside user accordion) | Should redirect to update_user.html | Clicked Update User | Redirects to update_user.html, displays correct user details | **PASS** |
 | Delete User (inside user accordion) | Should open modal, checking user wants to delete the User. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete User' should delete the user. | Clicked Delete User | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete User' deleted user correctly | **PASS** |
 | Add New Team | Should redirect to add_new_team.html | Clicked Add New Team | Redirects to add_new_team.html | **PASS** |
+| **Projects Page** | --- | --- | --- | --- |
+| Project Cards | Each project should display as its own card, displaying project details, team info and accordions for Outstanding Tasks and Team Members | Opened projects.html | Project cards displayed correctly | **PASS** |
+| Outstanding Tasks accordion | Should open an accordion displaying all active tasks assigned to the project | Clicked Outstanding Tasks accordion button | Accordion opened, displaying all active tasks for project | **PASS** |
+| Add New Task | Should redirect to add_new_task.html | Clicked Add New Task | Redirected to add_new_task.html | **PASS** |
+| Task Accordion (inside Outstanding Tasks) | Should open another accordion displaying the details of the task | Clicked Task Accordion | Opened task accordion, displayng details of the task correctly | **PASS** |
+| Update Task (inside Task Accordion) | Should redirect to update_task.html, displaying details of the relevant task | Clicked Update Task | Redirected to update_task.html, displayed task details correctly | **PASS** |
+| Delete Task (inside Task Accordion) | Should open modal, checking user wants to delete the Task. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete Task' should delete the task. | Clicked Delete Task | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete Task' deleted task correctly | **PASS** |
 
 - - -
