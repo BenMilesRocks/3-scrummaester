@@ -7,6 +7,23 @@
     </div>
 </div>
 
+{% if task_length == 0 %}
+
+<div class="row mx-0 g-0">
+    <div class="col-11 col-md-10 col-lg-8 mx-auto my-3 px-3 py-3 card text-center">
+        <h3>No Tasks Assigned!</h3>
+        <br>
+        <p>You don't currently have any tasks assigned to you.</p>
+        <p>Create a new task now!</p>
+        <br>
+        <div class="my-2">
+            <a class="btn btn-success" href={{ url_for('add_task') }}>Add new Task</a>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
 {% for task in task_list | sort (attribute="project_id") %}
     {% if task.assigned_user == user_id %}
     <div class="row mx-0 g-0">

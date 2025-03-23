@@ -110,8 +110,19 @@ def register():
 @app.route("/dashboard", methods=["GET", "POST"])
 @login_required
 def dashboard():
+
+    task_length = 0
     user_id = int(current_user.id)
-    return render_template("dashboard.html", page_title= "Dashboard", user_id = user_id, task_list = task_db, user_list = user_db)
+
+    # Check if user has tasks assigned to them
+    for task in task_db:
+        if task.assigned_user == user_id:
+            task_length += 1
+
+    return render_template(
+        "dashboard.html", page_title= "Dashboard",
+        user_id = user_id, task_list = task_db,
+        user_list = user_db, task_length = task_length)
 
 
 #-PROJECTS
