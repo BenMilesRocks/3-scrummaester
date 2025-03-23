@@ -40,6 +40,10 @@ def not_found(e):
 def not_found(e): 
     return render_template("500.html") 
 
+@app.errorhandler(502) 
+def not_found(e): 
+    return render_template("502.html") 
+
 #-LOGIN
 
 @app.route("/login", methods=["GET", "POST"])
