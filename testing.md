@@ -121,7 +121,7 @@ Additional testing was taken by friends and family on a variety of devices and s
 | Update Team | Should redirect to update_team.html, with the details for the selected team | Clicked Update Team | Redirected to update_team.html, displaying the correct team details | **PASS** |
 | Delete Team button | Should open modal, checking user wants to delete the team. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete Team' should delete the team. | Clicked Delete Team button, clicked 'Go Back to Safety' and 'Delete Team' inside the Modal. | Modal opened correctly, closed when clicking 'Go Back to Safety', 'Delete Team' deleted the team from the database | **PASS** |
 | Projects Accordion | Should expand the project_by_team accordion, display all projects assigned to this team. | Clicked Projects accordion | Expands the project_by_team accordion, displays all projects associated to this team | **PASS** |
-| Add new Task button (inside Project accordion) | Should redirect to add_new_task.html | Clicked Add new Task | Redirected to add_new_task.html | **PASS** |
+| Add new Task button (inside Project accordion) | Should redirect to add_task.html | Clicked Add new Task | Redirected to add_task.html | **PASS** |
 | Update Project (inside Project accordion) | Should redirect to update_project.html | Clicked Update Project | Redirected to update_project.html | **PASS** |
 | Delete Project (inside Project accordion) | Should open modal, checking user wants to delete the Project. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete Project' should delete the project. | Clicked Delete Project button, clicked 'Go Back to Safety' and 'Delete Project' inside the Modal. | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete Project' deleted project correctly | **PASS** |
 | Add New Project | Should redirect to add_project.html | Clicked Add New Project | Redirected to add_project.html | **PASS** |
@@ -134,11 +134,11 @@ Additional testing was taken by friends and family on a variety of devices and s
 | User accordion | Should expand accordion displaying details of team member and accordions for tasks assigned to them | Clicked User accordion | Expanded user accordion, displayed user details and tasks correctly | **PASS** |
 | Update User (inside user accordion) | Should redirect to update_user.html | Clicked Update User | Redirects to update_user.html, displays correct user details | **PASS** |
 | Delete User (inside user accordion) | Should open modal, checking user wants to delete the User. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete User' should delete the user. | Clicked Delete User | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete User' deleted user correctly | **PASS** |
-| Add New Team | Should redirect to add_new_team.html | Clicked Add New Team | Redirects to add_new_team.html | **PASS** |
+| Add New Team | Should redirect to add_team.html | Clicked Add New Team | Redirects to add_team.html | **PASS** |
 | **Projects Page** | --- | --- | --- | --- |
 | Project Cards | Each project should display as its own card, displaying project details, team info and accordions for Outstanding Tasks and Team Members | Opened projects.html | Project cards displayed correctly | **PASS** |
 | Outstanding Tasks accordion | Should open an accordion displaying all active tasks assigned to the project | Clicked Outstanding Tasks accordion button | Accordion opened, displaying all active tasks for project | **PASS** |
-| Add New Task | Should redirect to add_new_task.html | Clicked Add New Task | Redirected to add_new_task.html | **PASS** |
+| Add New Task | Should redirect to add_task.html | Clicked Add New Task | Redirected to add_task.html | **PASS** |
 | Task Accordion (inside Outstanding Tasks) | Should open another accordion displaying the details of the task | Clicked Task Accordion | Opened task accordion, displayng details of the task correctly | **PASS** |
 | Update Task (inside Task Accordion) | Should redirect to update_task.html, displaying details of the relevant task | Clicked Update Task | Redirected to update_task.html, displayed task details correctly | **PASS** |
 | Delete Task (inside Task Accordion) | Should open modal, checking user wants to delete the Task. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete Task' should delete the task. | Clicked Delete Task | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete Task' deleted task correctly | **PASS** |
@@ -159,5 +159,60 @@ Additional testing was taken by friends and family on a variety of devices and s
 | Task Accordion (inside Projects accordion) | Should open an accordion for tasks assigned to this user in this project, displaying details of the task | Clicked Task Accordion | Opens accordion for tasks assigned to this user in this project, displays details of the task correctly | **PASS** |
 | Update Task (inside Task Accordion) | Should redirect to update_task.html | Clicked Update Project | Redirected to update_task.html | **PASS** |
 | Delete Task (inside Task Accordion) | Should open modal, checking user wants to delete the Task. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete Task' should delete the task. | Clicked Delete Task | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete Task' deleted task correctly | **PASS** |
+| **Tasks Page** | --- | --- | --- | --- |
+| Tasks sorted by Project | Should display accordions for each project, opening to display project details | Opened tasks.html | Project accordions displayed correctly, opened when clicked | **PASS** |
+| Update Project (inside Project accordion) | Should redirect to update_project.html | Clicked Update Project | Redirected to update_project.html | **PASS** |
+| Delete Project (inside Project accordion) | Should open modal, checking user wants to delete the Project. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete Project' should delete the project. | Clicked Delete Project button, clicked 'Go Back to Safety' and 'Delete Project' inside the Modal. | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete Project' deleted project correctly | **PASS** |
+| Task accordions (inside Project accordion) | Should open accordion, displaying task details | Clicked Task accordion | Opens accordion, displays task details correctly | **PASS** |
+| Update Task (inside Task Accordion) | Should redirect to update_task.html | Clicked Update Project | Redirected to update_task.html | **PASS** |
+| Delete Task (inside Task Accordion) | Should open modal, checking user wants to delete the Task. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete Task' should delete the task. | Clicked Delete Task | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete Task' deleted task correctly | **PASS** |
+| Add New Task (inside project accordion) | Should redirect to add_task.html | Clicked Add New Team | Redirects to add_task.html | **PASS** |
+| Tasks sorted by User | Should display accordions for each user, opening to display tasks assigned to each user | Opened tasks.html | User accordions displayed correctly, opened when clicked | **PASS** |
+| Update User | Should redirect to update_user.html, displaying user details | Clicked Update User | Redirects to update_user.html, displayed user details correctly | **PASS** |
+| Delete User | Should open modal, checking user wants to delete the User. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete User' should delete the user. | Clicked Delete User | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete User' deleted user correctly | **PASS** |
+| Task accordion (inside User accordion) | Should open task accordion, displaying task details | Clicked task accordion | Task accordion opened, displayed task details correctly | **PASS** |
+| Update Task (inside Task Accordion) | Should redirect to update_task.html | Clicked Update Project | Redirected to update_task.html | **PASS** |
+| Delete Task (inside Task Accordion) | Should open modal, checking user wants to delete the Task. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete Task' should delete the task. | Clicked Delete Task | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete Task' deleted task correctly | **PASS** |
+| Add New Task (bottom of page) | Should redirect to add_task.html | Clicked Add New Team | Redirects to add_task.html | **PASS** |
+| **Add Task Page** | --- | --- | --- | --- |
+| Field Validation | Should prevent submitting invalid content | Tried submitting form with empty fields | Flashed message, asking for form to be filled out | **PASS** |
+| Regex Validation | Should flash message if whitespace submitted on Task Description, should not add task to database | Entered whitespace on Task Description | Flashed error message, did not add task to database | **PASS** |
+| Cancel Button | Should not create task, should redirect to last page visited | Clicked Cancel button | No task created, redirected to last page visited | **PASS** |
+| Add Task Button | Should create database entry on submission, should redirect to last page visited | Entered task details, clicked Add Task | Created database entry as expected, redirected to last page visited | **PASS** |
+| **Update Task Page** | --- | --- | --- | --- |
+| Display Task details | Should display the details of the Task selected | Clicked Update Task | Task details displayed correctly | **PASS** |
+| Field Validation | Should prevent submitting invalid content | Tried submitting form with empty fields | Flashed message, asking for form to be filled out | **PASS** |
+| Regex Validation | Should flash message if whitespace submitted on Task Description, should not add task to database | Entered whitespace on Task Description | Flashed error message, did not add task to database | **PASS** |
+| Cancel Button | Should not update task, should redirect to last page visited | Clicked Cancel button | No task updated, redirected to last page visited | **PASS** |
+| Update Task Button | Should update database entry on submission, should redirect to last page visited | Entered task details, clicked Update Task | Updated database entry as expected, redirected to last page visited | **PASS** |
+| **Add Project Page** | --- | --- | --- | --- |
+| Field Validation | Should prevent submitting invalid content | Tried submitting form with empty fields | Flashed message, asking for form to be filled out | **PASS** |
+| Cancel Button | Should not create project, should redirect to last page visited | Clicked Cancel button | No project created, redirected to last page visited | **PASS** |
+| Add Project Button | Should create database entry on submission, should redirect to last page visited | Entered project details, clicked Add Project | Created database entry as expected, redirected to last page visited | **PASS** |
+| **Update Project Page** | --- | --- | --- | --- |
+| Display Project details | Should display the details of the Project selected | Clicked Update Project | Project details displayed correctly | **PASS** |
+| Field Validation | Should prevent submitting invalid content | Tried submitting form with empty fields | Flashed message, asking for form to be filled out | **PASS** |
+| Cancel Button | Should not update project, should redirect to last page visited | Clicked Cancel button | No project updated, redirected to last page visited | **PASS** |
+| Update Project Button | Should update database entry on submission, should redirect to last page visited | Entered project details, clicked Update Project | Updated database entry as expected, redirected to last page visited | **PASS** |
+| **Add Team Page** | --- | --- | --- | --- |
+| Field Validation | Should prevent submitting invalid content | Tried submitting form with empty fields | Flashed message, asking for form to be filled out | **PASS** |
+| Cancel Button | Should not create team, should redirect to last page visited | Clicked Cancel button | No team created, redirected to last page visited | **PASS** |
+| Add Team Button | Should create database entry on submission, should redirect to last page visited | Entered team details, clicked Add Team | Created database entry as expected, redirected to last page visited | **PASS** |
+| **Update Team Page** | --- | --- | --- | --- |
+| Display Team details | Should display the details of the Team selected | Clicked Update Team | Team details displayed correctly | **PASS** |
+| Field Validation | Should prevent submitting invalid content | Tried submitting form with empty fields | Flashed message, asking for form to be filled out | **PASS** |
+| Cancel Button | Should not update team, should redirect to last page visited | Clicked Cancel button | No team updated, redirected to last page visited | **PASS** |
+| Update Team Button | Should update database entry on submission, should redirect to last page visited | Entered team details, clicked Update Team | Updated database entry as expected, redirected to last page visited | **PASS** |
+| **Update User Page** | --- | --- | --- | --- |
+| Display User details | Should display user information | Clicked update user | User info displayed correctly | **PASS** |
+| Field Validation | Should prevent submitting invalid content | Tried submitting form with empty fields | Flashed message, asking for form to be filled out | **PASS** |
+| Cancel Button | Should not update user, should redirect to last page visited | Clicked Cancel button | No user updated, redirected to last page visited | **PASS** |
+| Update User Button | Should update database entry on submission, should redirect to last page visited | Entered user details, clicked Update User | Updated database entry as expected, redirected to last page visited | **PASS** |
+| **Update Your Details Page** | --- | --- | --- | --- |
+| Display User details | Should display user information for logged in user | Clicked update user | User info displayed correctly | **PASS** |
+| Field Validation | Should prevent submitting invalid content | Tried submitting form with empty fields | Flashed message, asking for form to be filled out | **PASS** |
+| Cancel Button | Should not update user, should redirect to last page visited | Clicked Cancel button | No user updated, redirected to last page visited | **PASS** |
+| Update User Button | Should update database entry on submission, should redirect to last page visited | Entered user details, clicked Update User | Updated database entry as expected, redirected to last page visited | **PASS** |
+
 
 - - -
