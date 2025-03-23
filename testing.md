@@ -149,5 +149,15 @@ Additional testing was taken by friends and family on a variety of devices and s
 | Task Accordion (inside User Accordion) | Should expand accordion and display Task details | Clicked Task Accordion | Expanded accorion, task displayed correctly | **PASS** |
 | Update Task (inside Task Accordion) | Should redirect to update_task.html | Clicked Update Project | Redirected to update_task.html | **PASS** |
 | Delete Task (inside Task Accordion) | Should open modal, checking user wants to delete the Task. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete Task' should delete the task. | Clicked Delete Task | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete Task' deleted task correctly | **PASS** |
+| **Users Page** | --- | --- | --- | --- |
+| User Cards | Should display all users, each card displaying the user details with accordions for Projects and Outstanding Tasks | Opened users.html | Displayed all users correctly, each card displaying user details and accordions for Projects and Outstanding Tasks | **PASS** |
+| Update User | Should redirect to update_user.html, displaying user details | Clicked Update User | Redirects to update_user.html, displayed user details correctly | **PASS** |
+| Delete User | Should open modal, checking user wants to delete the User. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete User' should delete the user. | Clicked Delete User | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete User' deleted user correctly | **PASS** |
+| Projects accordion | Should open accordion, displaying all projects assigned to user's team_id | Clicked Projects accordion | Opens accordion, displaying all projects assigned to user's team_id | **PASS** |
+| Update Project (inside Projects accordion) | Should redirect to update_project.html | Clicked Update Project | Redirected to update_project.html | **PASS** |
+| Delete Project (inside Projects accordion) | Should open modal, checking user wants to delete the Project. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete Project' should delete the project. | Clicked Delete Project button, clicked 'Go Back to Safety' and 'Delete Project' inside the Modal. | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete Project' deleted project correctly | **PASS** |
+| Task Accordion (inside Projects accordion) | Should open an accordion for tasks assigned to this user in this project, displaying details of the task | Clicked Task Accordion | Opens accordion for tasks assigned to this user in this project, displays details of the task correctly | **PASS** |
+| Update Task (inside Task Accordion) | Should redirect to update_task.html | Clicked Update Project | Redirected to update_task.html | **PASS** |
+| Delete Task (inside Task Accordion) | Should open modal, checking user wants to delete the Task. Clicking 'Go Back To Safety' should close the modal, clicking 'Delete Task' should delete the task. | Clicked Delete Task | Opened modal correctly, 'Go Back to Safety' closed modal, 'Delete Task' deleted task correctly | **PASS** |
 
 - - -
