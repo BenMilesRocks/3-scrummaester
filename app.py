@@ -28,9 +28,9 @@ def index():
 
 #error handling
 
-@app.errorhandler(403) 
+@app.errorhandler(401) 
 def not_found(e): 
-    return render_template("403.html") 
+    return render_template("401.html") 
 
 @app.errorhandler(404) 
 def not_found(e): 
