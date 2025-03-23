@@ -90,7 +90,14 @@ Additional testing was taken by friends and family on a variety of devices and s
 
 | **Feature** | **Expected Outcome** | **Testing Performed** | **Result** | **Pass/Fail** |
 | --- | --- | ---- | --- | --- |
-| **Home Page** | --- | ---- | --- | --- |
-| --- | --- | ---- | --- | --- |
-
+| **Home Page** | --- | --- | --- | --- |
+| Login button | Redirect to login.html | Clicked Login button | Redirected to login.html | **PASS** |
+| Register button | Redirect to register.html | Clicked Register button | Redirected to register.html | **PASS** |
+| Responsive elements | Elements should resize on smaller screens | Resized screen, tested with Chrome Developer tools | Elements resized as expected | **PASS** |
+| **Register Page** | --- | --- | --- | --- |
+| Input Validation | Page should not accept null values, should display message to warn user | Entered null values on register page | Warning message flashes, asking user to enter details for empty fields | **PASS** |
+| Register User | Correctly entered details should create a new user on the database | Entered user details, checked database using PGAdmin | User details created successfully | **PASS** |
+| Regex Validation | Whitespace should not be allowed in fields | Entered whitespace in fields, checked database using PGAdmin | User not created in database | **PASS** |
+| Log In Nav Bar option | Should redirect to Login.html | Clicked Log In | Redirected to login.html | **PASS** |
+| 'Already have an account?' button | Should redirect to Login.html | Clicked 'Already have an account?' button | Redirected to login.html | **PASS** |
 - - -
