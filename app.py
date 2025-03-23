@@ -42,7 +42,11 @@ def not_found(e):
 
 @app.errorhandler(502) 
 def not_found(e): 
-    return render_template("502.html") 
+    return render_template("502.html")
+
+@app.errorhandler(503) 
+def not_found(e): 
+    return render_template("503.html")
 
 #-LOGIN
 
