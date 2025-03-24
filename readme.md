@@ -191,12 +191,30 @@ The site is deployed using Heroku - [The deployed version of the site is availab
 
 ![Create Server](static/assets/documentation/deployment/heroku-db-9.png)
 
-14. Click the "connection" tab, entering the details from step 10
+14. Click the "connection" tab, entering the details from step 10. Then click "save"
 
 ![Enter credentials](static/assets/documentation/deployment/heroku-db-10.png)
 
 
+**Restoring the database from backup file**
 
+If you haven't already, download the scrummaester.backup file from the GitHub repo - [BenMilesRocks/3-scrummaester](https://github.com/BenMilesRocks/3-scrummaester).
+
+1. In pgAdmin, navigate to the Heroku database.
+
+2. Open the "Schemas" tab.
+
+3. If a Schema does not currently exist, right click to create a Schema where the data will reside.
+
+4. Right click the Scheme, and select "Restore"
+
+5. Click the folder in the "Filename" section to navigate to the directory where you saved the backup file
+
+![Restore database](static/assets/documentation/deployment/restore-1.png)
+
+6. Click "restore". This should create the tables and populate them with data.
+
+*Please note* The default login for the Super User is Username: user1 , Password: password. This should be changed as soon as possible to prevent security issues.
 
 ### Local Development
 
