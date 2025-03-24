@@ -10,6 +10,7 @@ Visit the deployed site: [Scrum Maester](https://scrummaester-81eb70fbef06.herok
 
 * [AUTOMATED TESTING](#automated-testing)
   * [W3C Validator](#w3c-validator)
+  * [Python Linter](#python-linter)
   * [Lighthouse](#lighthouse)
 * [MANUAL TESTING](#manual-testing)
   * [Testing User Stories](#testing-user-stories)
@@ -36,6 +37,34 @@ I used [W3C's HTML validator](https://validator.w3.org/) to check my code.
 I used [W3C's Jigsaw Validator](https://jigsaw.w3.org/css-validator/) to test my site's CSS, which showed no issues.
 
 ![WC3's Jigsaw Validator](static/assets/documentation/testing/css-validation.png)
+
+- - -
+
+### Python Linter
+
+I used [Code Institute's Python Linter](https://pep8ci.herokuapp.com/) to ensure my code was up to PEP-8 standards.
+
+**app.py**
+
+![app.py linter](/static/assets/documentation/testing/app-linter.png)
+
+The issues raised here refer to my whitespace validation Regex which I found on [Stack Overflow](https://stackoverflow.com/questions/34974942/regex-for-no-whitespace-at-the-beginning-and-end). This can be safely ignored, because these are not escape sequences but part of the Regex.
+
+**database.py**
+
+![database.py linter](/static/assets/documentation/testing/database-linter.png)
+
+**models.py**
+
+![models.py linter](/static/assets/documentation/testing/models-linter.png)
+
+These trailing whitespaces are part of a multiline string, and as such can be safely ignored
+
+**forms.py**
+
+![forms.py linter](/static/assets/documentation/testing/forms-linter.png)
+
+These statements are part of the WTForms code, and cannot be safely broken into multiple lines. As a result I decided to ignore these warnings.
 
 - - -
 
