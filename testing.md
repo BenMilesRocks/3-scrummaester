@@ -213,6 +213,9 @@ Additional testing was taken by friends and family on a variety of devices and s
 | Field Validation | Should prevent submitting invalid content | Tried submitting form with empty fields | Flashed message, asking for form to be filled out | **PASS** |
 | Cancel Button | Should not update user, should redirect to last page visited | Clicked Cancel button | No user updated, redirected to last page visited | **PASS** |
 | Update User Button | Should update database entry on submission, should redirect to last page visited | Entered user details, clicked Update User | Updated database entry as expected, redirected to last page visited | **PASS** |
+| **Logout** | --- | --- | --- | --- |
+| Logout button | Should log user out, redirect to login.html & flash message "Successfully Logged Out!" | Clicked Logout button | Logged user out, redirected to login.html & flashed message "Successfully Logged Out!" | **PASS** |
+| Login required | Entering url for pages other than index, login and register should prevent the user from accessing the site | Manually typed url for Dashboard, Projects, Tasks, Users | Redirected to login.html, message flashed "Please log in to access this page" | **PASS** |
 
 
 - - -
