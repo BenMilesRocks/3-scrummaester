@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS teams
 
 CREATE TABLE IF NOT EXISTS users
 (
-id bigint NOT NULL,
+    id bigint NOT NULL,
     first_name character varying(30) NOT NULL,
     last_name character varying(30) NOT NULL,
     username character varying(30) NOT NULL,
@@ -56,3 +56,9 @@ CREATE TABLE IF NOT EXISTS tasks
         ON UPDATE NO ACTION
         ON DELETE CASCADE
 )
+
+INSERT INTO teams (team_lead, team_lead_email)
+VALUES ("Super User", "email@email.com")
+
+INSERT INTO users (first_name, last_name, username, password, email, team_role, team_id)
+VALUES ("Super", "User", "user1", "$2b$12$p1MXAQJ9a9RdXUfQIxXVV.9olx7TZfJ4UY75iLwejsJ4xgYQSB19y", "email@email.com", "Super User", 1);

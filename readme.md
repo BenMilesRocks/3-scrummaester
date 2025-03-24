@@ -141,7 +141,60 @@ I used [Visual Studio Code](https://code.visualstudio.com/) for code editing, [p
 
 The site is deployed using Heroku - [The deployed version of the site is available here](https://scrummaester-81eb70fbef06.herokuapp.com/)
 
+**Heroku app setup**
+
+1. From the [Heroku Dashboard](https://dashboard.heroku.com/), click the new button in the top right corner and select create new app.
+2. Give your app a name (this must be unique), select the region that is closest to you and then click the create app button bottom left.
+
 **Create the Database**
+
+1. From the [Heroku Dashboard](https://dashboard.heroku.com/), click the name of the web app created in the previous step.
+2. Click on the "Resources" tab, then click on the "Find more add-ons" button
+
+![Resources tab](static/assets/documentation/deployment/heroku-db-1.png)
+
+3. Scroll through the list of add-ons until you find "Heroku Postgres".
+
+![Heroku Postgres](static/assets/documentation/deployment/heroku-db-2.png) 
+
+4. By clicking on the "Heroku Postgres" add-on, the following page is displayed. Click on the "Install Heroku Postgres" button
+
+![Install Postgres](static/assets/documentation/deployment/heroku-db-3.png)
+
+5. The next page allows you to select which app to associate the database with. Select the payment plan you wish to use for this app, then click inside the "App to provision to" text box to bring up the drop-down list of apps. Select the app you wish to add the database to.
+
+![Select app](static/assets/documentation/deployment/heroku-db-4.png)
+
+6. Press the "Submit Order Form" button to connect the database to your app.
+
+7. Return to the app page, where you will see "Heroku Postgres" has been added to your app. Click "Heroku Postgres" to open the database and get the Database Connection Parameters.
+
+![Database Added](static/assets/documentation/deployment/heroku-db-5.png)
+
+8. Click the "Settings" tab
+
+![Settings tab](static/assets/documentation/deployment/heroku-db-6.png)
+
+9. Then click "View Credentials"
+
+![View Credentials](static/assets/documentation/deployment/heroku-db-7.png)
+
+10. Make note of these credentials, as you will need them to connect to your database.
+
+11. Open pgAdmin
+
+12. Right click "Servers" in the top left corner, then "Register" / "Server"
+
+![pgAdmin servers tab](static/assets/documentation/deployment/heroku-db-8.png)
+
+13. Name your server
+
+![Create Server](static/assets/documentation/deployment/heroku-db-9.png)
+
+14. Click the "connection" tab, entering the details from step 10
+
+![Enter credentials](static/assets/documentation/deployment/heroku-db-10.png)
+
 
 
 
