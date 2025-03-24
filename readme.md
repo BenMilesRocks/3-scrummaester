@@ -139,16 +139,11 @@ I used [Visual Studio Code](https://code.visualstudio.com/) for code editing, [p
 
 ### Deployment
 
-The site is deployed using GitHub Pages - [Ben Miles Rocks](https://benmilesrocks.github.io/1---Ben-Miles-Rocks/)
+The site is deployed using Heroku - [The deployed version of the site is available here](https://scrummaester-81eb70fbef06.herokuapp.com/)
 
-To Deploy the site using GitHub Pages:
+**Create the Database**
 
-1. Login (or signup) to Github.
-2. Go to the repository for this project, [BenMilesRocks/3-scrummaester](https://github.com/BenMilesRocks/3-scrummaester).
-3. Click the settings button.
-4. Select pages in the left hand navigation menu.
-5. From the source dropdown select main branch and press save.
-6. The site has now been deployed, please note that this process may take a few minutes before the site goes live.
+
 
 ### Local Development
 
@@ -169,6 +164,10 @@ To clone the repository:
 3. Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
 4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
 5. Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.
+6. Install the packages from the requirements.txt file by running the following command in the terminal:
+
+##
+        pip3 install -r requirements.txt
 
 ## Testing
 
