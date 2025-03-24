@@ -33,7 +33,9 @@ I used [W3C's HTML validator](https://validator.w3.org/) to check my code.
 
 **CSS Validation**
 
-I used [W3C's Jigsaw Validator](https://jigsaw.w3.org/css-validator/) to test my site's CSS.
+I used [W3C's Jigsaw Validator](https://jigsaw.w3.org/css-validator/) to test my site's CSS, which showed no issues.
+
+![WC3's Jigsaw Validator](static/assets/documentation/testing/css-validation.png)
 
 - - -
 
