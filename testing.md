@@ -30,7 +30,7 @@ I have gone through each page using Google Chrome developer tools & Microsoft Ed
 
 **HTML Validation**
 
-I used [W3C's HTML validator](https://validator.w3.org/) to check my code.
+I used [W3C's HTML validator](https://validator.w3.org/) to check my code. This raised no issues, other than issues raised because of the Flask syntax used (which can be safely ignored in a Flask app).
 
 **CSS Validation**
 
