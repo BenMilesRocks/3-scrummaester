@@ -128,6 +128,172 @@ During the design of this site it became apparrent that there would need to be a
 
 ### Features
 
+**Homepage**
+
+The site has a simple landing page, where users can either log in or register a new account.
+
+![Homepage](/static/assets/documentation/screenshots/home-page.png)
+
+**Register**
+
+The registration page allows users to create a new account. This also has validation to ensure that:
+
+* Fields contain data
+* Fields do not contain only whitespace
+* The inputted Username does not already exist on the database
+
+![Register](/static/assets/documentation/screenshots/register-page.png)
+
+**Login**
+
+![Login](/static/assets/documentation/screenshots/login-page.png)
+
+The login page allows users to log into the site, and contains some defensive design elements:
+
+* Accessing site features requires a login, and if users are not logged in they will be redirected to the login page with a message asking them to log in or register
+
+![Login required](/static/assets/documentation/screenshots/login-required.png)
+
+* Entering an incorrect username or password will flash an error message
+
+![Incorrect Password](/static/assets/documentation/screenshots/incorrect-password.png)
+
+**Dashboard**
+
+After logging in or performing any task, the site will flash an acknowledgement message
+
+![Flash Message](/static/assets/documentation/screenshots/flash-message.png)
+
+If the user has tasks assigned to them they will be displayed on the dashboard:
+
+![Dashboard with Tasks](/static/assets/documentation/screenshots/dashboard-with-tasks.png)
+
+But if they have no tasks assigned they will see a notification, inviting them to create a task to get started:
+
+![Dashboard with no Tasks](/static/assets/documentation/screenshots/dashboard-empty.png)
+
+**Teams**
+
+Users can see each Team currently active, with the ability to drill down into Projects sorted by Team and Users sorted by Team.
+
+![Teams](/static/assets/documentation/screenshots/teams.png)
+
+**Add Team / Update Team**
+
+Clicking on the Add Team button will direct the user to a new page, allowing them to add a team to the database.
+
+![Add Team](/static/assets/documentation/screenshots/add-team.png)
+
+Clicking on the Update Team button will direct the user to a new page, allowing them to update an existing team's details. It automatically populates with the existing values, making it easy for users to see what changes they need to make.
+
+![Update Team](/static/assets/documentation/screenshots/update-team.png)
+
+On both pages clicking Add Team / Update Team or Cancel will redirect the user back to the last page they visited, allowing them to continue working from where they left off.
+
+**Delete Team**
+
+If a user clicks Delete Team, a modal will pop up checking they wish to proceed
+
+![Delete Team](/static/assets/documentation/screenshots/delete-team.png)
+
+**Projects**
+
+Users can see each Project currently active, with the ability to drill down into Outstanding Tasks and Users assigned to that project.
+
+![Projects](/static/assets/documentation/screenshots/projects.png)
+
+**Add Project / Update Project**
+
+Clicking on the Add Project button will direct the user to a new page, allowing them to add a project to the database.
+
+![Add Project](/static/assets/documentation/screenshots/add-project.png)
+
+Clicking on the Update Project button will direct the user to a new page, allowing them to update an existing project's details. It automatically populates with the existing values, making it easy for users to see what changes they need to make.
+
+![Update Project](/static/assets/documentation/screenshots/update-project.png)
+
+On both pages clicking Add Project / Update Project or Cancel will redirect the user back to the last page they visited, allowing them to continue working from where they left off.
+
+**Delete Project**
+
+If a user clicks Delete Project, a modal will pop up checking they wish to proceed
+
+![Delete Project](/static/assets/documentation/screenshots/delete-project.png)
+
+**Users**
+
+Users can see each User currently active, with the ability to drill down into Projects that they are assigned to and Outstanding Projects.
+
+![Users](/static/assets/documentation/screenshots/users.png)
+
+**Update User**
+
+Clicking on the Update User button will direct the user to a new page, allowing them to update an existing user's details. It automatically populates with the existing values, making it easy for users to see what changes they need to make. It also limits the changes to the user's Name, Team Role and Team, preventing them from altering sensitive data like Email or Password.
+
+![Update User](/static/assets/documentation/screenshots/update-user.png)
+
+Clicking Update User or Cancel will redirect the user back to the last page they visited, allowing them to continue working from where they left off.
+
+**Delete User**
+
+If a user clicks Delete User, a modal will pop up checking they wish to proceed
+
+![Delete User](/static/assets/documentation/screenshots/delete-user.png)
+
+**Tasks**
+
+Users can see each Tasks sorted by Project or by User, allowing them to drill down as required.
+
+![Tasks](/static/assets/documentation/screenshots/tasks.png)
+
+**Add Task / Update Task**
+
+Clicking on the Add Task button will direct the user to a new page, allowing them to add a Task to the database.
+
+![Add Task](/static/assets/documentation/screenshots/add-task.png)
+
+Clicking on the Update Task button will direct the user to a new page, allowing them to update an existing task's details. It automatically populates with the existing values, making it easy for users to see what changes they need to make.
+
+![Update Task](/static/assets/documentation/screenshots/update-task.png)
+
+On both pages clicking Add Task / Update Task or Cancel will redirect the user back to the last page they visited, allowing them to continue working from where they left off.
+
+**Delete Task**
+
+If a user clicks Delete Task, a modal will pop up checking they wish to proceed
+
+![Delete Task](/static/assets/documentation/screenshots/delete-task.png)
+
+**Update Your Details**
+
+This tab allows users to alter their own information, including sensitive information like Email and Password.
+
+![Update Your Details](/static/assets/documentation/screenshots/update-user-info.png)
+
+**Logout**
+
+This tab logs users out, redirecting them back to the Login page and flashing a message telling them they have logged out successfully.
+
+![Logout](/static/assets/documentation/screenshots/logout.png)
+
+**404 Page**
+
+The site has a 404 page that displays when the user attempts to navigate to a page that does not exist
+
+![404](/static/assets/documentation/screenshots/404.png)
+
+**Other Error Pages**
+
+Because this app could be deployed locally on an intranet, I added additional error handling for these error codes:
+
+* 401
+* 500
+* 502
+* 503
+* 504
+
+This provides suitable handling for multiple types of environments in case of server errors.
+
 **Future Implementations**
 
 Currently all users can edit all the site data, which is less than ideal. In future implementations I would like to add user permissions based on roles, allowing only Admin users to edit and delete User data to limit the possibility for misuse of the system.
