@@ -41,7 +41,15 @@ I used [W3C's Jigsaw Validator](https://jigsaw.w3.org/css-validator/) to test my
 
 ### Lighthouse
 
-I used Lighthouse within the Chrome Developer Tools to test the performance, accessibility, best practices and SEO of the website.
+I used Lighthouse within the Chrome Developer Tools to test the performance, accessibility, best practices and SEO of the website. The site scored highly across the board:
+
+![Lighthouse scores](static/assets/documentation/testing/lighthouse-score.png)
+
+The only area for improvement was SEO, which showed an issue with the robots.txt file:
+
+![Lighthouse SEO score](static/assets/documentation/testing/lighthouse-seo.png)
+
+This file is configured by Heroku, and is not something I have created.
 
 - - -
 
@@ -53,16 +61,30 @@ I used Lighthouse within the Chrome Developer Tools to test the performance, acc
 
 | **Goals** | **How are they achieved?** |
 | --- | --- |
+| I want to be able to quickly ascertain the purpose of the site | Each page uses colour coding and simple design to make it easy for new users to pick up the site functions |
+| I want to be able to register quickly and easily, with no unneccesary complications | The registration page is as simple as possible, with each field clearly labled for ease of use |
+| I want the site to be responsive to my device | The site uses Bootstrap's default classes to make the site responsive to all device screens |
+| I want the layout of the site to be intuitive and easy to understand | All pages are clearly labelled, with color coding to make functions intuitive and clear |
 
 **Returning Visitors**
 
 | **Goals** | **How are they achieved?** |
 | --- | --- |
+| I want to be able to log in quickly and easily | The login page has clearly labelled fields woth no distractions to make it easy to access |
+| I want to see content relevant to me on my dashboard | The dashboard page automatically shows all tasks assigned to the user |
+| I want to be able to Create, Update and Delete data easily | All buttons for Creating, Updating and Deleting data are prominently placed and clearly labelled |
+| I want to be able to quickly navigate to the information I want to access | Each page is clearly labelled, with data sorted in a variety of ways to make it easy to find |
+| I want the site to be responsive to my device | The site uses Bootstrap's default classes to make the site responsive to all device screens |
 
 **Frequent Visitors**
 
 | **Goals** | **How are they achieved?** |
 | --- | --- |
+| I want to see content relevant to me on my dashboard | The dashboard page automatically shows all tasks assigned to the user |
+| I want to be able to Create, Update and Delete data easily | All buttons for Creating, Updating and Deleting data are prominently placed and clearly labelled |
+| I want to be able to quickly navigate to the information I want to access | Each page is clearly labelled, with data sorted in a variety of ways to make it easy to find |
+| I want to be able to filter data in a number of ways to make it easier to follow | Each page filters data in a variety of ways, allowing users to drill down into the information they need |
+| I want the site to be responsive to my device | The site uses Bootstrap's default classes to make the site responsive to all device screens |
 
 - - -
 
