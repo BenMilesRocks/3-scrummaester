@@ -268,18 +268,20 @@ The outstanding bugs that I am aware of relate to the Register form. I have trie
 
 ## Credits
 
-The instructions for creating a database on Heroku uses images taken from documentation on the [QuizFaber](https://docs.quizfaber.com/4.0/eng/pages/IDH_CLOUD_HEROKU_DB.html) site, and this article on [Medium](https://medium.com/analytics-vidhya/how-to-use-pgadmin-to-connect-to-a-heroku-database-c69b7cbfccd8).
+### Code used
 
 For whitespace validation I used code from this article on [Stack Overflow](https://stackoverflow.com/questions/34974942/regex-for-no-whitespace-at-the-beginning-and-end).
 
-### Code used
-
 ### Media
+
+The instructions for creating a database on Heroku uses images taken from documentation on the [QuizFaber](https://docs.quizfaber.com/4.0/eng/pages/IDH_CLOUD_HEROKU_DB.html) site, and this article on [Medium](https://medium.com/analytics-vidhya/how-to-use-pgadmin-to-connect-to-a-heroku-database-c69b7cbfccd8).
 
 ### Acknowledgements
 
 I would like to acknowledge the following people
 
 - Jubril Akolade - my Code Institute mentor
+
+- Ashley Thompson and Raechel Johnson for testing the app
 
 - The Code Institute Slack channel Peer Code Review - thank you to everyone who tested the site and offered feedback
