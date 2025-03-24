@@ -1,10 +1,14 @@
 # ScrumMaester
 
+![The Scrum Maester site shown on a variety of screen sizes](static/assets/documentation/screenshots/responsive-display.png)
+
 This project is to create a Scrum management system, allowing Scrum masters to better manage coding teams giving better visibility on who is working on what.
+
+[The deployed version of the site is available here](https://scrummaester-81eb70fbef06.herokuapp.com/)
 
 ## Project Goals
 
-[The deployed version of the site is available here](https://scrummaester-81eb70fbef06.herokuapp.com/)
+The goal of this project is to create a versatile Scrum management tool, allowing users of all levels to see at a glance what work has been assigned to them and help manage their workloads. Users should be able to filter data in meaningful ways to help them find the tasks and projects they are looking for quickly and easily. It should also allow Users to edit Teams, Projects and Tasks, so that the data stays relevant to the current state of the project they are working on. Finally, it should allow for deletion of Teams, Projects and Tasks that are no longer relevant, keeping the site clear and easy to navigate.
 
 ## Contents
 
@@ -14,7 +18,8 @@ This project is to create a Scrum management system, allowing Scrum masters to b
     - [Color Scheme](#color-scheme)
     - [Typography](#typography)
     - [Imagery](#imagery)
-    - [Wireframe](#wireframe#)
+    - [Wireframe](#wireframe)
+    - [Database](#database)
 * [Features](#features)
 * [Accessibility](#accessibility)
 * [Credits](#credits)
@@ -67,6 +72,10 @@ This project is to create a Scrum management system, allowing Scrum masters to b
 
 The color palette for this site was mostly chosen by keeping Bootstrap's 'Light' class defaults, as this provided a clean aesthetic that kept out of the way of the rest of the site.
 
+The rest of the site uses two main color themes - Green for Active tasks and projects, and Grey for Completed tasks and projects. This helps users ascertain at a glance the status of Tasks and Projects, making it easier to use.
+
+![Color Palette](static/assets/documentation/wireframes/scrummaester-palette.png)
+
 ### Typography
 
 Because the user is working with large volumes of mostly text data I wanted a font family that would be easy to read as well as not providing extra distraction from the content.
@@ -95,9 +104,39 @@ Wireframes were created using Affinity Designer.
 
 ![New Project page wireframe](/static/assets/documentation/wireframes/new%20project.jpg)
 
+The layout of these designs changed quite significantly during development, as they proved to not be inuitive for the user. Adding more ways to view and manage the data made for an easier way to help users find the data they needed, and allowed multiple points for editing and creating data.
+
+### Database
+
+**Data Map**
+
+Because of the complexity of this project, careful design of the database was needed to ensure it would be able to filter data in meaningful ways for the users.
+
+![Datamap](/static/assets/documentation/datamap/datamap.png)
+
+By creating careful relationships between tables, I was able to create a system that allows users to sort data in a number of ways for their convenience.
+
+![Querymap](/static/assets/documentation/datamap/querymap.png)
+
+**Defensive Design**
+
+During the design of this site it became apparrent that there would need to be a number of defensive design elements to prevent users from making invalid entries or deleting foreign keys that would render the database non-functional. As a result I added some design elements to prevent issues like this occuring:
+
+* *Setting default values for team_id and user_id foreign keys* - This way if a Team or User is deleted, any projects and tasks assigned to them are automatically reassigned to Team 1 and User 1. This allows them to be safely reallocated later, and does not interfere with the integrity of the data.
+* *Preventing the deletion of Team 1 and User 1* - Although these entries can be edited, they cannot be deleted. This means that it is not possible to delete the default foreign key values, ensuring the database will function.
+* *Populating fields for users when selecting foreign keys* - Rather than users manually inputting foreign key data (which could result in an erroneous value), all foreign keys are selected from values already on the database. This makes it impossible to input values which do not refer to an existing value, preventing issues later down the line.
+
 ### Features
 
 **Future Implementations**
+
+Currently all users can edit all the site data, which is less than ideal. In future implementations I would like to add user permissions based on roles, allowing only Admin users to edit and delete User data to limit the possibility for misuse of the system.
+
+The ability to have a proper team management suite for Team Leader users would also be very useful, allowing different users to interact with the database in ways that best suit their needs.
+
+I would also like to add search functionality to the site, allowing users to search for data and filter it in ways that they can customize according to their needs.
+
+Finally, an archiving facility could also be useful for older projects. So instead of them being deleted entirely projects would instead be archived, allowing Admin users to interrogate this data later as they need.
 
 ### Accessibility
 
@@ -262,7 +301,7 @@ The outstanding bugs that I am aware of relate to the Register form. I have trie
 
 | **No.** | **Bug** |
 |:--------|:-------:|
-| 1 | Register form Regex stops form submission, does not properly flash message warning user |
+| 1 | Register form Regex stops form submission, but does not properly flash message warning user and redirects to the login page |
 | 2 | Register form Team Select dropdown does not accept Bootstrap styling, making it visually different from the rest of the site |
 
 
