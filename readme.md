@@ -74,6 +74,8 @@ The color palette for this site was mostly chosen by keeping Bootstrap's 'Light'
 
 The rest of the site uses two main color themes - Green for Active tasks and projects, and Grey for Completed tasks and projects. This helps users ascertain at a glance the status of Tasks and Projects, making it easier to use.
 
+![Tasks](static/assets/documentation/screenshots/tasks.png)
+
 ![Color Palette](static/assets/documentation/wireframes/scrummaester-palette.png)
 
 ### Typography
